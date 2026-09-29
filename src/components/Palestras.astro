@@ -1,0 +1,40 @@
+---
+import { Picture } from "astro:assets";
+import { site } from "../site.config";
+import { rich, waLink } from "../lib/text";
+import foto from "../assets/fotos/em-pe-preto.jpg";
+const p = site.palestras;
+---
+<section class="secao pa" id="palestras" data-bg="#faf5f0">
+  <div class="wrap pa__grid">
+    <div class="pa__txt">
+      <p class="eyebrow" data-reveal>{p.titulo}</p>
+      <h2 data-split>Saúde mental <em>para mais gente.</em></h2>
+      <p class="lead" data-reveal>{p.texto}</p>
+      <ul class="pa__publicos" data-reveal>
+        {p.publicos.map((x) => <li>{x}</li>)}
+      </ul>
+      <p class="pa__temas">Tema, público e formato definidos em conversa prévia.</p>
+      <a class="btn btn--ghost" data-reveal href={waLink(site.contato.whatsapp, site.mensagens.palestras)} target="_blank" rel="noopener">Convidar para uma palestra</a>
+    </div>
+    <div class="pa__foto" data-parallax="-8">
+      <Picture src={foto} formats={["avif", "webp"]} widths={[480, 720, 960]} sizes="(max-width: 860px) 90vw, 36vw"
+        alt="Hellen Xavier em pé, de blazer preto, sorrindo no consultório" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .pa__grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(40px, 7vw, 120px); align-items: center; }
+  .pa__txt .lead { margin-top: 24px; }
+  .pa__publicos { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .pa__publicos li { font-size: 0.85rem; padding: 6px 14px; border-radius: 99px; box-shadow: inset 0 0 0 1px var(--linha); color: var(--floresta); }
+  .pa__temas { list-style: none; padding: 0; margin: 40px 0; }
+  .pa__temas li {
+    display: grid; grid-template-columns: 48px 1fr; gap: 8px; padding: 18px 0; border-bottom: 1px solid var(--linha);
+    font-family: var(--serif); font-size: clamp(1.15rem, 1.7vw, 1.4rem); line-height: 1.3;
+  }
+  .pa__temas .num { color: var(--terracota-txt); font-size: 1rem; padding-top: 4px; }
+  .pa__foto :global(img) { border-radius: var(--radius); width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+  @media (max-width: 860px) { .pa__grid { grid-template-columns: 1fr; } .pa__foto { display: none; } }
+</style>

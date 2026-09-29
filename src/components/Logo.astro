@@ -1,0 +1,27 @@
+---
+import { LOGO_PATH } from "./logoPath";
+interface Props {
+  class?: string;
+  /** "arvore" = logo inteiro · "raizes" = só as raízes (rodapé) · "copa" = só o cérebro */
+  recorte?: "arvore" | "raizes" | "copa";
+  titulo?: string;
+  [key: string]: unknown;
+}
+const { class: cls = "", recorte = "arvore", titulo, ...rest } = Astro.props;
+const viewBox = {
+  arvore: "0 0 672 760",
+  raizes: "0 578 672 182",
+  copa: "90 0 600 470",
+}[recorte];
+---
+<svg
+  class={`logo logo--${recorte} ${cls}`}
+  viewBox={viewBox}
+  role={titulo ? "img" : undefined}
+  aria-hidden={titulo ? undefined : "true"}
+  aria-label={titulo}
+  preserveAspectRatio="xMidYMid meet"
+  {...rest}
+>
+  <path d={LOGO_PATH} fill="currentColor" />
+</svg>

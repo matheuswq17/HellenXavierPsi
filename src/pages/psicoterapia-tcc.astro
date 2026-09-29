@@ -1,0 +1,52 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../site.config";
+import { waLink } from "../lib/text";
+---
+<Base title="Psicoterapia com TCC no Tucuruvi e online | Hellen Xavier" description="Psicoterapia particular para adolescentes e adultos com Hellen Xavier. Entenda a TCC, a primeira sessão e o atendimento no Tucuruvi ou online.">
+  <section class="secao terapia" data-hero data-bg="#faf5f0">
+    <div class="wrap texto">
+      <p class="eyebrow">Adolescentes e adultos · atendimento particular</p>
+      <h1>Psicoterapia com TCC <em>no Tucuruvi e online.</em></h1>
+      <p class="lead">Um acompanhamento para compreender dificuldades emocionais e os padrões de pensamento e comportamento que afetam sua rotina.</p>
+      <a class="btn" href={waLink(site.contato.whatsapp, site.mensagens.geral)} target="_blank" rel="noopener">Conversar pelo WhatsApp</a>
+      <p class="nota">Consulte valores e disponibilidade antes de agendar.</p>
+      <h2>Quando procurar psicoterapia?</h2>
+      <p>Ansiedade, dificuldades nas relações, estresse, questões de autoestima e mudanças na vida podem motivar a busca. Você não precisa chegar com um diagnóstico ou saber explicar tudo o que sente: a compreensão da demanda faz parte do processo.</p>
+      <h2>Como a Terapia Cognitivo-Comportamental funciona?</h2>
+      <p>A TCC considera a relação entre pensamentos, emoções e ações. Nas sessões, situações da sua vida ajudam a identificar padrões e a construir respostas possíveis. Não se trata de substituir todo pensamento por algo positivo, mas de examinar interpretações e ampliar a forma de lidar com as experiências.</p>
+      <p>Os objetivos são construídos em conjunto e revistos ao longo do acompanhamento. O ritmo e as estratégias dependem da história e das necessidades de cada pessoa; não há promessa de resultado ou prazo único.</p>
+      <a class="link" href="/#tcc">Explore um exemplo educativo de TCC</a>
+      <h2>Do primeiro contato à primeira sessão</h2>
+      <ol class="passos">
+        <li><strong>Contato:</strong> envie uma mensagem para perguntar sobre valores, modalidade e horários. Não é necessário contar detalhes de saúde.</li>
+        <li><strong>Combinação:</strong> duração, frequência, pagamento e condições de agendamento são esclarecidos antes do início.</li>
+        <li><strong>Primeira sessão:</strong> espaço para conhecer sua história, compreender a demanda e conversar sobre os objetivos do acompanhamento.</li>
+      </ol>
+      <h2>Atendimento de adolescentes</h2>
+      <p>As necessidades do adolescente e a participação dos responsáveis são conversadas no início. Os limites de confidencialidade e os momentos de participação da família são esclarecidos pela profissional.</p>
+      <h2>Presencial ou online?</h2>
+      <p>O consultório fica na {site.contato.endereco}, {site.contato.bairro}, {site.contato.cidade}. O atendimento online é realizado por videochamada, quando adequado à demanda, em ambiente reservado. A plataforma e as orientações são combinadas previamente.</p>
+      <p>{site.horarios.texto}. Atendimento particular, mediante disponibilidade.</p>
+      <h2>Psicoterapia e avaliação são a mesma coisa?</h2>
+      <p>Não. A psicoterapia acompanha questões emocionais e comportamentais ao longo do tempo. A avaliação neuropsicológica investiga funções cognitivas e questões específicas, integrando entrevistas e instrumentos. Se você tem dúvida sobre o serviço, explique apenas o motivo geral da busca no primeiro contato.</p>
+      <a class="link" href="/avaliacao-neuropsicologica">Entenda a avaliação neuropsicológica</a>
+      <h2>Quem acompanha você</h2>
+      <p>{site.nomeCompleto}, {site.crp}. Psicóloga com especializações em Terapia Cognitivo-Comportamental, Neuropsicologia, Psicopatologia e Saúde Mental e Dependência Química, esta última pela Unifesp.</p>
+      <a class="link" href="/#sobre">Conheça a formação de Hellen</a>
+    </div>
+  </section>
+</Base>
+<style>
+.terapia { padding-top: 144px; }
+.texto { max-width: 800px; }
+h1 { font-size: clamp(2.3rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); margin: 48px 0 20px; }
+.lead { margin-top: 24px; max-width: 55ch; }
+.nota { font-size: .9rem; margin-top: 12px; color: var(--tinta-suave); }
+li { margin-bottom: 16px; }
+.passos { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; padding: 0; list-style: none; counter-reset: passo; }
+.passos li { background: var(--salvia); padding: 24px; border-radius: 18px; font-size: 1rem; }
+.passos li::before { counter-increment: passo; content: "0" counter(passo); display: block; font-family: var(--serif); font-size: 2rem; color: var(--floresta); margin-bottom: 12px; }
+@media(max-width: 700px) { .passos { grid-template-columns: 1fr; } }
+</style>

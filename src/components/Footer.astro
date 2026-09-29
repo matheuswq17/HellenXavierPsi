@@ -1,0 +1,120 @@
+---
+import { site } from "../site.config";
+import { rich, waLink } from "../lib/text";
+import Logo from "./Logo.astro";
+const c = site.contato;
+const { mensagem = site.mensagens.geral } = Astro.props;
+const ano = new Date().getFullYear();
+---
+<footer class="rodape" id="contato" data-bg="#16301f" data-fg="#f4ece2">
+  <div class="wrap rodape__cta">
+    <p class="eyebrow">Contato</p>
+    <h2 data-split>Quando fizer sentido para você, <em>estou aqui.</em></h2>
+    <p class="rodape__lead" data-reveal>
+      Pelo WhatsApp, você consulta valores e horários e tira dúvidas sobre o atendimento. O agendamento é confirmado após combinarmos a disponibilidade.
+    </p>
+    <div class="rodape__botoes" data-reveal>
+      <a class="btn btn--claro" href={waLink(c.whatsapp, mensagem)} target="_blank" rel="noopener">
+        Conversar pelo WhatsApp
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="raizes" aria-hidden="true">
+    <div class="raizes__tronco" data-tronco></div>
+    <Logo recorte="raizes" class="raizes__svg" data-raizes />
+    <svg class="raizes__pin" data-pin viewBox="0 0 24 32"><path d="M12 31s10-10.4 10-18.5C22 6.6 17.5 2 12 2S2 6.6 2 12.5C2 20.6 12 31 12 31z" fill="currentColor"/><circle cx="12" cy="12.5" r="3.6" fill="#16301f"/></svg>
+  </div>
+
+  <div class="wrap rodape__grid">
+    <div>
+      <h3 class="rodape__h">Consultório</h3>
+      <p>{site.empresa}</p>
+      <p>
+        {c.endereco}<br />
+        {c.bairro}, {c.cidade} · {c.uf}<br />CEP {c.cep}<br />
+        <a class="link link--claro" href={c.mapsUrl} target="_blank" rel="noopener">Ver no mapa</a>
+      </p>
+      <p class="rodape__muted">Online para todo o Brasil</p>
+    </div>
+    <div>
+      <h3 class="rodape__h">Horários</h3>
+      <p>{site.horarios.texto}</p>
+      <p class="rodape__muted" set:html={rich(site.horarios.resposta)} />
+    </div>
+    <div>
+      <h3 class="rodape__h">Fale comigo</h3>
+      <ul class="rodape__links">
+        <li><a class="link link--claro" href={waLink(c.whatsapp, mensagem)} target="_blank" rel="noopener">WhatsApp <span set:html={rich(c.whatsappExibicao)} /></a></li>
+        <li><a class="link link--claro" href={c.instagram.replace(/\[\[|\]\]/g, "")} target="_blank" rel="noopener">Instagram <span set:html={rich(c.instagramExibicao)} /></a></li>
+        <li><a class="link link--claro" href={`mailto:${c.email.replace(/\[\[|\]\]/g, "")}`}><span set:html={rich(c.email)} /></a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="rodape__h">Pagamento</h3>
+      <p>{site.pagamento.convenio}<br />{site.pagamento.reembolso}</p>
+    </div>
+  </div>
+
+  <div class="wrap rodape__base">
+    <p><span class="num">©&nbsp;{ano}</span> {site.nomeCompleto} · {site.titulo} · <strong>{site.crp}</strong></p>
+    <p>
+      <a class="link link--claro" href="/privacidade">Privacidade</a>
+      
+    </p>
+  </div>
+</footer>
+
+<style>
+  .rodape {
+    background: var(--terra); color: var(--creme); padding-top: clamp(96px, 14vw, 180px);
+    position: relative; overflow: hidden;
+  }
+  .rodape :global(h2) { color: var(--linho); max-width: 16ch; }
+  .rodape :global(h2 em) { color: #b9cdb0; }
+  .rodape .eyebrow { color: #b9cdb0; }
+  .rodape__lead { color: #cfd6c9; max-width: 44ch; margin-top: 24px; font-size: 1.15rem; }
+  .rodape__botoes { margin-top: 36px; }
+  .btn--claro { background: var(--linho); color: var(--terra); }
+  .btn--claro::after { background: #dfe8d6; }
+
+  .raizes { position: relative; margin-top: clamp(48px, 8vw, 96px); height: clamp(150px, 22vw, 260px); }
+  .raizes__tronco {
+    position: absolute; left: 50%; top: -40px; width: 2px; height: 48px; background: #9fb898;
+    transform-origin: top; translate: -50% 0;
+  }
+  .raizes__svg {
+    color: #9fb898; width: min(1100px, 100%); height: 100%; margin: 0 auto;
+  }
+  .raizes__pin {
+    position: absolute; left: 50%; bottom: -12px; width: 26px; translate: -50% 0;
+    color: var(--terracota);
+  }
+
+  .rodape__grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
+    padding-top: 56px; margin-top: 24px; border-top: 1px solid rgba(244, 236, 226, 0.14);
+    font-size: 0.98rem;
+  }
+  .rodape__h {
+    font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase;
+    font-weight: 600; color: #b9cdb0; margin-bottom: 14px;
+  }
+  .rodape__muted { color: #aab6a6; font-size: 0.92rem; }
+  .rodape__links { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .link--claro { color: var(--creme); }
+  .rodape :global(mark.pendente) { background: rgba(192, 122, 90, 0.3); }
+
+  .rodape__base {
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    padding: 40px 0 48px; margin-top: 56px; border-top: 1px solid rgba(244, 236, 226, 0.14);
+    font-size: 0.85rem; color: #aab6a6;
+  }
+  .rodape__base p { margin: 0; }
+  .rodape__base strong { color: var(--creme); font-weight: 600; }
+  .rodape__base span[aria-hidden] { margin: 0 8px; }
+
+  @media (max-width: 900px) { .rodape__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .rodape__grid { grid-template-columns: 1fr; gap: 28px; } }
+</style>

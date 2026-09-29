@@ -1,0 +1,118 @@
+---
+import "@fontsource-variable/fraunces/opsz.css";
+import "@fontsource-variable/fraunces/opsz-italic.css";
+import "@fontsource-variable/manrope/index.css";
+import "../styles/global.css";
+import { site } from "../site.config";
+import { plain } from "../lib/text";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import WhatsFloat from "../components/WhatsFloat.astro";
+import Respire from "../components/Respire.astro";
+import ogImg from "../assets/fotos/hero-claro.jpg";
+import { getImage } from "astro:assets";
+
+interface Props {
+  title?: string;
+  description?: string;
+  mensagem?: string;
+  noindex?: boolean;
+}
+const { title = site.seo.title, description = site.seo.description, mensagem = site.mensagens.geral } = Astro.props;
+const indexavel = Boolean(import.meta.env.PUBLIC_SITE_URL) && !Astro.props.noindex && Astro.url.pathname !== "/404.html";
+const canonical = new URL(Astro.url.pathname, site.url).toString();
+const og = await getImage({ src: ogImg, width: 1200, height: 630, format: "jpg", fit: "cover" });
+const c = site.contato;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalBusiness",
+      "@id": `${site.url}/#consultorio`,
+      name: `${site.nomeCompleto} · Psicóloga`,
+      legalName: site.empresa,
+      email: c.email,
+      description: site.seo.description,
+      url: site.url,
+      image: new URL(og.src, site.url).toString(),
+      telephone: `+${c.whatsapp}`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: c.endereco,
+        addressLocality: "São Paulo",
+        addressRegion: "SP",
+        postalCode: plain(c.cep),
+        addressCountry: "BR",
+      },
+      areaServed: ["Tucuruvi", "São Paulo"],
+      sameAs: [plain(c.instagram)],
+      founder: { "@id": `${site.url}/#hellen` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${site.url}/#hellen`,
+      name: site.nomeCompleto,
+      jobTitle: site.titulo,
+      knowsAbout: ["Terapia Cognitivo-Comportamental", "Avaliação Neuropsicológica", "Psicoterapia"],
+      hasCredential: { "@type": "EducationalOccupationalCredential", credentialCategory: "Registro profissional", name: site.crp },
+    },
+  ],
+};
+---
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {indexavel && <link rel="canonical" href={canonical} />}
+    {!indexavel && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#faf5f0" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(og.src, site.url).toString()} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {indexavel && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <script is:inline>
+      // Antes da pintura: modo calmo, horário e motion (evita "piscar")
+      (function () {
+        var d = document.documentElement;
+        d.classList.remove("no-js");
+        var calmo = false;
+        try { calmo = localStorage.getItem("calmo") === "1"; } catch (e) {}
+        var reduz = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (calmo || reduz) d.setAttribute("data-calmo", "");
+
+        var h = new Date().getHours();
+        if (h >= 18 || h < 6) d.classList.add("noite");
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+    <Header mensagem={mensagem} />
+    <main id="conteudo">
+      <slot />
+    </main>
+    <Footer mensagem={mensagem} />
+    <WhatsFloat mensagem={mensagem} />
+    <Respire />
+    <script>
+      import "../scripts/motion.ts";
+    </script>
+    <style>
+      .pular {
+        position: fixed; left: 16px; top: -80px; z-index: 100;
+        background: var(--floresta); color: var(--linho);
+        padding: 12px 18px; border-radius: 12px; text-decoration: none;
+      }
+      .pular:focus { top: 16px; }
+    </style>
+  </body>
+</html>

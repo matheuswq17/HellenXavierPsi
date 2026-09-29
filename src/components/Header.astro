@@ -1,0 +1,180 @@
+---
+import { site } from "../site.config";
+import { waLink } from "../lib/text";
+import Logo from "./Logo.astro";
+const { mensagem } = Astro.props as { mensagem: string };
+const home = Astro.url.pathname === "/";
+const p = (h: string) => (home ? h : `/${h}`);
+const links = [
+  { href: p("#sobre"), label: "Sobre" },
+  { href: "/psicoterapia-tcc", label: "Psicoterapia" },
+  { href: "/avaliacao-neuropsicologica", label: "Avaliação" },
+  { href: p("#atendimento"), label: "Atendimento" },
+  { href: p("#palestras"), label: "Palestras" },
+  { href: p("#duvidas"), label: "Dúvidas" },
+];
+---
+<header class:list={["topo", { "topo--home": home }]} data-topo>
+  <div class="topo__in">
+    <a href="/" class="marca" aria-label={`${site.nome} — início`}>
+      <Logo class="marca__logo" data-logo-intro />
+      <span class="marca__txt">
+        <span class="marca__nome">{site.nome}</span>
+        <span class="marca__crp">{site.crp}</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Principal">
+      <ul>
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="acoes">
+      <button class="calmo" type="button" data-calmo-toggle aria-pressed="false" aria-label="Modo calmo: desligar animações" title="Desliga as animações do site">
+        <span class="calmo__dot" aria-hidden="true"></span>
+        <span class="calmo__txt">Modo calmo</span>
+      </button>
+      <a class="btn topo__cta" href={waLink(site.contato.whatsapp, mensagem)} target="_blank" rel="noopener">
+        WhatsApp
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-movel" data-menu-btn>
+        <span class="sr-only">Abrir menu</span>
+        <span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="menu-movel" id="menu-movel" hidden data-menu>
+    <ul>
+      {links.map((l) => <li><a href={l.href} data-menu-link>{l.label}</a></li>)}
+    </ul>
+    <a class="btn" href={waLink(site.contato.whatsapp, mensagem)} target="_blank" rel="noopener">Conversar pelo WhatsApp</a>
+  </div>
+</header>
+
+<style>
+  .topo {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    background: var(--linho);
+    transition: background 0.5s var(--ease), box-shadow 0.5s var(--ease), transform 0.6s var(--ease);
+  }
+  .topo.is-scrolled {
+    background: var(--linho);
+    box-shadow: 0 1px 0 var(--linha);
+  }
+  @media (min-width: 861px) {
+    .topo--home:not(.is-scrolled):not(:has([data-menu-btn][aria-expanded="true"])) { background: transparent; }
+  }
+  .topo.is-hidden { transform: translateY(-100%); }
+  .topo__in {
+    width: min(1400px, 100% - 2 * var(--gutter)); margin-inline: auto;
+    height: 84px; display: flex; align-items: center; gap: 24px;
+  }
+  .marca { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--floresta); }
+  .marca__logo { width: 34px; height: auto; }
+  .marca__txt { display: flex; flex-direction: column; line-height: 1.1; }
+  .marca__nome { font-family: var(--serif); font-size: 1.3rem; font-variation-settings: "opsz" 40; }
+  .marca__crp { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--tinta-suave); margin-top: 3px; }
+
+  .nav { margin-left: auto; }
+  .nav ul { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; }
+  .nav a { text-decoration: none; font-size: 0.95rem; color: var(--tinta); position: relative; }
+  .nav a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px;
+    background: var(--floresta); transform: scaleX(0); transform-origin: right;
+    transition: transform 0.5s var(--ease);
+  }
+  .nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+  .acoes { display: flex; align-items: center; gap: 12px; }
+  .topo__cta { --h: 44px; padding: 0 22px; font-size: 0.92rem; }
+  .calmo {
+    display: inline-flex; align-items: center; gap: 8px; background: none; border: 0;
+    font-size: 0.85rem; color: var(--tinta-suave); cursor: pointer; padding: 8px 6px;
+  }
+  .calmo__dot {
+    width: 30px; height: 18px; border-radius: 99px; background: var(--areia); position: relative;
+    transition: background 0.4s var(--ease);
+  }
+  .calmo__dot::after {
+    content: ""; position: absolute; top: 3px; left: 3px; width: 12px; height: 12px; border-radius: 50%;
+    background: var(--linho); box-shadow: 0 1px 2px rgba(0,0,0,.15); transition: transform 0.4s var(--ease);
+  }
+  .calmo[aria-pressed="true"] .calmo__dot { background: var(--floresta); }
+  .calmo[aria-pressed="true"] .calmo__dot::after { transform: translateX(12px); }
+
+  .menu-btn { display: none; width: 44px; height: 44px; border: 0; background: none; cursor: pointer; position: relative; }
+  .menu-btn span[aria-hidden] {
+    position: absolute; left: 11px; right: 11px; height: 1.5px; background: var(--floresta);
+    transition: transform 0.4s var(--ease);
+  }
+  .menu-btn span[aria-hidden]:nth-of-type(2) { top: 18px; }
+  .menu-btn span[aria-hidden]:nth-of-type(3) { top: 25px; }
+  .menu-btn[aria-expanded="true"] span[aria-hidden]:nth-of-type(2) { transform: translateY(3.5px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] span[aria-hidden]:nth-of-type(3) { transform: translateY(-3.5px) rotate(-45deg); }
+
+  .menu-movel {
+    position: fixed; top: 84px; left: 0; right: 0; height: calc(100dvh - 84px); overflow-y: auto; overscroll-behavior: contain; background: var(--linho); padding: 32px var(--gutter);
+    display: flex; flex-direction: column; gap: 32px;
+  }
+  .menu-movel > * { flex-shrink: 0; }
+  .menu-movel ul { list-style: none; padding: 0; margin: 0; }
+  .menu-movel a:not(.btn) {
+    display: block; font-family: var(--serif); font-size: 2rem; text-decoration: none; padding: 8px 0;
+    color: var(--floresta); border-bottom: 1px solid var(--linha);
+  }
+
+  @media (max-height: 700px) { .menu-movel { gap: 16px; padding-block: 16px; } .menu-movel a:not(.btn) { font-size: 1.5rem; padding-block: 6px; } }
+  @media (max-width: 1200px) {
+    .nav { display: none; }
+    .acoes { margin-left: auto; }
+    .menu-btn { display: block; }
+  }
+  @media (max-width: 560px) {
+    .topo__cta, .calmo__txt { display: none; }
+    .marca__nome { font-size: 1.05rem; white-space: nowrap; }
+    .topo__in { gap: 8px; }
+    .marca { gap: 6px; }
+    .acoes { gap: 2px; }
+  }
+</style>
+
+<script>
+  const topo = document.querySelector<HTMLElement>("[data-topo]")!;
+  let last = 0;
+  const onScroll = () => {
+    const y = window.scrollY;
+    topo.classList.toggle("is-scrolled", y > 24);
+    const menuAberto = topo.querySelector("[data-menu-btn]")?.getAttribute("aria-expanded") === "true";
+    topo.classList.toggle("is-hidden", !menuAberto && y > 600 && y > last + 4);
+    if (y < last - 4) topo.classList.remove("is-hidden");
+    last = y;
+  };
+  addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  const btn = topo.querySelector<HTMLButtonElement>("[data-menu-btn]")!;
+  const menu = topo.querySelector<HTMLElement>("[data-menu]")!;
+  const setMenu = (open: boolean) => {
+    btn.setAttribute("aria-expanded", String(open));
+    btn.querySelector(".sr-only")!.textContent = open ? "Fechar menu" : "Abrir menu";
+    document.querySelectorAll<HTMLElement>("main, footer, [data-flutua]").forEach((el) => el.inert = open);
+    menu.hidden = !open;
+    document.body.style.overflow = open ? "hidden" : "";
+    topo.classList.toggle("is-scrolled", open || scrollY > 24);
+  };
+  btn.addEventListener("click", () => setMenu(btn.getAttribute("aria-expanded") !== "true"));
+  menu.querySelectorAll("[data-menu-link]").forEach((a) => a.addEventListener("click", () => setMenu(false)));
+  addEventListener("keydown", (e) => {
+    if (btn.getAttribute("aria-expanded") !== "true") return;
+    if (e.key === "Escape") { setMenu(false); btn.focus(); }
+    if (e.key === "Tab") {
+      const nodes = Array.from(topo.querySelectorAll<HTMLElement>('a[href], button')).filter(el => el.getClientRects().length > 0);
+      const first = nodes[0], last = nodes[nodes.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  matchMedia("(min-width: 1201px)").addEventListener("change", e => { if (e.matches) setMenu(false); });
+</script>

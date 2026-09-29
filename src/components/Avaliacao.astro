@@ -1,0 +1,64 @@
+---
+import { site } from "../site.config";
+import { rich, waLink } from "../lib/text";
+import MapaFuncoes from "./MapaFuncoes.astro";
+const a = site.avaliacao;
+---
+<section class="secao av" id="avaliacao" data-bg="#faf5f0">
+  <div class="wrap">
+    <div class="av__topo">
+      <p class="eyebrow" data-reveal>{a.titulo}</p>
+      <h2 data-split>Entender como a mente funciona, <em>com método e cuidado.</em></h2>
+      <p class="lead" data-reveal>{a.resumo}</p>
+    </div>
+
+    <div class="av__mapa" data-reveal>
+      <MapaFuncoes />
+    </div>
+
+    <ol class="av__etapas">
+      {a.etapas.map((e, i) => (
+        <li data-reveal>
+          <span class="av__n num">{i + 1}</span>
+          <h3>{e.titulo}</h3>
+          <p set:html={rich(e.texto)} />
+        </li>
+      ))}
+    </ol>
+
+    <div class="av__cta" data-reveal>
+      <a class="btn" href="/avaliacao-neuropsicologica">
+        Tudo sobre a avaliação
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn--ghost" href={waLink(site.contato.whatsapp, site.mensagens.avaliacao)} target="_blank" rel="noopener">Tirar dúvidas sobre avaliação</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .av__topo { max-width: 780px; }
+  .av__topo .lead { margin-top: 24px; max-width: 56ch; }
+  .av__mapa { margin: clamp(56px, 8vw, 104px) 0; }
+  .av__etapas {
+    list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: clamp(20px, 3vw, 40px); counter-reset: e; position: relative;
+  }
+  .av__etapas::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 22px; height: 1px; background: var(--linha);
+  }
+  .av__etapas li { position: relative; }
+  .av__n {
+    width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--linho); box-shadow: inset 0 0 0 1px var(--floresta); color: var(--floresta);
+    font-size: 1.2rem; margin-bottom: 22px; position: relative;
+  }
+  .av__etapas h3 { font-size: 1.3rem; margin-bottom: 10px; }
+  .av__etapas p { color: var(--tinta-suave); font-size: 0.98rem; }
+  .av__cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: clamp(40px, 6vw, 72px); }
+  @media (max-width: 900px) {
+    .av__etapas { grid-template-columns: 1fr 1fr; }
+    .av__etapas::before { display: none; }
+  }
+  @media (max-width: 520px) { .av__etapas { grid-template-columns: 1fr; } }
+</style>

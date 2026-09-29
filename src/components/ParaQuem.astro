@@ -1,0 +1,40 @@
+---
+import { site } from "../site.config";
+import { rich } from "../lib/text";
+---
+<section class="secao pq" id="para-quem" data-bg="#faf5f0">
+  <div class="wrap">
+    <div class="pq__topo">
+      <p class="eyebrow" data-reveal>Para quem</p>
+      <h2 data-split>Adolescentes e adultos <em>em diferentes momentos da vida.</em></h2>
+    </div>
+    <ol class="pq__lista">
+      {site.paraQuem.map((p, i) => (
+        <li class="pq__item" data-reveal>
+          <span class="pq__n num">{String(i + 1).padStart(2, "0")}</span>
+          <blockquote class="pq__voz">{p.voz}</blockquote>
+          <h3>{p.titulo}</h3>
+          {p.idade && <p class="pq__idade" set:html={rich(p.idade)} />}
+          <p class="pq__txt">{p.texto}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .pq__topo { max-width: 760px; }
+  .pq__lista {
+    list-style: none; padding: 0; margin: clamp(56px, 8vw, 96px) 0 0;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(24px, 3vw, 48px);
+  }
+  .pq__item { border-top: 1px solid var(--linha); padding-top: 28px; }
+  .pq__n { color: var(--floresta-2); font-size: 1.1rem; }
+  .pq__voz {
+    font-family: var(--serif); font-style: italic; font-weight: 330; font-size: clamp(1.4rem, 2vw, 1.75rem);
+    line-height: 1.25; margin: 18px 0 28px; color: var(--floresta); min-height: 2.6em;
+  }
+  .pq__idade { font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tinta-suave); margin: 6px 0 0; }
+  .pq__txt { color: var(--tinta-suave); margin-top: 12px; }
+  @media (max-width: 820px) { .pq__lista { grid-template-columns: 1fr; } .pq__voz { min-height: 0; } }
+</style>

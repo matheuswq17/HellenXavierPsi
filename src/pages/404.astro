@@ -1,0 +1,20 @@
+---
+import Base from "../layouts/Base.astro";
+import Logo from "../components/Logo.astro";
+---
+<Base title="Página não encontrada" noindex={true}>
+  <section class="secao nf" data-hero data-bg="#faf5f0">
+    <div class="wrap">
+      <Logo class="nf__logo" data-logo-intro />
+      <h1>Esse caminho <em>não existe.</em></h1>
+      <p class="lead">Mas a gente pode voltar ao começo.</p>
+      <a class="btn" href="/">Voltar ao início</a>
+    </div>
+  </section>
+</Base>
+<style>
+  .nf { min-height: 100svh; display: grid; place-items: center; text-align: center; }
+  .nf .wrap { display: grid; justify-items: center; gap: 20px; }
+  .nf__logo { width: 90px; color: var(--floresta); }
+  .nf h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); }
+</style>

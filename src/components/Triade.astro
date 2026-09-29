@@ -1,0 +1,56 @@
+---
+const { cenarios, aviso } = Astro.props;
+const first = cenarios[0];
+---
+<div class="triade" data-triade>
+  <div class="triade__controle">
+    <p class="triade__rot" id="triade-situacao">Escolha uma situação</p>
+    <div class="triade__chips" role="radiogroup" aria-labelledby="triade-situacao">
+      {cenarios.map((s, i) => <button type="button" role="radio" aria-checked={i === 0} tabindex={i === 0 ? 0 : -1} class="triade__chip" data-cenario={i}>{s.situacao}</button>)}
+    </div>
+    <div class="triade__modo">
+      <span class="on" data-auto-label>Pensamento automático</span>
+      <button type="button" class="triade__switch" role="switch" aria-checked="false" aria-label="Experimentar um pensamento alternativo" data-alternar><span></span></button>
+      <span data-alt-label>Pensamento alternativo</span>
+    </div>
+    <button type="button" class="btn triade__btn" data-alternar data-alt-btn>E se o pensamento fosse outro?</button>
+    <p class="triade__aviso">{aviso}</p>
+  </div>
+  <div class="triade__palco" aria-live="polite">
+    <svg class="triade__linhas" viewBox="0 0 400 360" aria-hidden="true" preserveAspectRatio="none"><path class="triade__trilho" d="M200 40 L50 310 L350 310 Z"/><path class="triade__fluxo" d="M200 40 L50 310 L350 310 Z" pathLength="100"/></svg>
+    <div class="triade__no triade__no--p"><span class="triade__tag">Pensamento</span><p class="triade__val" data-valor="pensamento">{first.automatico.pensamento}</p></div>
+    <div class="triade__no triade__no--e"><span class="triade__tag">Emoção</span><p class="triade__val" data-valor="emocao">{first.automatico.emocao}</p></div>
+    <div class="triade__no triade__no--c"><span class="triade__tag">Comportamento</span><p class="triade__val" data-valor="comportamento">{first.automatico.comportamento}</p></div>
+    <p class="triade__situacao"><span>Situação</span><span data-situacao>{first.situacao}</span></p>
+  </div>
+  <script type="application/json" data-cenarios set:html={JSON.stringify(cenarios).replace(/</g, "\\u003c")} />
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-triade]').forEach(root => {
+    const data = JSON.parse(root.querySelector('[data-cenarios]')!.textContent!);
+    const radios = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-cenario]'));
+    let index = 0, alternate = false;
+    const render = () => {
+      const current = data[index];
+      const values = alternate ? current.alternativo : current.automatico;
+      root.classList.toggle('is-alt', alternate);
+      radios.forEach((b,i) => { b.setAttribute('aria-checked', String(i === index)); b.tabIndex = i === index ? 0 : -1; });
+      root.querySelector('[role="switch"]')!.setAttribute('aria-checked', String(alternate));
+      root.querySelector('[data-auto-label]')!.classList.toggle('on', !alternate);
+      root.querySelector('[data-alt-label]')!.classList.toggle('on', alternate);
+      root.querySelector('[data-alt-btn]')!.textContent = alternate ? 'Voltar ao pensamento automático' : 'E se o pensamento fosse outro?';
+      root.querySelector('[data-situacao]')!.textContent = current.situacao;
+      root.querySelectorAll<HTMLElement>('[data-valor]').forEach(el => el.textContent = values[el.dataset.valor!]);
+    };
+    radios.forEach((b,i) => {
+      b.addEventListener('click', () => { index = i; alternate = false; render(); });
+      b.addEventListener('keydown', e => {
+        if (!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(e.key)) return;
+        e.preventDefault();
+        index = e.key === 'Home' ? 0 : e.key === 'End' ? radios.length-1 : (i + (['ArrowRight','ArrowDown'].includes(e.key) ? 1 : -1) + radios.length) % radios.length;
+        alternate = false; render(); radios[index].focus();
+      });
+    });
+    root.querySelectorAll('[data-alternar]').forEach(b => b.addEventListener('click', () => { alternate = !alternate; render(); }));
+  });
+</script>

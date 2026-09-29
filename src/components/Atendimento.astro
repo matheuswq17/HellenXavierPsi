@@ -1,0 +1,72 @@
+---
+import { Picture } from "astro:assets";
+import { site } from "../site.config";
+import { rich, waLink } from "../lib/text";
+import foto from "../assets/fotos/hero-claro.jpg";
+const a = site.atendimento;
+---
+<section class="secao at" id="atendimento" data-bg="#f4ece2">
+  <div class="wrap">
+    <div class="at__topo">
+      <p class="eyebrow" data-reveal>Atendimento</p>
+      <h2 data-split>No Tucuruvi <em>ou online.</em></h2>
+    </div>
+  </div>
+
+  <div class="at__faixa" data-reveal>
+    <div class="at__faixa-in" data-parallax="-10">
+      <Picture src={foto} formats={["avif", "webp"]} widths={[640, 1024, 1672]} sizes="100vw"
+        alt="Consultório da Hellen: poltrona clara, plantas, luminária e madeira" class="at__img" />
+    </div>
+  </div>
+
+  <div class="wrap at__grid">
+    {[a.presencial, a.online].map((b) => (
+      <div class="at__card" data-reveal>
+        <h3>{b.titulo}</h3>
+        <ul>{b.itens.map((i) => <li set:html={rich(i)} />)}</ul>
+      </div>
+    ))}
+    <div class="at__card at__card--info" data-reveal>
+      <h3>Na prática</h3>
+      <dl>
+        <div><dt>Horários</dt><dd>{site.horarios.texto}</dd></div>
+        <div><dt>Sessões</dt><dd set:html={rich(a.sessao)} /></div>
+        <div><dt>Convênio</dt><dd>{site.pagamento.convenio} {site.pagamento.reembolso}</dd></div>
+        <div><dt>Valores</dt><dd>{site.pagamento.valores}</dd></div>
+      </dl>
+    </div>
+  </div>
+  <div class="wrap at__proximo">
+    <h3>Do contato ao primeiro encontro</h3>
+    <ol>
+      <li><strong>Conte qual serviço procura.</strong> Psicoterapia, avaliação ou uma dúvida sobre o caminho mais adequado. Não é necessário enviar laudos ou detalhes de saúde.</li>
+      <li><strong>Esclareça o funcionamento.</strong> Consulte valores, modalidade, horários disponíveis e condições antes de agendar.</li>
+      <li><strong>Combine o encontro.</strong> A sessão fica agendada após a confirmação de disponibilidade, data e horário na conversa.</li>
+    </ol>
+    <div class="at__links"><a class="btn" href={waLink(site.contato.whatsapp, site.mensagens.geral)} target="_blank" rel="noopener">Consultar disponibilidade</a><a class="link" href={site.contato.mapsUrl} target="_blank" rel="noopener">Localizar o consultório</a></div>
+  </div>
+</section>
+
+<style>
+  .at__proximo { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--linha); }
+  .at__proximo ol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; padding-left: 22px; margin-block: 24px; font-size: .95rem; color: var(--tinta-suave); }
+  .at__links { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+  @media(max-width: 700px) { .at__proximo ol { grid-template-columns: 1fr; gap: 16px; } }
+  .at__topo { max-width: 760px; }
+  .at__faixa { margin: clamp(48px, 7vw, 88px) auto; width: min(1400px, 100% - 2 * var(--gutter)); border-radius: 28px; overflow: hidden; aspect-ratio: 21 / 9; }
+  .at__faixa-in { height: 118%; margin-top: -9%; }
+  .at__faixa :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; }
+  .at__grid { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: clamp(20px, 3vw, 40px); }
+  .at__card { padding-top: 24px; border-top: 1px solid var(--linha); }
+  .at__card h3 { font-size: 1.9rem; margin-bottom: 18px; color: var(--floresta); }
+  .at__card ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; color: var(--tinta-suave); }
+  .at__card li { padding-left: 22px; position: relative; }
+  .at__card li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 8px; height: 8px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--floresta); }
+  .at__card--info { background: var(--linho); border-radius: 22px; padding: 28px; border-top: 0; }
+  .at__card--info dl { margin: 0; display: grid; gap: 16px; }
+  .at__card--info dt { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--tinta-suave); }
+  .at__card--info dd { margin: 2px 0 0; font-size: 0.98rem; }
+  @media (max-width: 960px) { .at__grid { grid-template-columns: 1fr 1fr; } .at__card--info { grid-column: 1 / -1; } .at__faixa { aspect-ratio: 16 / 10; } }
+  @media (max-width: 600px) { .at__grid { grid-template-columns: 1fr; } .at__faixa { aspect-ratio: 4 / 5; } .at__faixa :global(img) { object-position: 30% 50%; } }
+</style>

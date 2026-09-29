@@ -1,0 +1,104 @@
+import { useEffect, useId, useState } from "react";
+
+type Resp = { pensamento: string; emocao: string; comportamento: string };
+type Cenario = { situacao: string; automatico: Resp; alternativo: Resp };
+
+interface Props {
+  cenarios: readonly Cenario[];
+  aviso: string;
+}
+
+/**
+ * Tríade da TCC — Pensamento → Emoção → Comportamento.
+ * Interação educativa: o visitante escolhe uma situação e troca o pensamento
+ * automático por um alternativo, vendo a emoção e o comportamento mudarem.
+ */
+export default function Triade({ cenarios, aviso }: Props) {
+  const [idx, setIdx] = useState(0);
+  const [alt, setAlt] = useState(false);
+  const [tick, setTick] = useState(0); // força reanimação do texto
+  const id = useId();
+  const c = cenarios[idx];
+  const r = alt ? c.alternativo : c.automatico;
+
+  useEffect(() => setTick((t) => t + 1), [idx, alt]);
+
+  const escolher = (i: number) => {
+    setIdx(i);
+    setAlt(false);
+  };
+
+  return (
+    <div className={`triade ${alt ? "is-alt" : ""}`}>
+      <div className="triade__controle">
+        <p className="triade__rot" id={`${id}-sit`}>Escolha uma situação</p>
+        <div className="triade__chips" role="radiogroup" aria-labelledby={`${id}-sit`}>
+          {cenarios.map((s, i) => (
+            <button
+              key={i}
+              type="button"
+              role="radio"
+              aria-checked={i === idx}
+              tabIndex={i === idx ? 0 : -1}
+              onKeyDown={(e) => {
+                const keys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"];
+                if (!keys.includes(e.key)) return;
+                e.preventDefault();
+                const next = e.key === "Home" ? 0 : e.key === "End" ? cenarios.length - 1 :
+                  (i + (e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : -1) + cenarios.length) % cenarios.length;
+                escolher(next);
+                e.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>('[role="radio"]')[next]?.focus();
+              }}
+              className="triade__chip"
+              onClick={() => escolher(i)}
+            >
+              {s.situacao}
+            </button>
+          ))}
+        </div>
+
+        <div className="triade__modo">
+          <span className={!alt ? "on" : ""}>Pensamento automático</span>
+          <button
+            type="button"
+            className="triade__switch"
+            role="switch"
+            aria-checked={alt}
+            aria-label="Experimentar um pensamento alternativo"
+            onClick={() => setAlt((a) => !a)}
+          >
+            <span />
+          </button>
+          <span className={alt ? "on" : ""}>Pensamento alternativo</span>
+        </div>
+        <button type="button" className="btn triade__btn" onClick={() => setAlt((a) => !a)}>
+          {alt ? "Voltar ao pensamento automático" : "E se o pensamento fosse outro?"}
+        </button>
+        <p className="triade__aviso">{aviso}</p>
+      </div>
+
+      <div className="triade__palco" aria-live="polite">
+        <svg className="triade__linhas" viewBox="0 0 400 360" aria-hidden="true" preserveAspectRatio="none">
+          <path className="triade__trilho" d="M200 40 L50 310 L350 310 Z" />
+          <path className="triade__fluxo" d="M200 40 L50 310 L350 310 Z" pathLength={100} />
+        </svg>
+        <div className="triade__no triade__no--p">
+          <span className="triade__tag">Pensamento</span>
+          <p key={`p${tick}`} className="triade__val">{r.pensamento}</p>
+        </div>
+        <div className="triade__no triade__no--e">
+          <span className="triade__tag">Emoção</span>
+          <p key={`e${tick}`} className="triade__val" style={{ animationDelay: "0.15s" }}>{r.emocao}</p>
+        </div>
+        <div className="triade__no triade__no--c">
+          <span className="triade__tag">Comportamento</span>
+          <p key={`c${tick}`} className="triade__val" style={{ animationDelay: "0.3s" }}>{r.comportamento}</p>
+        </div>
+        <p className="triade__situacao">
+          <span>Situação</span>
+          {c.situacao}
+        </p>
+      </div>
+    </div>
+  );
+}

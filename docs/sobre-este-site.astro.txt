@@ -1,0 +1,79 @@
+---
+import Base from "../layouts/Base.astro";
+import Logo from "../components/Logo.astro";
+import { site } from "../site.config";
+import { rich } from "../lib/text";
+
+const decisoes = [
+  { t: "Um fundo que nunca corta", d: "A cor de fundo é uma só e muda devagar conforme você rola. Por isso as seções parecem uma conversa contínua, sem bordas." },
+  { t: "A identidade vira interface", d: "O logo da árvore-cérebro foi vetorizado à mão. Ele cresce das raízes na abertura, vira o mapa clicável da avaliação neuropsicológica e se espalha em raízes no final da página." },
+  { t: "A abertura usa o consultório de verdade", d: "O vídeo de abertura parte de uma fotografia real do consultório, com movimento sutil de luz e plantas. Nada de rostos ou lugares inventados." },
+  { t: "Ensinar em vez de prometer", d: "A tríade da TCC mostra, em 10 segundos, como um pensamento muda a emoção e o comportamento. É educação, não propaganda: sem promessas e sem depoimentos, como pede o Código de Ética do CFP." },
+  { t: "Feito para quem está ansioso", d: "Existe um “modo calmo” que desliga todas as animações, e o site respeita a configuração de movimento reduzido do celular. Há também um minuto de respiração guiada." },
+  { t: "Leve e encontrável", d: "HTML estático, imagens em AVIF/WebP, vídeo carregado só depois da página, dados estruturados para o Google e SEO local para a Zona Norte de São Paulo." },
+];
+const stack = ["Astro", "React (ilhas)", "TypeScript", "GSAP + ScrollTrigger", "Higgsfield (vídeo IA)", "Vercel"];
+---
+<Base title={`Sobre este site | ${site.nome}`} description="Como e por que este site foi feito: decisões de design, motion, acessibilidade e ética.">
+  <section class="secao ss-hero" data-hero data-bg="#faf5f0">
+    <div class="wrap">
+      <Logo class="ss-logo" data-logo-intro />
+      <p class="eyebrow" data-reveal>Making of</p>
+      <h1 data-split>Um site que <em>acolhe antes de vender.</em></h1>
+      <p class="lead" data-reveal>
+        Este site foi pensado para passar a mesma sensação de uma primeira sessão: calma, clareza e confiança.
+        Aqui estão as decisões por trás dele.
+      </p>
+    </div>
+  </section>
+
+  <section class="secao" data-bg="#f4ece2">
+    <div class="wrap">
+      <ol class="ss-lista">
+        {decisoes.map((x, i) => (
+          <li data-reveal>
+            <span class="num">{String(i + 1).padStart(2, "0")}</span>
+            <h2>{x.t}</h2>
+            <p>{x.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="secao" data-bg="#dfe5d8">
+    <div class="wrap ss-stack">
+      <div>
+        <p class="eyebrow" data-reveal>Tecnologia</p>
+        <h2 data-split>Feito com <em>cuidado de artesão.</em></h2>
+      </div>
+      <ul data-reveal>{stack.map((s) => <li>{s}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="secao" data-bg="#faf5f0">
+    <div class="wrap ss-cta">
+      <h2 data-split>Quer um site assim <em>para o seu consultório?</em></h2>
+      <p class="lead" data-reveal>Design, motion e desenvolvimento sob medida para profissionais da saúde.</p>
+      <p data-reveal><a class="btn" href="mailto:[[seu-email]]" set:html={rich("Falar com [[Seu Nome]]")} /></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ss-hero { padding-top: calc(84px + clamp(48px, 8vw, 120px)); }
+  .ss-logo { width: 72px; color: var(--floresta); margin-bottom: 32px; }
+  .ss-hero h1 { font-size: clamp(2.6rem, 6vw, 5.6rem); max-width: 14ch; }
+  .ss-hero .lead { margin-top: 28px; max-width: 52ch; }
+  .ss-lista { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(32px, 5vw, 72px); }
+  .ss-lista li { border-top: 1px solid var(--linha); padding-top: 24px; }
+  .ss-lista .num { color: var(--terracota-txt); }
+  .ss-lista h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin: 12px 0 14px; }
+  .ss-lista p { color: var(--tinta-suave); max-width: 50ch; }
+  .ss-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; }
+  .ss-stack ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .ss-stack li { padding: 10px 18px; border-radius: 99px; background: var(--linho); font-weight: 600; font-size: 0.92rem; color: var(--floresta); }
+  .ss-cta { text-align: center; display: grid; justify-items: center; gap: 12px; }
+  .ss-cta h2 { max-width: 18ch; }
+  @media (max-width: 760px) { .ss-lista, .ss-stack { grid-template-columns: 1fr; } }
+</style>

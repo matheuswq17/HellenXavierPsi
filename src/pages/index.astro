@@ -1,0 +1,33 @@
+---
+import { site } from "../site.config";
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import ParaQuem from "../components/ParaQuem.astro";
+import Sobre from "../components/Sobre.astro";
+import Tcc from "../components/Tcc.astro";
+import Avaliacao from "../components/Avaliacao.astro";
+import Atendimento from "../components/Atendimento.astro";
+import Palestras from "../components/Palestras.astro";
+import Duvidas from "../components/Duvidas.astro";
+---
+<Base>
+  <Hero />
+  <aside class="resumo-pratico wrap" aria-label="Informações práticas">
+    <p><strong>Presencial e online</strong><br/>Tucuruvi, São Paulo</p>
+    <p><strong>Atendimento particular</strong><br/>Adolescentes e adultos</p>
+    <p><strong>Segunda a quinta, até 21h</strong><br/><a class="link" href="#atendimento">Local e funcionamento</a></p>
+  </aside>
+  <ParaQuem />
+  <Sobre />
+  <Tcc />
+  <Avaliacao />
+  <Atendimento />
+  <Palestras />
+  <Duvidas />
+</Base>
+
+<style>
+.resumo-pratico { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; padding-block: 28px; border-block: 1px solid var(--linha); font-size: .95rem; }
+.resumo-pratico p { margin: 0; }
+@media(max-width: 700px) { .resumo-pratico { grid-template-columns: 1fr; gap: 16px; } }
+</style>

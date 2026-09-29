@@ -1,0 +1,65 @@
+---
+import { Picture } from "astro:assets";
+import { site } from "../site.config";
+import { rich } from "../lib/text";
+import foto from "../assets/fotos/bege-mao-queixo.jpg";
+import foto2 from "../assets/fotos/maos-bolsos.jpg";
+const s = site.sobre;
+---
+<section class="secao sobre" id="sobre" data-bg="#f4ece2">
+  <div class="wrap sobre__grid">
+    <div class="sobre__fotos">
+      <div class="sobre__f1" data-parallax="-6">
+        <Picture src={foto} formats={["avif", "webp"]} widths={[480, 720, 960]} sizes="(max-width: 860px) 90vw, 40vw"
+          alt="Hellen Xavier de blazer bege, sorrindo, com a mão próxima ao queixo, no consultório" />
+      </div>
+      <div class="sobre__f2" data-parallax="8">
+        <Picture src={foto2} formats={["avif", "webp"]} widths={[320, 480]} sizes="(max-width: 860px) 40vw, 16vw"
+          alt="Hellen Xavier em pé no consultório, com as mãos nos bolsos" />
+      </div>
+    </div>
+    <div class="sobre__txt">
+      <p class="eyebrow" data-reveal>Sobre</p>
+      <h2 data-split>{s.titulo.replace("Hellen.", "")}<em>Hellen.</em></h2>
+      <p class="sobre__identidade">{site.nomeCompleto} · {site.crp}</p>
+      <div class="sobre__ps">
+        {s.paragrafos.map((p) => <p data-reveal>{p}</p>)}
+      </div>
+      <p class="sobre__contexto">O atendimento presencial acontece na Insight Psicologia, na Av. Nova Cantareira, 2026, conjunto 15. Conheça abaixo o funcionamento de cada serviço.</p>
+      <div class="sobre__caminhos"><a class="link" href="/psicoterapia-tcc">Como funciona a psicoterapia</a><a class="link" href="/avaliacao-neuropsicologica">Como funciona a avaliação</a></div>
+      <h3 class="sobre__formacao-titulo">Formação e especializações</h3>
+      <ul class="sobre__form" data-reveal>
+        {s.formacao.map((f) => <li set:html={rich(f)} />)}
+        <li><strong>{site.crp}</strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sobre__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 7vw, 120px); align-items: center; }
+  .sobre__fotos { position: relative; padding-bottom: 12%; }
+  .sobre__f1 :global(img) { border-radius: var(--radius); width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+  .sobre__f2 {
+    position: absolute; right: -8%; bottom: 0; width: 42%;
+    border-radius: 18px; overflow: hidden; box-shadow: 0 0 0 8px var(--creme);
+  }
+  .sobre__f2 :global(img) { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+  .sobre__identidade { font-size: .88rem; color: var(--tinta-suave); margin-top: 18px; }
+  .sobre__contexto { color: var(--tinta-suave); }
+  .sobre__caminhos { display: flex; flex-wrap: wrap; gap: 16px; font-size: .95rem; }
+  .sobre__formacao-titulo { margin-top: 32px; }
+  .sobre__ps { margin-top: 32px; color: var(--tinta-suave); max-width: 52ch; }
+  .sobre__form {
+    list-style: none; padding: 24px 0 0; margin: 32px 0 0; border-top: 1px solid var(--linha);
+    display: grid; gap: 10px; font-size: 0.96rem;
+  }
+  .sobre__form li { padding-left: 22px; position: relative; }
+  .sobre__form li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 10px; height: 1px; background: var(--floresta); }
+  .sobre__form strong { color: var(--floresta); font-weight: 600; letter-spacing: 0.04em; }
+  @media (max-width: 860px) {
+    .sobre__grid { grid-template-columns: 1fr; }
+    .sobre__f2 { display: none; }
+    .sobre__fotos { padding-bottom: 0; max-width: 320px; }
+  }
+</style>

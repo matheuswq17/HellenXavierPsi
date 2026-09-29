@@ -1,0 +1,76 @@
+---
+import { site } from "../site.config";
+import { plain, waLink } from "../lib/text";
+const { mensagem } = Astro.props as { mensagem: string };
+---
+<div class="flutua is-on" data-flutua>
+  <button class="flutua__respire" type="button" data-respire-open aria-label="Respire comigo por 1 minuto">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="8.5" opacity=".45"/></svg>
+    <span>Respire comigo</span>
+  </button>
+  <a class="flutua__wa" href={waLink(site.contato.whatsapp, mensagem)} target="_blank" rel="noopener" aria-describedby="wa-previa">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2a9.9 9.9 0 0 0-8.5 14.98L2 22l5.16-1.5A9.93 9.93 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.16l-.3-.18-3.07.9.92-2.98-.2-.31a8.18 8.18 0 1 1 6.85 3.73Zm4.5-6.12c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.55.12-.16.25-.63.8-.78.97-.14.16-.29.18-.53.06a6.7 6.7 0 0 1-3.3-2.89c-.25-.43.25-.4.71-1.33.08-.16.04-.3-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.74 2.74 0 0 0-.86 2.04 4.76 4.76 0 0 0 1 2.53 10.9 10.9 0 0 0 4.18 3.7c1.55.67 2.16.73 2.94.61.47-.07 1.46-.6 1.66-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+    <span class="sr-only">Conversar pelo WhatsApp</span>
+  </a>
+  <p class="flutua__previa" id="wa-previa" role="tooltip">
+    <span class="flutua__previa-rot">Mensagem pronta</span>
+    {plain(mensagem)}
+  </p>
+</div>
+
+<style>
+  .flutua {
+    position: fixed; right: max(16px, 2vw); bottom: max(16px, env(safe-area-inset-bottom), 2vw); z-index: 40;
+    display: flex; align-items: center; gap: 10px;
+    opacity: 1; transform: none; pointer-events: auto;
+    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  }
+  .flutua:not(.is-on) { visibility: hidden; }
+  .flutua.is-on { opacity: 1; transform: none; pointer-events: auto; }
+  .flutua__wa {
+    width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--floresta); color: var(--linho);
+    box-shadow: 0 10px 30px -10px rgba(22, 48, 31, 0.55);
+    transition: transform 0.5s var(--ease);
+  }
+  .flutua__wa svg { width: 28px; height: 28px; }
+  .flutua__wa:hover { transform: scale(1.06); }
+  .flutua.is-on .flutua__wa { animation: respira 3.2s var(--ease) 1 0.4s; }
+  @keyframes respira { 0%, 100% { box-shadow: 0 0 0 0 rgba(31, 74, 46, 0.35), 0 10px 30px -10px rgba(22,48,31,.55); } 50% { box-shadow: 0 0 0 14px rgba(31, 74, 46, 0), 0 10px 30px -10px rgba(22,48,31,.55); } }
+
+  .flutua__respire {
+    height: 44px; padding: 0 16px 0 12px; border-radius: 999px; border: 0; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px; font-size: 0.86rem; font-weight: 600;
+    background: color-mix(in srgb, var(--linho) 88%, transparent); color: var(--floresta);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    box-shadow: inset 0 0 0 1px var(--linha), 0 8px 24px -14px rgba(22, 48, 31, 0.5);
+  }
+  .flutua__respire svg { width: 20px; height: 20px; }
+
+  .flutua__previa {
+    position: absolute; right: 0; bottom: 72px; width: 260px; margin: 0;
+    background: #fff; color: var(--tinta); font-size: 0.88rem; line-height: 1.45;
+    padding: 12px 14px; border-radius: 16px 16px 4px 16px;
+    box-shadow: 0 16px 40px -18px rgba(22, 48, 31, 0.45);
+    opacity: 0; transform: translateY(6px) scale(0.98); transform-origin: bottom right;
+    transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); pointer-events: none;
+  }
+  .flutua__previa-rot { display: block; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tinta-suave); margin-bottom: 4px; }
+  .flutua__wa:hover ~ .flutua__previa,
+  .flutua__wa:focus-visible ~ .flutua__previa { opacity: 1; transform: none; }
+
+  @media (max-width: 560px) { .flutua__respire { width: 44px; padding: 0; justify-content: center; } .flutua__respire span { display: none; } .flutua__wa { width: 48px; height: 48px; } .flutua { right: 12px; bottom: 12px; } }
+  @media (hover: none) { .flutua__previa { display: none; } }
+</style>
+
+<script>
+  const el = document.querySelector<HTMLElement>("[data-flutua]")!;
+  const contato = document.querySelector("#contato");
+  if (contato) {
+    new IntersectionObserver(([entry]) => {
+      const visible = !entry.isIntersecting;
+      el.classList.toggle("is-on", visible);
+      el.inert = !visible;
+    }, { threshold: 0 }).observe(contato);
+  }
+</script>

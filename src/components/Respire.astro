@@ -1,0 +1,68 @@
+---
+import Logo from "./Logo.astro";
+---
+<dialog class="respire" data-respire aria-labelledby="respire-titulo">
+  <div class="respire__in">
+    <p class="eyebrow" id="respire-titulo">Um minuto para você</p>
+    <div class="respire__circ" data-respire-circ>
+      <span class="respire__halo" aria-hidden="true"></span>
+      <Logo recorte="copa" class="respire__logo" />
+    </div>
+    <p class="respire__fase" aria-live="polite" data-respire-fase>Prepare-se…</p>
+    <p class="respire__dica">Inspire em 4 tempos, solte o ar em 6. Se ficar desconfortável, volte ao seu ritmo.</p>
+    <div class="respire__barra" aria-hidden="true"><span data-respire-barra></span></div>
+    <button class="btn btn--ghost" type="button" data-respire-close>Voltar ao site</button>
+  </div>
+</dialog>
+
+<style>
+  .respire {
+    border: 0; padding: 0; margin: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none;
+    background: var(--linho); color: var(--tinta);
+  }
+  .respire::backdrop { background: var(--linho); }
+  .respire[open] { display: grid; place-items: center; animation: fadein 0.8s var(--ease); }
+  @keyframes fadein { from { opacity: 0; } }
+  .respire__in { text-align: center; display: grid; justify-items: center; gap: 18px; padding: 24px; max-width: 520px; }
+  .respire__circ { width: min(260px, 60vw); aspect-ratio: 1; display: grid; place-items: center; position: relative; }
+  .respire__halo {
+    position: absolute; inset: 0; border-radius: 50%;
+    background: radial-gradient(circle, var(--salvia) 0%, transparent 68%);
+    transform: scale(0.7);
+  }
+  .respire__logo { width: 62%; color: var(--floresta); position: relative; transform: scale(0.8); }
+  .respire.is-running .respire__halo,
+  .respire.is-running .respire__logo { animation: ciclo 10s ease-in-out infinite; }
+  @keyframes ciclo { 0% { transform: scale(0.8); } 40% { transform: scale(1.08); } 100% { transform: scale(0.8); } }
+  .respire__fase { font-family: var(--serif); font-size: clamp(2rem, 6vw, 3rem); margin: 0; color: var(--floresta); min-height: 1.3em; }
+  .respire__dica { color: var(--tinta-suave); font-size: 0.98rem; max-width: 36ch; }
+  .respire__barra { width: 180px; height: 2px; background: var(--areia); border-radius: 2px; overflow: hidden; }
+  .respire__barra span { display: block; height: 100%; background: var(--floresta); transform-origin: left; transform: scaleX(0); }
+</style>
+
+<script>
+  const dlg = document.querySelector<HTMLDialogElement>("[data-respire]")!;
+  const fase = dlg.querySelector<HTMLElement>("[data-respire-fase]")!;
+  const barra = dlg.querySelector<HTMLElement>("[data-respire-barra]")!;
+  let timers: number[] = [];
+  const limpar = () => { timers.forEach(clearTimeout); timers = []; dlg.classList.remove("is-running"); barra.style.transition = "none"; barra.style.transform = "scaleX(0)"; };
+
+  const iniciar = () => {
+    limpar();
+    dlg.showModal();
+    fase.textContent = "Prepare-se…";
+    const calmo = document.documentElement.hasAttribute("data-calmo");
+    timers.push(window.setTimeout(() => {
+      if (!calmo) dlg.classList.add("is-running");
+      requestAnimationFrame(() => { barra.style.transition = "transform 60s linear"; barra.style.transform = "scaleX(1)"; });
+      for (let i = 0; i < 6; i++) {
+        timers.push(window.setTimeout(() => (fase.textContent = "Inspire"), i * 10000));
+        timers.push(window.setTimeout(() => (fase.textContent = "Solte o ar"), i * 10000 + 4000));
+      }
+      timers.push(window.setTimeout(() => { dlg.classList.remove("is-running"); fase.textContent = "Obrigada por esse minuto."; }, 60000));
+    }, 1500));
+  };
+  document.querySelectorAll("[data-respire-open]").forEach((b) => b.addEventListener("click", iniciar));
+  dlg.querySelector("[data-respire-close]")!.addEventListener("click", () => dlg.close());
+  dlg.addEventListener("close", limpar);
+</script>

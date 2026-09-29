@@ -1,0 +1,98 @@
+---
+import { site } from "../site.config";
+import Logo from "./Logo.astro";
+const fs = site.avaliacao.funcoes;
+---
+<div class="mapa" data-mapa>
+  <div class="mapa__cerebro">
+    <Logo recorte="copa" class="mapa__logo" />
+    {fs.map((f, i) => (
+      <button
+        type="button"
+        class="mapa__ponto"
+        style={`left:${f.x}%;top:${f.y}%`}
+        aria-pressed={i === 0 ? "true" : "false"}
+        aria-controls="mapa-painel"
+        aria-label={f.nome}
+        data-mapa-btn={f.id}
+      >
+        <span class="mapa__ponto-dot" aria-hidden="true"></span>
+        <span class="mapa__ponto-nome">{f.nome}</span>
+      </button>
+    ))}
+  </div>
+  <div class="mapa__painel" id="mapa-painel" aria-live="polite">
+    <div class="mapa__opcoes" aria-label="Funções cognitivas">{fs.map((f, i) => <button type="button" data-mapa-btn={f.id} aria-pressed={i === 0} aria-controls="mapa-painel">{f.nome}</button>)}</div>
+    <p class="mapa__dica">Toque nas áreas para ver o que a avaliação investiga.</p>
+    {fs.map((f, i) => (
+      <article class="mapa__item" data-mapa-item={f.id} hidden={i !== 0}>
+        <h3>{f.nome}</h3>
+        <p class="mapa__sub">O que investigamos</p>
+        <p>{f.investiga}</p>
+        <p class="mapa__sub">Sinais que costumam motivar a busca</p>
+        <p>{f.sinais}</p>
+      </article>
+    ))}
+    <p class="mapa__nota">Ilustração simbólica, inspirada na identidade visual. As funções cognitivas envolvem redes distribuídas pelo cérebro.</p>
+  </div>
+</div>
+
+<style>
+  .mapa { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .mapa__cerebro { position: relative; }
+  .mapa__logo { width: 100%; height: auto; color: var(--floresta); opacity: 0.9; }
+  .mapa__ponto {
+    position: absolute; translate: -50% -50%; background: none; border: 0; cursor: pointer; padding: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .mapa__ponto-dot {
+    width: 16px; height: 16px; border-radius: 50%; background: var(--linho);
+    box-shadow: 0 0 0 2px var(--floresta), 0 0 0 0 rgba(192, 122, 90, 0.4);
+    transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease), transform 0.4s var(--ease);
+    flex: none;
+  }
+  .mapa__ponto-nome {
+    font-size: 0.8rem; font-weight: 600; background: var(--linho); color: var(--floresta);
+    padding: 4px 10px; border-radius: 99px; white-space: nowrap;
+    box-shadow: inset 0 0 0 1px var(--linha);
+    opacity: 0; transform: translateX(-4px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+  }
+  .mapa__ponto:hover .mapa__ponto-nome,
+  .mapa__ponto:focus-visible .mapa__ponto-nome,
+  .mapa__ponto[aria-pressed="true"] .mapa__ponto-nome { opacity: 1; transform: none; }
+  .mapa__ponto[aria-pressed="true"] .mapa__ponto-dot {
+    background: var(--terracota); box-shadow: 0 0 0 2px var(--terracota), 0 0 0 10px rgba(192, 122, 90, 0.18);
+    transform: scale(1.1);
+  }
+  html.motion .mapa__ponto:not([aria-pressed="true"]) .mapa__ponto-dot { animation: pulsar 2.8s var(--ease) infinite; }
+  @keyframes pulsar { 50% { box-shadow: 0 0 0 2px var(--floresta), 0 0 0 8px rgba(31, 74, 46, 0.08); } }
+
+  .mapa__opcoes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .mapa__opcoes button { background: var(--linho); border: 1px solid var(--floresta); border-radius: 24px; padding: 10px 14px; font-size: .85rem; cursor: pointer; min-height: 44px; }
+  .mapa__opcoes button[aria-pressed="true"] { background: var(--floresta); color: var(--linho); }
+  .mapa__painel { min-height: 300px; }
+  .mapa__dica { font-size: 0.85rem; color: var(--tinta-suave); margin-bottom: 20px; }
+  .mapa__item h3 { font-size: clamp(1.8rem, 3vw, 2.4rem); color: var(--floresta); margin-bottom: 18px; }
+  .mapa__item:not([hidden]) { animation: surgir 0.6s var(--ease); }
+  @keyframes surgir { from { opacity: 0; transform: translateY(10px); } }
+  .mapa__sub { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--tinta-suave); margin: 18px 0 4px; }
+  .mapa__nota { font-size: 0.78rem; color: var(--tinta-suave); margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--linha); }
+  @media (max-width: 860px) {
+    .mapa { grid-template-columns: 1fr; }
+    .mapa__ponto-nome { display: none; }
+    .mapa__ponto { padding: 14px; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-mapa]").forEach((m) => {
+    const btns = m.querySelectorAll<HTMLButtonElement>("[data-mapa-btn]");
+    const items = m.querySelectorAll<HTMLElement>("[data-mapa-item]");
+    btns.forEach((b) =>
+      b.addEventListener("click", () => {
+        btns.forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.mapaBtn === b.dataset.mapaBtn)));
+        items.forEach((it) => (it.hidden = it.dataset.mapaItem !== b.dataset.mapaBtn));
+      }),
+    );
+  });
+</script>

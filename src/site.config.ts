@@ -116,6 +116,12 @@ export const site = {
       "Na psicoterapia, trabalho com a relação entre pensamentos, emoções e comportamentos. O processo começa pela compreensão da sua história e das dificuldades que levaram você a buscar ajuda; os objetivos são construídos em conjunto.",
       "Minha formação reúne especializações em Terapia Cognitivo-Comportamental, Neuropsicologia, Psicopatologia e Saúde Mental e Dependência Química, esta última pela Unifesp. Psicoterapia e avaliação neuropsicológica têm objetivos diferentes: conversamos sobre qual caminho faz sentido para a sua demanda.",
     ],
+    /** Compromissos de processo (validar redação com a profissional). */
+    compromissos: [
+      { t: "Escuta sem julgamento", d: "Você pode chegar sem saber nomear o que sente. Entender isso faz parte do trabalho." },
+      { t: "Método e objetivos claros", d: "Combinamos juntos o que queremos alcançar e revisamos o caminho ao longo do processo." },
+      { t: "Transparência", d: "Valores, frequência e próximos passos são conversados abertamente, desde o primeiro contato." },
+    ],
     formacao: [
       "Graduação em Psicologia",
       "Especialização em Terapia Cognitivo-Comportamental",

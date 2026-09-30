@@ -25,7 +25,11 @@ const s = site.sobre;
       <div class="sobre__ps">
         {s.paragrafos.map((p) => <p data-reveal>{p}</p>)}
       </div>
-      <p class="sobre__contexto">Conheça abaixo como funciona cada serviço.</p>
+      <h3 class="sobre__formacao-titulo">O que você pode esperar de mim</h3>
+      <ul class="sobre__comp">
+        {s.compromissos.map((c) => <li data-reveal><strong>{c.t}</strong><span>{c.d}</span></li>)}
+      </ul>
+      <p class="sobre__contexto">Conheça como funciona cada serviço:</p>
       <div class="sobre__caminhos"><a class="link" href="/psicoterapia-tcc/">Como funciona a psicoterapia</a><a class="link" href="/avaliacao-neuropsicologica/">Como funciona a avaliação</a></div>
       <h3 class="sobre__formacao-titulo">Formação e especializações</h3>
       <ul class="sobre__form" data-reveal>
@@ -46,7 +50,11 @@ const s = site.sobre;
   }
   .sobre__f2 :global(img) { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
   .sobre__identidade { font-size: .88rem; color: var(--tinta-suave); margin-top: 18px; }
-  .sobre__contexto { color: var(--tinta-suave); }
+  .sobre__contexto { color: var(--tinta-suave); margin-top: 28px; }
+  .sobre__comp { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 14px; }
+  .sobre__comp li { display: grid; gap: 2px; padding-left: 18px; border-left: 2px solid var(--salvia-forte); }
+  .sobre__comp strong { color: var(--floresta); font-weight: 600; }
+  .sobre__comp span { color: var(--tinta-suave); font-size: .95rem; }
   .sobre__caminhos { display: flex; flex-wrap: wrap; gap: 16px; font-size: .95rem; }
   .sobre__formacao-titulo { margin-top: 32px; }
   .sobre__ps { margin-top: 32px; color: var(--tinta-suave); max-width: 52ch; }

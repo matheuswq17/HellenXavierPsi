@@ -1,26 +1,28 @@
-# Pendências reais para publicação — 29/09/2026
+# Pendências — atualizado em 30/09/2026
 
-## Confirmado pelo usuário
-- Hellen Xavier Silva de Toledo; especializações informadas na conversa.
-- Atendimento particular a adolescentes e adultos; segunda a quinta até 21h.
-- WhatsApp (11) 98015-7199 e Instagram @hellen.xavierpsi.
-- E-mail xavier.hellen@gmail.com.
-- Insight Psicologia Ltda.; Av. Nova Cantareira, 2026, conjunto 15, Tucuruvi, São Paulo/SP, CEP 02330-003 (imagem fornecida).
+## Confirmado pela profissional (via Adolfo)
+- Endereço: Av. Nova Cantareira, 2014 — Edifício Cantareira Tower. Estacionamento no local.
+- Referências: ~950 m do Metrô Tucuruvi e do Shopping Tucuruvi; 200 m do Shopping TriMais.
+- Atende adolescentes (a partir de 12 anos), adultos e casais.
+- Sessões de 60 minutos, em geral semanais.
+- Responde mensagens em até 1 dia útil.
+- CNPJ da Insight Psicologia Ltda.: 60.101.913/0001-26 (exibido só no rodapé e na política de privacidade).
+- Particular, sem convênio. WhatsApp (11) 98015-7199, Instagram @hellen.xavierpsi, e-mail xavier.hellen@gmail.com.
 
-## Depende da profissional
-- Revisão final dos textos clínicos, serviços de avaliação/palestras e identificação CRP 06/48328 que já constava no projeto.
-- Instituições/anos das demais formações e experiência: não inventados.
-- Duração/frequência das sessões, regras de cancelamento, documentos para reembolso, prazos de resposta e avaliação: não prometidos no site.
-- Acesso físico, estacionamento e coordenadas: não afirmados sem confirmação.
+## Ainda confirmar com a Hellen
+- [ ] **Conjunto 15 e CEP 02330-003** continuam valendo no número 2014? (vieram da informação anterior, do número 2026).
+- [ ] **Horário de início** do atendimento (o site diz "segunda a quinta, até 21h"). Com o início, dá para colocar `openingHoursSpecification` no JSON-LD.
+- [ ] **Temas das palestras**: hoje são derivados das especializações (ansiedade/TCC, álcool e outras drogas, TDAH/neuropsicologia, saúde mental no trabalho e na escola). Validar ou trocar em `site.config.ts > palestras.temas`.
+- [ ] **Formação completa**: instituição e ano da graduação e de cada especialização (só a Unifesp está confirmada) e ano de início na clínica.
+- [ ] **Reembolso**: ela emite recibo? Se sim, trocar `pagamento.reembolsoCurto` por "Emito recibo para reembolso".
+- [ ] **Dependência química** como serviço de atendimento (hoje aparece só na formação e nas palestras).
+- [ ] Validar a redação de "O que você pode esperar de mim" (`sobre.compromissos`), dos textos de terapia de casal e das seções novas da página de avaliação (TDAH, TEA, laudo).
+- [ ] Valor de referência ("a partir de R$…"), se ela quiser mostrar.
 
-## Depende do lançamento
-- Escolher e registrar o domínio; configurar PUBLIC_SITE_URL com HTTPS sem barra final, a partir de .env.example.
-- Escolher hospedagem, verificar HTTPS, redirecionamento de www, compressão e cache; atualizar a política com informações reais de logs e retenção do provedor.
-- Confirmar o domínio e propriedade no Search Console e enviar sitemap-index.xml.
-- Criar/ajustar Perfil da Empresa no Google com conta da responsável; alinhar nome, endereço e telefone.
-- Medir Core Web Vitals na hospedagem real e, quando houver volume, dados de campo. Não há pontuação Lighthouse certificada nesta revisão.
-- Validar textos educativos com a profissional antes de ampliar conteúdo. Não publicar artigos em nome dela sem revisão.
-
-Sem PUBLIC_SITE_URL o site gera noindex, robots bloqueado e não gera sitemap. Não publicar nessa condição esperando aparecer no Google.
-
-Para preparar a versão final, usar `npm run build:publicacao` dentro de `site`, após configurar o domínio registrado. Esse comando bloqueia domínio ausente/local e confere canonical, robots, sitemap e indexação dos arquivos gerados. O comando não publica o site e não substitui a conferência de HTTPS e indexação na hospedagem real.
+## Para você (Adolfo) fazer fora do código
+- [ ] Criar o **Perfil da Empresa no Google** (categoria "Psicólogo") com nome, endereço e telefone **idênticos** ao site; adicionar fotos do consultório, horários e o link do site.
+- [ ] Cadastrar **Google Search Console** e **Bing Webmaster Tools**, enviar `https://hellenxavier.com.br/sitemap-index.xml` e pedir indexação da home e das duas páginas de serviço.
+- [ ] Atualizar endereço e horário no Instagram e colocar o link do site na bio.
+- [ ] Cloudflare: ativar **Always Use HTTPS**. Os cabeçalhos de segurança (HSTS etc.) já vão no arquivo `public/_headers`.
+- [ ] Cloudflare → "robots.txt gerenciado": hoje bloqueia robôs de IA (ChatGPT, Claude, Google-Extended). Decidir com a Hellen se quer aparecer em respostas de IA.
+- [ ] Depois de 2–4 semanas, conferir Core Web Vitals reais no Search Console.

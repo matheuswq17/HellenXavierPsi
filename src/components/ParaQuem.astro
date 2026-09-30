@@ -6,7 +6,7 @@ import { rich } from "../lib/text";
   <div class="wrap">
     <div class="pq__topo">
       <p class="eyebrow" data-reveal>Para quem</p>
-      <h2 data-split>Adolescentes e adultos <em>em diferentes momentos da vida.</em></h2>
+      <h2 data-split>Adolescentes, adultos e casais <em>em diferentes momentos da vida.</em></h2>
     </div>
     <ol class="pq__lista">
       {site.paraQuem.map((p, i) => (
@@ -26,7 +26,7 @@ import { rich } from "../lib/text";
   .pq__topo { max-width: 760px; }
   .pq__lista {
     list-style: none; padding: 0; margin: clamp(56px, 8vw, 96px) 0 0;
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(24px, 3vw, 48px);
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 48px);
   }
   .pq__item { border-top: 1px solid var(--linha); padding-top: 28px; }
   .pq__n { color: var(--floresta-2); font-size: 1.1rem; }

@@ -14,7 +14,11 @@ const p = site.palestras;
       <ul class="pa__publicos" data-reveal>
         {p.publicos.map((x) => <li>{x}</li>)}
       </ul>
-      <p class="pa__temas">Tema, público e formato definidos em conversa prévia.</p>
+      <ol class="pa__temas">
+        {p.temas.map((t, i) => (
+          <li data-reveal><span class="num">{String(i + 1).padStart(2, "0")}</span><span set:html={rich(t)} /></li>
+        ))}
+      </ol>
       <a class="btn btn--ghost" data-reveal href={waLink(site.contato.whatsapp, site.mensagens.palestras)} target="_blank" rel="noopener">Convidar para uma palestra</a>
     </div>
     <div class="pa__foto" data-parallax="-8">

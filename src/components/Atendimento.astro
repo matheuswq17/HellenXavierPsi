@@ -32,8 +32,9 @@ const a = site.atendimento;
       <dl>
         <div><dt>Horários</dt><dd>{site.horarios.texto}</dd></div>
         <div><dt>Sessões</dt><dd set:html={rich(a.sessao)} /></div>
-        <div><dt>Convênio</dt><dd>{site.pagamento.convenio} {site.pagamento.reembolso}</dd></div>
+        <div><dt>Convênio</dt><dd>{site.pagamento.convenio} {site.pagamento.reembolsoCurto}</dd></div>
         <div><dt>Valores</dt><dd>{site.pagamento.valores}</dd></div>
+        <div><dt>Resposta</dt><dd>{site.horarios.resposta}</dd></div>
       </dl>
     </div>
   </div>

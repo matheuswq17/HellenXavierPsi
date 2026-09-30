@@ -30,8 +30,8 @@ const ano = new Date().getFullYear();
   <div class="wrap rodape__grid">
     <div>
       <h3 class="rodape__h">Consultório</h3>
-      <p>{site.empresa}</p>
       <p>
+        {c.predio}<br />
         {c.endereco}<br />
         {c.bairro}, {c.cidade} · {c.uf}<br />CEP {c.cep}<br />
         <a class="link link--claro" href={c.mapsUrl} target="_blank" rel="noopener">Ver no mapa</a>
@@ -53,12 +53,12 @@ const ano = new Date().getFullYear();
     </div>
     <div>
       <h3 class="rodape__h">Pagamento</h3>
-      <p>{site.pagamento.convenio}<br />{site.pagamento.reembolso}</p>
+      <p>{site.pagamento.convenio}<br />{site.pagamento.reembolsoCurto}</p>
     </div>
   </div>
 
   <div class="wrap rodape__base">
-    <p><span class="num">©&nbsp;{ano}</span> {site.nomeCompleto} · {site.titulo} · <strong>{site.crp}</strong></p>
+    <p><span class="num">©&nbsp;{ano}</span> {site.nomeCompleto} · {site.titulo} · <strong>{site.crp}</strong><br /><span class="rodape__pj">{site.empresa} · CNPJ {site.cnpj}</span></p>
     <p>
       <a class="link link--claro" href="/privacidade">Privacidade</a>
       
@@ -102,6 +102,7 @@ const ano = new Date().getFullYear();
     font-weight: 600; color: #b9cdb0; margin-bottom: 14px;
   }
   .rodape__muted { color: #aab6a6; font-size: 0.92rem; }
+  .rodape__pj { font-size: 0.8rem; color: #aab6a6; }
   .rodape__links { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
   .link--claro { color: var(--creme); }
   .rodape :global(mark.pendente) { background: rgba(192, 122, 90, 0.3); }

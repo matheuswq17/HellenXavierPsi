@@ -17,6 +17,7 @@ export const mostrarPendencias = false;
 export const site = {
   url: import.meta.env.PUBLIC_SITE_URL || "http://localhost:4321",
   empresa: "Insight Psicologia Ltda.",
+  cnpj: "60.101.913/0001-26",
   nome: "Hellen Xavier",
   nomeCompleto: "Hellen Xavier Silva de Toledo",
   titulo: "Psicóloga e Neuropsicóloga",
@@ -26,7 +27,7 @@ export const site = {
   seo: {
     title: "Psicóloga no Tucuruvi · Hellen Xavier | TCC e Neuropsicologia",
     description:
-      "Psicóloga no Tucuruvi, São Paulo. Psicoterapia com TCC e avaliação neuropsicológica para adolescentes e adultos. Atendimento particular, presencial e online.",
+      "Psicóloga no Tucuruvi, São Paulo. Psicoterapia com TCC para adolescentes (a partir de 12 anos), adultos e casais, e avaliação neuropsicológica. Atendimento particular, presencial e online.",
   },
 
   contato: {
@@ -35,25 +36,36 @@ export const site = {
     instagram: "https://www.instagram.com/hellen.xavierpsi/",
     instagramExibicao: "@hellen.xavierpsi",
     email: "xavier.hellen@gmail.com",
-    endereco: "Av. Nova Cantareira, 2026, conjunto 15",
+    endereco: "Av. Nova Cantareira, 2014, conjunto 15",
+    predio: "Edifício Cantareira Tower",
     bairro: "Tucuruvi",
     cidade: "São Paulo",
     uf: "SP",
     cep: "02330-003",
-    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Av.+Nova+Cantareira,+2026,+conjunto+15+-+Tucuruvi,+S%C3%A3o+Paulo+-+SP",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Cantareira+Tower,+Av.+Nova+Cantareira,+2014+-+Tucuruvi,+S%C3%A3o+Paulo+-+SP",
+    /** Referências de acesso (informadas pela profissional). */
+    acesso: [
+      "Estacionamento no local",
+      "Cerca de 950 m do Metrô Tucuruvi e do Shopping Tucuruvi",
+      "200 m do Shopping TriMais",
+    ],
+    /** Bairros atendidos presencialmente (SEO local). */
+    bairros: ["Tucuruvi", "Santana", "Jaçanã", "Tremembé", "Mandaqui", "Vila Mazzei", "Parada Inglesa", "Vila Guilherme"],
   },
 
   horarios: {
     texto: "De segunda a quinta-feira, até às 21h",
     dias: ["Monday", "Tuesday", "Wednesday", "Thursday"],
     fecha: "21:00",
-    resposta: "Consulte os horários disponíveis pelo WhatsApp.",
+    resposta: "Respondo mensagens em até 1 dia útil.",
   },
 
   pagamento: {
     convenio: "Atendimento particular. Não atendo por convênio.",
+    /** Versão curta (rodapé, cards). A versão completa fica só no FAQ. */
+    reembolsoCurto: "Possibilidade de reembolso: consulte seu plano.",
     reembolso:
-      "Se você pretende solicitar reembolso, confirme a documentação com a profissional e as condições com seu plano. A cobertura depende da operadora.",
+      "Se você pretende solicitar reembolso, confirme comigo a documentação disponível e, com o seu plano, as condições de cobertura, que dependem de cada operadora.",
     valores: "Valores informados no primeiro contato.",
   },
 
@@ -79,7 +91,7 @@ export const site = {
   paraQuem: [
     {
       titulo: "Adolescentes",
-      idade: "",
+      idade: "A partir de 12 anos",
       voz: "“Ninguém entende o que eu sinto.”",
       texto: "Ansiedade, autoestima, escola, relações e as mudanças dessa fase, com a família participando quando faz sentido.",
     },
@@ -89,12 +101,18 @@ export const site = {
       voz: "“Sinto que não dou conta.”",
       texto: "Ansiedade, humor, estresse, trabalho, decisões e padrões que se repetem, com metas claras e acompanhamento.",
     },
+    {
+      titulo: "Casais",
+      idade: "",
+      voz: "“A gente sempre briga pelas mesmas coisas.”",
+      texto: "Comunicação, conflitos que se repetem, confiança e fases de transição, com espaço para os dois lados.",
+    },
   ],
 
   sobre: {
     titulo: "Prazer, eu sou a Hellen.",
     paragrafos: [
-      "Sou psicóloga clínica com abordagem cognitivo-comportamental e neuropsicóloga. Ofereço atendimento particular para adolescentes e adultos no meu consultório no Tucuruvi e online.",
+      "Sou psicóloga clínica com abordagem cognitivo-comportamental e neuropsicóloga. Ofereço atendimento particular para adolescentes, adultos e casais no meu consultório no Tucuruvi e online.",
       "Na psicoterapia, trabalho com a relação entre pensamentos, emoções e comportamentos. O processo começa pela compreensão da sua história e das dificuldades que levaram você a buscar ajuda; os objetivos são construídos em conjunto.",
       "Minha formação reúne especializações em Terapia Cognitivo-Comportamental, Neuropsicologia, Psicopatologia e Saúde Mental e Dependência Química, esta última pela Unifesp. Psicoterapia e avaliação neuropsicológica têm objetivos diferentes: conversamos sobre qual caminho faz sentido para a sua demanda.",
     ],
@@ -156,11 +174,11 @@ export const site = {
       { id: "visuo", nome: "Percepção visuoespacial", investiga: "Como enxergamos e organizamos o espaço.", sinais: "Dificuldade com desenho, geometria, mapas ou orientação.", x: 21, y: 60 },
     ],
     faq: [
+      { p: "Qual a idade mínima?", r: "A avaliação é feita em adolescentes a partir de 12 anos e em adultos." },
       { p: "Quanto tempo leva a avaliação?", r: "O prazo depende da demanda, dos instrumentos necessários e da disponibilidade para os encontros. A estimativa é combinada após a entrevista inicial." },
-      { p: "Para quem é a avaliação?", r: "O atendimento é voltado a adolescentes e adultos." },
       { p: "O laudo serve para a escola?", r: "Sim. O laudo traz os resultados e orientações que podem ser compartilhados com a escola e outros profissionais, com a sua autorização." },
       { p: "Preciso de encaminhamento médico?", r: "Não é obrigatório. Muitas avaliações começam por indicação da escola, do médico ou pela própria percepção da família." },
-      { p: "Tem reembolso do plano?", r: "O atendimento é particular. Consulte a documentação disponível com a profissional e confirme com seu plano os critérios de cobertura antes de iniciar." },
+      { p: "Tem reembolso do plano?", r: "O atendimento é particular. Se você pretende solicitar reembolso, confirme comigo a documentação disponível e, com o seu plano, as condições de cobertura." },
     ],
   },
 
@@ -177,31 +195,37 @@ export const site = {
     presencial: {
       titulo: "Presencial",
       itens: [
-        "Consultório na Av. Nova Cantareira, 2026, conjunto 15, no Tucuruvi",
-        "Conjunto 15 · CEP 02330-003",
-        "Ambiente reservado, claro e acolhedor",
-        "Consulte as condições de acesso ao consultório antes da visita",
+        "Edifício Cantareira Tower · Av. Nova Cantareira, 2014, conjunto 15",
+        "Estacionamento no local",
+        "Cerca de 950 m do Metrô Tucuruvi e do Shopping Tucuruvi",
+        "200 m do Shopping TriMais",
       ],
     },
-    sessao: "Duração e frequência combinadas antes do início do acompanhamento.",
+    sessao: "Sessões de 60 minutos, em geral semanais.",
   },
 
   palestras: {
     titulo: "Palestras",
-    texto: "Conteúdo sobre saúde mental com linguagem clara, base científica e espaço para perguntas.",
+    texto: "Temas das minhas áreas de especialização, adaptados ao público: escolas, famílias, empresas e eventos. Tema, duração e formato são definidos em conversa prévia.",
     publicos: ["Escolas e famílias", "Empresas e SIPAT", "Eventos e rodas de conversa"],
+    /** Temas derivados das especializações — validar lista final com a profissional. */
     temas: [
-      "Tema, público e formato definidos em conversa prévia.",
+      "Ansiedade no dia a dia: como pensamentos, emoções e comportamentos se conectam",
+      "Álcool e outras drogas: prevenção e como conversar sobre dependência química",
+      "Atenção, memória e aprendizagem: o que a neuropsicologia explica sobre o TDAH",
+      "Saúde mental no trabalho e na escola: sinais de alerta e quando procurar ajuda",
     ],
   },
 
   faq: [
-    { p: "Você atende por convênio?", r: "O atendimento é particular. Não atendo por convênio. Se você pretende solicitar reembolso, confirme a documentação com a profissional e as condições com seu plano. A cobertura depende da operadora." },
+    { p: "Você atende por convênio?", r: "O atendimento é particular. Não atendo por convênio. Se você pretende solicitar reembolso, confirme comigo a documentação disponível e, com o seu plano, as condições de cobertura, que dependem de cada operadora." },
     { p: "Como funciona a sessão online?", r: "Por chamada de vídeo, no horário e na plataforma combinados. Antes de iniciar, conversamos sobre a adequação da modalidade. Escolha um lugar reservado, com boa conexão, e use fones de ouvido." },
-    { p: "Quais são os horários?", r: "De segunda a quinta-feira, até às 21h, presencial ou online." },
+    { p: "Quais são os horários?", r: "De segunda a quinta-feira, até às 21h, presencial ou online. Respondo mensagens em até 1 dia útil." },
+    { p: "Quanto tempo dura cada sessão?", r: "As sessões têm 60 minutos e, em geral, acontecem uma vez por semana. A frequência pode mudar ao longo do processo, sempre combinada com você." },
     { p: "Quanto custa?", r: "Os valores são informados no primeiro contato, junto com as formas de pagamento." },
-    { p: "Como é a primeira sessão?", r: "A primeira sessão clínica é dedicada a conhecer sua história, compreender a demanda e combinar objetivos. O contato pelo WhatsApp serve para esclarecer funcionamento, valores e disponibilidade; ele não é uma sessão e não confirma automaticamente um agendamento." },
-    { p: "Adolescentes fazem terapia sozinhos?", r: "As sessões são individuais, e os responsáveis participam em momentos combinados, sempre respeitando o sigilo do adolescente." },
+    { p: "Como é a primeira sessão?", r: "A primeira sessão clínica é dedicada a conhecer sua história, compreender a demanda e combinar objetivos. Antes disso, pelo WhatsApp, você tira dúvidas sobre funcionamento, valores e horários." },
+    { p: "Você atende casais?", r: "Sim. Na terapia de casal, os dois participam das sessões e o foco está na relação: comunicação, conflitos que se repetem e acordos. Quando necessário, podem ser combinados encontros individuais." },
+    { p: "Adolescentes fazem terapia sozinhos?", r: "Atendo adolescentes a partir de 12 anos. As sessões são individuais, e os responsáveis participam em momentos combinados, sempre respeitando o sigilo do adolescente." },
   ],
 
   guia: {

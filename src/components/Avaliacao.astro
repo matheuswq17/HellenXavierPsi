@@ -8,13 +8,14 @@ const a = site.avaliacao;
   <div class="wrap">
     <div class="av__topo">
       <p class="eyebrow" data-reveal>{a.titulo}</p>
-      <h2 data-split>Entender como a mente funciona, <em>com método e cuidado.</em></h2>
+      <h2 data-split>Avaliação neuropsicológica: <em>entender antes de decidir.</em></h2>
       <p class="lead" data-reveal>{a.resumo}</p>
     </div>
 
     <div class="av__mapa" data-reveal>
       <MapaFuncoes />
     </div>
+    <p class="av__mapa-link"><a class="link" href="/avaliacao-neuropsicologica/#funcoes">Veja o mapa das funções investigadas</a></p>
 
     <ol class="av__etapas">
       {a.etapas.map((e, i) => (
@@ -61,4 +62,7 @@ const a = site.avaliacao;
     .av__etapas::before { display: none; }
   }
   @media (max-width: 520px) { .av__etapas { grid-template-columns: 1fr; } }
+  .av__mapa-link { display: none; }
+  /* No celular, o mapa interativo fica só na página da avaliação (home mais curta). */
+  @media (max-width: 860px) { .av__mapa { display: none; } .av__mapa-link { display: block; margin: 32px 0 40px; } }
 </style>

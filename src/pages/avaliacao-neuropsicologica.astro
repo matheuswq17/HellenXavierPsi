@@ -40,11 +40,16 @@ const a = site.avaliacao;
     </div>
   </section>
 
-  <section class="secao" data-bg="#faf5f0">
+  <section class="secao" id="funcoes" data-bg="#faf5f0">
     <div class="wrap">
       <p class="eyebrow" data-reveal>O que é investigado</p>
       <h2 data-split>Um mapa das <em>funções cognitivas</em></h2>
       <div class="ap-mapa" data-reveal><MapaFuncoes /></div>
+      <dl class="ap-funcoes">
+        {a.funcoes.map((f) => (
+          <div data-reveal><dt>{f.nome}</dt><dd>{f.investiga}</dd></div>
+        ))}
+      </dl>
     </div>
   </section>
 
@@ -82,4 +87,9 @@ const a = site.avaliacao;
   .ap-etapas h3 { margin-bottom: 8px; }
   .ap-etapas p { color: var(--tinta-suave); max-width: 60ch; margin: 0; }
   @media (max-width: 860px) { .ap-hero__grid { grid-template-columns: 1fr; } .ap-etapas li { grid-template-columns: 56px 1fr; } }
+  .ap-funcoes { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin: 56px 0 0; padding-top: 32px; border-top: 1px solid var(--linha); }
+  .ap-funcoes dt { font-family: var(--serif); font-size: 1.2rem; color: var(--floresta); margin-bottom: 6px; }
+  .ap-funcoes dd { margin: 0; color: var(--tinta-suave); font-size: .95rem; }
+  @media (max-width: 960px) { .ap-funcoes { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .ap-funcoes { grid-template-columns: 1fr; } }
 </style>

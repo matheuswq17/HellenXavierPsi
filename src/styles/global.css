@@ -93,7 +93,7 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 .secao { padding-block: clamp(64px, 8vw, 112px); position: relative; }
 
 .eyebrow {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 600;

@@ -152,7 +152,7 @@ export const site = {
   avaliacao: {
     titulo: "Avaliação Neuropsicológica",
     resumo:
-      "Uma investigação cuidadosa de como funcionam a atenção, a memória, a linguagem, as funções executivas e outras habilidades, para compreender dificuldades e orientar próximos passos.",
+      "Investigação da atenção, memória, linguagem, funções executivas e percepção, com entrevistas, testes padronizados e laudo. Ajuda a esclarecer suspeitas como TDAH, TEA ou dificuldades de aprendizagem e a orientar os próximos passos.",
     paraQuem: [
       "Suspeita de TDAH em adolescentes ou adultos",
       "Investigação de Transtorno do Espectro Autista (TEA)",

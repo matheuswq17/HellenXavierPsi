@@ -83,13 +83,13 @@ const links = [
   .marca__logo { width: 34px; height: auto; }
   .marca__txt { display: flex; flex-direction: column; line-height: 1.1; }
   .marca__nome { font-family: var(--serif); font-size: 1.3rem; font-variation-settings: "opsz" 40; }
-  .marca__crp { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--tinta-suave); margin-top: 3px; }
+  .marca__crp { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--tinta-suave); margin-top: 3px; }
 
   .nav { margin-left: auto; }
   .nav ul { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; }
-  .nav a { text-decoration: none; font-size: 0.95rem; color: var(--tinta); position: relative; }
+  .nav a { text-decoration: none; font-size: 0.95rem; color: var(--tinta); position: relative; display: inline-block; padding-block: 10px; }
   .nav a::after {
-    content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px;
+    content: ""; position: absolute; left: 0; right: 0; bottom: 6px; height: 1px;
     background: var(--floresta); transform: scaleX(0); transform-origin: right;
     transition: transform 0.5s var(--ease);
   }

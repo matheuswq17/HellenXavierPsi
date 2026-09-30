@@ -9,7 +9,8 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import WhatsFloat from "../components/WhatsFloat.astro";
 import Respire from "../components/Respire.astro";
-import ogImg from "../assets/fotos/hero-claro.jpg";
+import ogImg from "../assets/fotos/consultorio-psicologia-tucuruvi-hellen-xavier.jpg";
+import retratoImg from "../assets/fotos/hellen-xavier-retrato.jpg";
 import { getImage } from "astro:assets";
 
 interface Props {
@@ -17,11 +18,14 @@ interface Props {
   description?: string;
   mensagem?: string;
   noindex?: boolean;
+  /** Nós extras de dados estruturados (Service, BreadcrumbList…) para a página. */
+  ld?: Record<string, unknown>[];
 }
 const { title = site.seo.title, description = site.seo.description, mensagem = site.mensagens.geral } = Astro.props;
 const indexavel = Boolean(import.meta.env.PUBLIC_SITE_URL) && !Astro.props.noindex && Astro.url.pathname !== "/404.html";
 const canonical = new URL(Astro.url.pathname, site.url).toString();
 const og = await getImage({ src: ogImg, width: 1200, height: 630, format: "jpg", fit: "cover" });
+const retrato = await getImage({ src: retratoImg, width: 800, format: "jpg" });
 const c = site.contato;
 
 const jsonLd = {
@@ -39,13 +43,24 @@ const jsonLd = {
       telephone: `+${c.whatsapp}`,
       address: {
         "@type": "PostalAddress",
-        streetAddress: c.endereco,
+        streetAddress: `${c.endereco} (${c.predio})`,
         addressLocality: "São Paulo",
         addressRegion: "SP",
         postalCode: plain(c.cep),
         addressCountry: "BR",
       },
-      areaServed: ["Tucuruvi", "São Paulo"],
+      areaServed: [
+        ...c.bairros.map((b) => ({ "@type": "Place", name: `${b}, São Paulo - SP` })),
+        { "@type": "Country", name: "Brasil (atendimento online)" },
+      ],
+      hasMap: c.mapsUrl,
+      taxID: site.cnpj,
+      currenciesAccepted: "BRL",
+      amenityFeature: [{ "@type": "LocationFeatureSpecification", name: "Estacionamento no local", value: true }],
+      availableService: [
+        { "@id": `${site.url}/psicoterapia-tcc/#servico` },
+        { "@id": `${site.url}/avaliacao-neuropsicologica/#servico` },
+      ],
       sameAs: [plain(c.instagram)],
       founder: { "@id": `${site.url}/#hellen` },
     },
@@ -54,9 +69,15 @@ const jsonLd = {
       "@id": `${site.url}/#hellen`,
       name: site.nomeCompleto,
       jobTitle: site.titulo,
-      knowsAbout: ["Terapia Cognitivo-Comportamental", "Avaliação Neuropsicológica", "Psicoterapia"],
+      image: new URL(retrato.src, site.url).toString(),
+      url: site.url,
+      sameAs: [plain(c.instagram)],
+      alumniOf: [{ "@type": "CollegeOrUniversity", name: "Universidade Federal de São Paulo (Unifesp)" }],
+      worksFor: { "@id": `${site.url}/#consultorio` },
+      knowsAbout: ["Terapia Cognitivo-Comportamental", "Avaliação Neuropsicológica", "Psicoterapia", "Terapia de casal", "Dependência Química", "Psicopatologia", "TDAH"],
       hasCredential: { "@type": "EducationalOccupationalCredential", credentialCategory: "Registro profissional", name: site.crp },
     },
+    ...(Astro.props.ld ?? []),
   ],
 };
 ---
@@ -72,11 +93,15 @@ const jsonLd = {
     <meta name="theme-color" content="#faf5f0" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={`${site.nome} · Psicóloga`} />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(og.src, site.url).toString()} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Consultório de psicologia de Hellen Xavier no Tucuruvi, com a psicóloga sentada em uma poltrona clara" />
     <meta name="twitter:card" content="summary_large_image" />
     {indexavel && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
     <script is:inline>

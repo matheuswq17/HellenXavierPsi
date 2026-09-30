@@ -2,8 +2,8 @@
 import { Picture } from "astro:assets";
 import { site } from "../site.config";
 import { rich } from "../lib/text";
-import foto from "../assets/fotos/bege-mao-queixo.jpg";
-import foto2 from "../assets/fotos/maos-bolsos.jpg";
+import foto from "../assets/fotos/hellen-xavier-psicologa-blazer-bege.jpg";
+import foto2 from "../assets/fotos/hellen-xavier-neuropsicologa.jpg";
 const s = site.sobre;
 ---
 <section class="secao sobre" id="sobre" data-bg="#f4ece2">
@@ -26,7 +26,7 @@ const s = site.sobre;
         {s.paragrafos.map((p) => <p data-reveal>{p}</p>)}
       </div>
       <p class="sobre__contexto">Conheça abaixo como funciona cada serviço.</p>
-      <div class="sobre__caminhos"><a class="link" href="/psicoterapia-tcc">Como funciona a psicoterapia</a><a class="link" href="/avaliacao-neuropsicologica">Como funciona a avaliação</a></div>
+      <div class="sobre__caminhos"><a class="link" href="/psicoterapia-tcc/">Como funciona a psicoterapia</a><a class="link" href="/avaliacao-neuropsicologica/">Como funciona a avaliação</a></div>
       <h3 class="sobre__formacao-titulo">Formação e especializações</h3>
       <ul class="sobre__form" data-reveal>
         {s.formacao.map((f) => <li set:html={rich(f)} />)}

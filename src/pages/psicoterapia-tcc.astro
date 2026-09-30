@@ -2,51 +2,116 @@
 import Base from "../layouts/Base.astro";
 import { site } from "../site.config";
 import { waLink } from "../lib/text";
+const c = site.contato;
+const url = `${site.url}/psicoterapia-tcc/`;
+const ld = [
+  {
+    "@type": "Service",
+    "@id": `${url}#servico`,
+    name: "Psicoterapia com Terapia Cognitivo-Comportamental (TCC)",
+    serviceType: "Psicoterapia",
+    description:
+      "Psicoterapia particular com Terapia Cognitivo-Comportamental para adolescentes a partir de 12 anos, adultos e casais, presencial no Tucuruvi (São Paulo) e online.",
+    provider: { "@id": `${site.url}/#hellen` },
+    areaServed: [{ "@type": "City", name: "São Paulo" }, { "@type": "Country", name: "Brasil" }],
+    audience: [
+      { "@type": "PeopleAudience", audienceType: "Adolescentes", suggestedMinAge: 12 },
+      { "@type": "PeopleAudience", audienceType: "Adultos" },
+      { "@type": "PeopleAudience", audienceType: "Casais" },
+    ],
+    url,
+  },
+  {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Início", item: `${site.url}/` },
+      { "@type": "ListItem", position: 2, name: "Psicoterapia com TCC", item: url },
+    ],
+  },
+];
 ---
-<Base title="Psicoterapia com TCC no Tucuruvi e online | Hellen Xavier" description="Psicoterapia particular para adolescentes, adultos e casais com Hellen Xavier. Entenda a TCC, a primeira sessão e o atendimento no Tucuruvi ou online.">
+<Base
+  title="Psicoterapia com TCC no Tucuruvi e online | Hellen Xavier"
+  description="Psicoterapia com TCC para adolescentes (a partir de 12 anos), adultos e casais no Tucuruvi, Zona Norte de SP, e online. Sessões de 60 minutos. Atendimento particular."
+  ld={ld}
+>
   <section class="secao terapia" data-hero data-bg="#faf5f0">
     <div class="wrap texto">
+      <nav class="migalha" aria-label="Você está em"><a href="/">Início</a> <span aria-hidden="true">/</span> Psicoterapia</nav>
       <p class="eyebrow">Adolescentes, adultos e casais · atendimento particular</p>
       <h1>Psicoterapia com TCC <em>no Tucuruvi e online.</em></h1>
-      <p class="lead">Um acompanhamento para compreender dificuldades emocionais e os padrões de pensamento e comportamento que afetam sua rotina.</p>
-      <a class="btn" href={waLink(site.contato.whatsapp, site.mensagens.geral)} target="_blank" rel="noopener">Conversar pelo WhatsApp</a>
+      <p class="lead">Um acompanhamento para entender dificuldades emocionais e os padrões de pensamento e comportamento que afetam sua rotina, com objetivos combinados e revistos junto com você.</p>
+      <a class="btn" href={waLink(c.whatsapp, site.mensagens.geral)} target="_blank" rel="noopener">Conversar pelo WhatsApp</a>
       <p class="nota">{site.horarios.resposta} Sem compromisso.</p>
+
+      <ul class="fatos" aria-label="Resumo do atendimento">
+        <li><strong>60 min</strong> por sessão</li>
+        <li><strong>Semanal</strong> em geral</li>
+        <li><strong>12+</strong> adolescentes a partir de 12 anos</li>
+        <li><strong>Presencial</strong> no Tucuruvi ou online</li>
+      </ul>
+
       <h2>Quando procurar psicoterapia?</h2>
-      <p>Ansiedade, dificuldades nas relações, estresse, questões de autoestima e mudanças na vida podem motivar a busca. Você não precisa chegar com um diagnóstico ou saber explicar tudo o que sente: a compreensão da demanda faz parte do processo.</p>
+      <p>Ansiedade, tristeza persistente, estresse, dificuldades nas relações, questões de autoestima, conflitos no trabalho ou nos estudos e mudanças importantes na vida costumam motivar a busca. Você não precisa chegar com um diagnóstico nem saber explicar tudo o que sente: entender a demanda faz parte do processo.</p>
+
       <h2>Como a Terapia Cognitivo-Comportamental funciona?</h2>
-      <p>A TCC considera a relação entre pensamentos, emoções e ações. Nas sessões, situações da sua vida ajudam a identificar padrões e a construir respostas possíveis. Não se trata de substituir todo pensamento por algo positivo, mas de examinar interpretações e ampliar a forma de lidar com as experiências.</p>
-      <p>Os objetivos são construídos em conjunto e revistos ao longo do acompanhamento. O ritmo e as estratégias dependem da história e das necessidades de cada pessoa; não há promessa de resultado ou prazo único.</p>
+      <p>A TCC olha para a relação entre pensamentos, emoções e comportamentos. Nas sessões, situações reais da sua semana ajudam a identificar padrões, como interpretações automáticas que aumentam a ansiedade ou evitações que mantêm um problema, e a construir outras formas de responder.</p>
+      <p>Não se trata de "pensar positivo". O trabalho é examinar interpretações com mais cuidado, experimentar novas estratégias entre as sessões e observar o que muda. Os objetivos são construídos em conjunto e revistos ao longo do acompanhamento. O ritmo depende da história e das necessidades de cada pessoa, e não há promessa de resultado ou prazo único.</p>
       <a class="link" href="/#tcc">Explore um exemplo educativo de TCC</a>
+
+      <h2>Quanto tempo dura cada sessão e a terapia?</h2>
+      <p>As sessões têm <strong>60 minutos</strong> e, em geral, acontecem <strong>uma vez por semana</strong>. A frequência pode mudar ao longo do processo, sempre combinada com você. A duração total da terapia varia conforme os objetivos: há acompanhamentos mais focais e outros mais longos, e isso é conversado abertamente durante o processo.</p>
+
       <h2>Do primeiro contato à primeira sessão</h2>
       <ol class="passos">
-        <li><strong>Contato:</strong> envie uma mensagem para perguntar sobre valores, modalidade e horários. Não é necessário contar detalhes de saúde.</li>
-        <li><strong>Combinação:</strong> duração, frequência, pagamento e condições de agendamento são esclarecidos antes do início.</li>
-        <li><strong>Primeira sessão:</strong> espaço para conhecer sua história, compreender a demanda e conversar sobre os objetivos do acompanhamento.</li>
+        <li><strong>Contato:</strong> envie uma mensagem pelo WhatsApp para perguntar sobre valores, modalidade e horários. Não é necessário contar detalhes de saúde.</li>
+        <li><strong>Combinação:</strong> pagamento, horário e modalidade são esclarecidos antes do início.</li>
+        <li><strong>Primeira sessão:</strong> espaço para conhecer sua história, compreender o que trouxe você até aqui e conversar sobre os objetivos.</li>
       </ol>
-      <h2>Atendimento de adolescentes</h2>
-      <p>As necessidades do adolescente e a participação dos responsáveis são conversadas no início. Os limites de confidencialidade e os momentos de participação da família são esclarecidos pela profissional.</p>
-      <h2>Presencial ou online?</h2>
-      <p>O consultório fica na {site.contato.endereco}, {site.contato.bairro}, {site.contato.cidade}. O atendimento online é realizado por videochamada, quando adequado à demanda, em ambiente reservado. A plataforma e as orientações são combinadas previamente.</p>
-      <p>{site.horarios.texto}. Atendimento particular, mediante disponibilidade.</p>
+
+      <h2>Terapia para adolescentes (a partir de 12 anos)</h2>
+      <p>Atendo adolescentes a partir de 12 anos em questões como ansiedade, autoestima, escola, relações com amigos e família e as mudanças próprias dessa fase. As sessões são individuais. No início, conversamos com os responsáveis sobre a participação da família e os limites do sigilo, para que o adolescente tenha um espaço seguro e os pais saibam como acompanhar.</p>
+
+      <h2>Terapia de casal</h2>
+      <p>Na terapia de casal, os dois participam das sessões e o foco está na relação: comunicação, conflitos que se repetem, confiança, decisões e fases de transição, como a chegada de filhos ou mudanças de carreira. O objetivo não é decidir quem tem razão, e sim entender os padrões da relação e construir acordos possíveis. Quando necessário, podem ser combinados encontros individuais.</p>
+
+      <h2>Presencial no Tucuruvi ou online?</h2>
+      <p>O consultório fica no {c.predio}, na {c.endereco}, {c.bairro}, São Paulo, com estacionamento no local. Fica a cerca de 950 m do Metrô Tucuruvi e do Shopping Tucuruvi e a 200 m do Shopping TriMais, com acesso fácil para quem vem de {c.bairros.slice(1, 6).join(", ")} e outros bairros da Zona Norte.</p>
+      <p>O atendimento online é feito por videochamada, quando adequado à demanda, em ambiente reservado, conforme a Resolução CFP nº 09/2024. Horários: {site.horarios.texto.charAt(0).toLowerCase() + site.horarios.texto.slice(1)}.</p>
+      <a class="link" href={c.mapsUrl} target="_blank" rel="noopener">Ver o consultório no mapa</a>
+
       <h2 id="diferenca">Psicoterapia e avaliação são a mesma coisa?</h2>
-      <p>Não. A psicoterapia acompanha questões emocionais e comportamentais ao longo do tempo. A avaliação neuropsicológica investiga funções cognitivas e questões específicas, integrando entrevistas e instrumentos. Se você tem dúvida sobre o serviço, explique apenas o motivo geral da busca no primeiro contato.</p>
-      <a class="link" href="/avaliacao-neuropsicologica">Entenda a avaliação neuropsicológica</a>
+      <p>Não. A psicoterapia acompanha questões emocionais e comportamentais ao longo do tempo. A avaliação neuropsicológica investiga funções como atenção, memória e funções executivas, com testes e entrevistas, para responder a perguntas específicas, como uma suspeita de TDAH. As duas podem se complementar. Se você não sabe qual procurar, explique apenas o motivo geral da busca no primeiro contato.</p>
+      <a class="link" href="/avaliacao-neuropsicologica/">Entenda a avaliação neuropsicológica</a>
+
       <h2>Quem acompanha você</h2>
-      <p>{site.nomeCompleto}, {site.crp}. Psicóloga com especializações em Terapia Cognitivo-Comportamental, Neuropsicologia, Psicopatologia e Saúde Mental e Dependência Química, esta última pela Unifesp.</p>
+      <p>{site.nomeCompleto}, {site.crp}. Psicóloga clínica e neuropsicóloga, com especializações em Terapia Cognitivo-Comportamental, Neuropsicologia, Psicopatologia e Saúde Mental e Dependência Química (Unifesp).</p>
       <a class="link" href="/#sobre">Conheça a formação de Hellen</a>
+
+      <div class="fim">
+        <p>Quer saber se a psicoterapia faz sentido para você agora?</p>
+        <a class="btn" href={waLink(c.whatsapp, site.mensagens.geral)} target="_blank" rel="noopener">Conversar pelo WhatsApp</a>
+      </div>
     </div>
   </section>
 </Base>
 <style>
 .terapia { padding-top: 144px; }
 .texto { max-width: 800px; }
+.migalha { font-size: .85rem; color: var(--tinta-suave); margin-bottom: 20px; }
+.migalha a { color: var(--floresta); }
 h1 { font-size: clamp(2.3rem, 5vw, 4rem); }
-h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); margin: 48px 0 20px; }
+h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); margin: 56px 0 20px; }
 .lead { margin-top: 24px; max-width: 55ch; }
 .nota { font-size: .9rem; margin-top: 12px; color: var(--tinta-suave); }
 li { margin-bottom: 16px; }
+.fatos { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.fatos li { margin: 0; background: var(--linho); box-shadow: inset 0 0 0 1px var(--linha); border-radius: 16px; padding: 16px; font-size: .9rem; color: var(--tinta-suave); }
+.fatos strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.5rem; color: var(--floresta); }
 .passos { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; padding: 0; list-style: none; counter-reset: passo; }
 .passos li { background: var(--salvia); padding: 24px; border-radius: 18px; font-size: 1rem; }
 .passos li::before { counter-increment: passo; content: "0" counter(passo); display: block; font-family: var(--serif); font-size: 2rem; color: var(--floresta); margin-bottom: 12px; }
-@media(max-width: 700px) { .passos { grid-template-columns: 1fr; } }
+.fim { margin-top: 64px; padding: 32px; border-radius: 22px; background: var(--salvia); display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center; justify-content: space-between; }
+.fim p { margin: 0; font-family: var(--serif); font-size: 1.4rem; color: var(--floresta); }
+@media(max-width: 700px) { .passos { grid-template-columns: 1fr; } .fatos { grid-template-columns: 1fr 1fr; } }
 </style>

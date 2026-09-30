@@ -7,8 +7,8 @@ const home = Astro.url.pathname === "/";
 const p = (h: string) => (home ? h : `/${h}`);
 const links = [
   { href: p("#sobre"), label: "Sobre" },
-  { href: "/psicoterapia-tcc", label: "Psicoterapia" },
-  { href: "/avaliacao-neuropsicologica", label: "Avaliação" },
+  { href: "/psicoterapia-tcc/", label: "Psicoterapia" },
+  { href: "/avaliacao-neuropsicologica/", label: "Avaliação" },
   { href: p("#atendimento"), label: "Atendimento" },
   { href: p("#palestras"), label: "Palestras" },
   { href: p("#duvidas"), label: "Dúvidas" },

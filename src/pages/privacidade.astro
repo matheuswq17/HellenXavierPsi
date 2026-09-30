@@ -2,21 +2,22 @@
 import Base from "../layouts/Base.astro";
 import { site } from "../site.config";
 ---
-<Base title={`Privacidade | ${site.nome}`} description="Como este site trata seus dados.">
+<Base title={`Privacidade | ${site.nome}`} description="Política de privacidade do site de Hellen Xavier, psicóloga no Tucuruvi: sem formulários, sem cookies de publicidade, métricas anônimas e sigilo profissional.">
   <section class="secao pv" data-hero data-bg="#faf5f0">
     <div class="wrap pv__in">
       <p class="eyebrow">Privacidade</p>
       <h1>Seus dados, <em>com cuidado.</em></h1>
-      <p>Este site não tem formulários e não usa cookies de rastreamento ou publicidade.</p>
+      <p>Este site não tem formulários e não usa cookies de rastreamento ou de publicidade.</p>
       <p>Ao clicar em “WhatsApp”, você é levado a uma conversa com uma mensagem pronta e neutra. Nada é enviado sem a sua confirmação. Recomendamos não compartilhar informações de saúde detalhadas por mensagem: elas podem ser tratadas com calma e sigilo na sessão.</p>
       <p>O “modo calmo” fica salvo apenas no seu navegador.</p>
       <p>As informações compartilhadas em atendimento são protegidas pelo sigilo profissional previsto no Código de Ética do Psicólogo e pela Lei Geral de Proteção de Dados (LGPD).</p>
       <h2>Contato e seus direitos</h2>
-      <p>Responsável pelo contato profissional: {site.nomeCompleto}, {site.crp}, da {site.empresa}. Para dúvidas de privacidade ou solicitações sobre seus dados, escreva para <a href={`mailto:${site.contato.email}`}>{site.contato.email}</a>. As solicitações serão avaliadas conforme a legislação e os deveres de guarda aplicáveis ao atendimento.</p>
+      <p>Responsável pelo contato profissional: {site.nomeCompleto}, {site.crp}, da {site.empresa} (CNPJ {site.cnpj}). Para dúvidas de privacidade ou solicitações sobre seus dados, escreva para <a href={`mailto:${site.contato.email}`}>{site.contato.email}</a>. As solicitações serão avaliadas conforme a legislação e os deveres de guarda aplicáveis ao atendimento.</p>
       <h2>Serviços externos</h2>
       <p>WhatsApp, Instagram e Google Maps são serviços externos. Ao abrir seus links, passam a valer também as políticas de privacidade desses serviços. Nenhum conteúdo desses serviços é incorporado automaticamente nesta página.</p>
       <h2>Dados técnicos e atendimento</h2>
-      <p>A hospedagem pode processar registros técnicos, como endereço IP, data e recurso solicitado, para entrega das páginas e segurança. A configuração e os prazos de retenção devem ser definidos com o provedor antes da publicação. Este aviso será atualizado quando a hospedagem for escolhida.</p>
+      <p>O site é hospedado na Cloudflare, que processa dados técnicos, como endereço IP, data, página acessada e navegador, para entregar as páginas e proteger o site contra abusos. Esses dados são tratados pela Cloudflare conforme a <a href="https://www.cloudflare.com/pt-br/privacypolicy/" target="_blank" rel="noopener">política de privacidade dela</a>.</p>
+      <p>Para saber quantas pessoas visitam o site e quais páginas são mais acessadas, usamos o Cloudflare Web Analytics, que mede visitas de forma agregada, sem cookies e sem identificar você.</p>
       <p>Este aviso trata do site e dos canais de contato. As informações sobre tratamento e guarda de registros clínicos são esclarecidas no início do atendimento. Evite enviar laudos, documentos ou detalhes de saúde no primeiro contato.</p>
     </div>
   </section>

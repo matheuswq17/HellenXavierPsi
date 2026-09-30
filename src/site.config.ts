@@ -27,7 +27,7 @@ export const site = {
   seo: {
     title: "Psicóloga no Tucuruvi · Hellen Xavier | TCC e Neuropsicologia",
     description:
-      "Psicóloga no Tucuruvi, São Paulo. Psicoterapia com TCC para adolescentes (a partir de 12 anos), adultos e casais, e avaliação neuropsicológica. Atendimento particular, presencial e online.",
+      "Psicóloga no Tucuruvi, São Paulo. Psicoterapia com TCC para adolescentes (a partir de 12 anos) e adultos, atendimento em dependência química e avaliação neuropsicológica. Atendimento particular, presencial e online.",
   },
 
   contato: {
@@ -63,9 +63,9 @@ export const site = {
   pagamento: {
     convenio: "Atendimento particular. Não atendo por convênio.",
     /** Versão curta (rodapé, cards). A versão completa fica só no FAQ. */
-    reembolsoCurto: "Possibilidade de reembolso: consulte seu plano.",
+    reembolsoCurto: "Emito nota fiscal para reembolso.",
     reembolso:
-      "Se você pretende solicitar reembolso, confirme comigo a documentação disponível e, com o seu plano, as condições de cobertura, que dependem de cada operadora.",
+      "Emito nota fiscal para você solicitar reembolso ao seu plano de saúde. As condições de cobertura dependem de cada operadora.",
     valores: "Valores informados no primeiro contato.",
   },
 
@@ -81,7 +81,7 @@ export const site = {
     eyebrow: "Psicóloga · Neuropsicóloga · CRP 06/48328",
     h1: "Psicoterapia e avaliação neuropsicológica",
     h1Local: "no Tucuruvi e online",
-    apoio: "Psicóloga clínica e neuropsicóloga, com especializações em TCC, Neuropsicologia e Dependência Química (Unifesp). Cuidado emocional e investigação cognitiva com a mesma profissional.",
+    apoio: "Psicóloga clínica e neuropsicóloga desde 2010, com especializações em TCC, Neuropsicologia e Dependência Química (Unifesp). Cuidado emocional e investigação cognitiva com a mesma profissional.",
     cta: "Conversar pelo WhatsApp",
     ctaSecundario: "Conhecer a avaliação",
     /** Vídeo gerado a partir da foto real (Higgsfield). Deixe vazio para usar só a foto. */
@@ -102,17 +102,17 @@ export const site = {
       texto: "Ansiedade, humor, estresse, trabalho, decisões e padrões que se repetem, com metas claras e acompanhamento.",
     },
     {
-      titulo: "Casais",
+      titulo: "Dependência química",
       idade: "",
-      voz: "“A gente sempre briga pelas mesmas coisas.”",
-      texto: "Comunicação, conflitos que se repetem, confiança e fases de transição, com espaço para os dois lados.",
+      voz: "“Já tentei parar sozinho e não consegui.”",
+      texto: "Uso de álcool e outras drogas, recaídas e seus impactos na rotina e nas relações, com orientação à família quando faz sentido.",
     },
   ],
 
   sobre: {
     titulo: "Prazer, eu sou a Hellen.",
     paragrafos: [
-      "Sou psicóloga clínica com abordagem cognitivo-comportamental e neuropsicóloga. Ofereço atendimento particular para adolescentes, adultos e casais no meu consultório no Tucuruvi e online.",
+      "Sou psicóloga clínica com abordagem cognitivo-comportamental e neuropsicóloga. Atuo na área desde 2010 e ofereço atendimento particular para adolescentes e adultos, incluindo casos de dependência química, no meu consultório no Tucuruvi e online.",
       "Na psicoterapia, trabalho com a relação entre pensamentos, emoções e comportamentos. O processo começa pela compreensão da sua história e das dificuldades que levaram você a buscar ajuda; os objetivos são construídos em conjunto.",
       "Minha formação reúne especializações em Terapia Cognitivo-Comportamental, Neuropsicologia, Psicopatologia e Saúde Mental e Dependência Química, esta última pela Unifesp. Psicoterapia e avaliação neuropsicológica têm objetivos diferentes: conversamos sobre qual caminho faz sentido para a sua demanda.",
     ],
@@ -122,12 +122,14 @@ export const site = {
       { t: "Método e objetivos claros", d: "Combinamos juntos o que queremos alcançar e revisamos o caminho ao longo do processo." },
       { t: "Transparência", d: "Valores, frequência e próximos passos são conversados abertamente, desde o primeiro contato." },
     ],
+    desde: 2010,
     formacao: [
-      "Graduação em Psicologia",
-      "Especialização em Terapia Cognitivo-Comportamental",
-      "Especialização em Dependência Química pela Unifesp",
-      "Especialização em Neuropsicologia",
-      "Especialização em Psicopatologia e Saúde Mental",
+      "Graduação em Psicologia — UnG, 1998",
+      "Especialização em Dependência Química — Unifesp, 2011",
+      "Especialização em Neuropsicologia — IPAF, 2015",
+      "Especialização em Psicopatologia e Saúde Mental — CEPS, 2019",
+      "Especialização em Terapia Cognitivo-Comportamental — CETCC, 2020",
+      "Atuação na área desde 2010",
     ],
   },
 
@@ -168,7 +170,7 @@ export const site = {
     ],
     etapas: [
       { titulo: "Entrevista inicial", texto: "Conversa para entender a queixa, a história e os objetivos. Com adolescentes, os responsáveis participam." },
-      { titulo: "Sessões de testagem", texto: "Aplicação de testes e tarefas selecionados para a demanda. O número de encontros é definido conforme a necessidade de cada avaliação." },
+      { titulo: "Sessões de testagem", texto: "Aplicação de testes e tarefas selecionados para a demanda. Em média, a avaliação completa tem 6 sessões, podendo ser mais conforme cada paciente." },
       { titulo: "Análise e integração", texto: "Correção dos instrumentos e integração com entrevistas, observações e, quando útil, informações da escola." },
       { titulo: "Devolutiva e laudo", texto: "Encontro para explicar os resultados com clareza, entrega do laudo e orientações de próximos passos." },
     ],
@@ -181,10 +183,10 @@ export const site = {
     ],
     faq: [
       { p: "Qual a idade mínima?", r: "A avaliação é feita em adolescentes a partir de 12 anos e em adultos." },
-      { p: "Quanto tempo leva a avaliação?", r: "O prazo depende da demanda, dos instrumentos necessários e da disponibilidade para os encontros. A estimativa é combinada após a entrevista inicial." },
+      { p: "Quantas sessões tem a avaliação?", r: "Em média, 6 sessões, incluindo entrevista, testagem e devolutiva. Alguns casos pedem mais encontros; a estimativa é apresentada após a entrevista inicial." },
       { p: "O laudo serve para a escola?", r: "Sim. O laudo traz os resultados e orientações que podem ser compartilhados com a escola e outros profissionais, com a sua autorização." },
       { p: "Preciso de encaminhamento médico?", r: "Não é obrigatório. Muitas avaliações começam por indicação da escola, do médico ou pela própria percepção da família." },
-      { p: "Tem reembolso do plano?", r: "O atendimento é particular. Se você pretende solicitar reembolso, confirme comigo a documentação disponível e, com o seu plano, as condições de cobertura." },
+      { p: "Tem reembolso do plano?", r: "O atendimento é particular. Emito nota fiscal para você solicitar reembolso ao seu plano; a cobertura depende das regras de cada operadora." },
     ],
   },
 
@@ -214,7 +216,7 @@ export const site = {
     titulo: "Palestras",
     texto: "Temas das minhas áreas de especialização, adaptados ao público: escolas, famílias, empresas e eventos. Tema, duração e formato são definidos em conversa prévia.",
     publicos: ["Escolas e famílias", "Empresas e SIPAT", "Eventos e rodas de conversa"],
-    /** Temas derivados das especializações — validar lista final com a profissional. */
+    /** Temas aprovados pela profissional (30/09/2026). */
     temas: [
       "Ansiedade no dia a dia: como pensamentos, emoções e comportamentos se conectam",
       "Álcool e outras drogas: prevenção e como conversar sobre dependência química",
@@ -224,13 +226,13 @@ export const site = {
   },
 
   faq: [
-    { p: "Você atende por convênio?", r: "O atendimento é particular. Não atendo por convênio. Se você pretende solicitar reembolso, confirme comigo a documentação disponível e, com o seu plano, as condições de cobertura, que dependem de cada operadora." },
+    { p: "Você atende por convênio?", r: "O atendimento é particular. Não atendo por convênio, mas emito nota fiscal para você solicitar reembolso ao seu plano. As condições de cobertura dependem de cada operadora." },
     { p: "Como funciona a sessão online?", r: "Por chamada de vídeo, no horário e na plataforma combinados. Antes de iniciar, conversamos sobre a adequação da modalidade. Escolha um lugar reservado, com boa conexão, e use fones de ouvido." },
     { p: "Quais são os horários?", r: "De segunda a quinta-feira, até às 21h, presencial ou online. Respondo mensagens em até 1 dia útil." },
     { p: "Quanto tempo dura cada sessão?", r: "As sessões têm 60 minutos e, em geral, acontecem uma vez por semana. A frequência pode mudar ao longo do processo, sempre combinada com você." },
     { p: "Quanto custa?", r: "Os valores são informados no primeiro contato, junto com as formas de pagamento." },
     { p: "Como é a primeira sessão?", r: "A primeira sessão clínica é dedicada a conhecer sua história, compreender a demanda e combinar objetivos. Antes disso, pelo WhatsApp, você tira dúvidas sobre funcionamento, valores e horários." },
-    { p: "Você atende casais?", r: "Sim. Na terapia de casal, os dois participam das sessões e o foco está na relação: comunicação, conflitos que se repetem e acordos. Quando necessário, podem ser combinados encontros individuais." },
+    { p: "Você atende dependência química?", r: "Sim. Atendo adolescentes e adultos em questões relacionadas ao uso de álcool e outras drogas, com especialização em Dependência Química pela Unifesp. O trabalho envolve entender o papel do uso na sua vida, prevenir recaídas e, quando faz sentido, orientar a família." },
     { p: "Adolescentes fazem terapia sozinhos?", r: "Atendo adolescentes a partir de 12 anos. As sessões são individuais, e os responsáveis participam em momentos combinados, sempre respeitando o sigilo do adolescente." },
   ],
 

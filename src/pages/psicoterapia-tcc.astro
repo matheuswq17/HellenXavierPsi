@@ -11,13 +11,12 @@ const ld = [
     name: "Psicoterapia com Terapia Cognitivo-Comportamental (TCC)",
     serviceType: "Psicoterapia",
     description:
-      "Psicoterapia particular com Terapia Cognitivo-Comportamental para adolescentes a partir de 12 anos, adultos e casais, presencial no Tucuruvi (São Paulo) e online.",
+      "Psicoterapia particular com Terapia Cognitivo-Comportamental para adolescentes a partir de 12 anos e adultos, incluindo dependência química, presencial no Tucuruvi (São Paulo) e online.",
     provider: { "@id": `${site.url}/#hellen` },
     areaServed: [{ "@type": "City", name: "São Paulo" }, { "@type": "Country", name: "Brasil" }],
     audience: [
       { "@type": "PeopleAudience", audienceType: "Adolescentes", suggestedMinAge: 12 },
       { "@type": "PeopleAudience", audienceType: "Adultos" },
-      { "@type": "PeopleAudience", audienceType: "Casais" },
     ],
     url,
   },
@@ -32,13 +31,13 @@ const ld = [
 ---
 <Base
   title="Psicoterapia com TCC no Tucuruvi e online | Hellen Xavier"
-  description="Psicoterapia com TCC para adolescentes (a partir de 12 anos), adultos e casais no Tucuruvi, Zona Norte de SP, e online. Sessões de 60 minutos. Atendimento particular."
+  description="Psicoterapia com TCC para adolescentes (a partir de 12 anos) e adultos, incluindo dependência química, no Tucuruvi, Zona Norte de SP, e online. Sessões de 60 minutos."
   ld={ld}
 >
   <section class="secao terapia" data-hero data-bg="#faf5f0">
     <div class="wrap texto">
       <nav class="migalha" aria-label="Você está em"><a href="/">Início</a> <span aria-hidden="true">/</span> Psicoterapia</nav>
-      <p class="eyebrow">Adolescentes, adultos e casais · atendimento particular</p>
+      <p class="eyebrow">Adolescentes e adultos · atendimento particular</p>
       <h1>Psicoterapia com TCC <em>no Tucuruvi e online.</em></h1>
       <p class="lead">Um acompanhamento para entender dificuldades emocionais e os padrões de pensamento e comportamento que afetam sua rotina, com objetivos combinados e revistos junto com você.</p>
       <a class="btn" href={waLink(c.whatsapp, site.mensagens.geral)} target="_blank" rel="noopener">Conversar pelo WhatsApp</a>
@@ -72,8 +71,9 @@ const ld = [
       <h2>Terapia para adolescentes (a partir de 12 anos)</h2>
       <p>Atendo adolescentes a partir de 12 anos em questões como ansiedade, autoestima, escola, relações com amigos e família e as mudanças próprias dessa fase. As sessões são individuais. No início, conversamos com os responsáveis sobre a participação da família e os limites do sigilo, para que o adolescente tenha um espaço seguro e os pais saibam como acompanhar.</p>
 
-      <h2>Terapia de casal</h2>
-      <p>Na terapia de casal, os dois participam das sessões e o foco está na relação: comunicação, conflitos que se repetem, confiança, decisões e fases de transição, como a chegada de filhos ou mudanças de carreira. O objetivo não é decidir quem tem razão, e sim entender os padrões da relação e construir acordos possíveis. Quando necessário, podem ser combinados encontros individuais.</p>
+      <h2>Dependência química</h2>
+      <p>Tenho especialização em Dependência Química pela Unifesp e atendo adolescentes e adultos com questões relacionadas ao uso de álcool e outras drogas. O acompanhamento ajuda a entender a função que o uso ocupa na sua vida, identificar situações de risco, construir estratégias para lidar com a vontade de usar e prevenir recaídas.</p>
+      <p>Quando faz sentido, a família recebe orientação sobre como apoiar sem se desgastar. Em alguns casos, o cuidado é feito em conjunto com médico psiquiatra ou outros serviços de saúde.</p>
 
       <h2>Presencial no Tucuruvi ou online?</h2>
       <p>O consultório fica no {c.predio}, na {c.endereco}, {c.bairro}, São Paulo, com estacionamento no local. Fica a cerca de 950 m do Metrô Tucuruvi e do Shopping Tucuruvi e a 200 m do Shopping TriMais, com acesso fácil para quem vem de {c.bairros.slice(1, 6).join(", ")} e outros bairros da Zona Norte.</p>
@@ -85,7 +85,7 @@ const ld = [
       <a class="link" href="/avaliacao-neuropsicologica/">Entenda a avaliação neuropsicológica</a>
 
       <h2>Quem acompanha você</h2>
-      <p>{site.nomeCompleto}, {site.crp}. Psicóloga clínica e neuropsicóloga, com especializações em Terapia Cognitivo-Comportamental, Neuropsicologia, Psicopatologia e Saúde Mental e Dependência Química (Unifesp).</p>
+      <p>{site.nomeCompleto}, {site.crp}. Psicóloga clínica e neuropsicóloga, atuando na área desde 2010, com especializações em Terapia Cognitivo-Comportamental, Neuropsicologia, Psicopatologia e Saúde Mental e Dependência Química (Unifesp).</p>
       <a class="link" href="/#sobre">Conheça a formação de Hellen</a>
 
       <div class="fim">

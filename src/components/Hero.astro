@@ -60,10 +60,9 @@ const alt = "Retrato de Hellen Xavier sorrindo, de blazer preto";
         {h.cta}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="btn btn--ghost" href="/avaliacao-neuropsicologica">{h.ctaSecundario}</a>
-      <a class="link" href="/psicoterapia-tcc">Entender a psicoterapia</a>
+      <a class="link" href="/psicoterapia-tcc/#diferenca">Psicoterapia ou avaliação? Entenda a diferença</a>
     </div>
-    <p class="hero__nota">Consulte valores e horários. O contato não confirma uma sessão.</p>
+    <p class="hero__nota">{site.horarios.resposta} Sem compromisso.</p>
   </div>
 
   <a href="#para-quem" class="hero__rolar" aria-label="Rolar para a próxima seção" data-reveal>
@@ -99,7 +98,7 @@ const alt = "Retrato de Hellen Xavier sorrindo, de blazer preto";
   .hero h1 { font-size: clamp(2.2rem, 3.5vw, 3.6rem); color: var(--tinta); }
   .hero h1 em { display: block; }
   .hero .lead { margin-top: 28px; }
-  .hero__cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px; }
+  .hero__cta { display: flex; gap: 12px 24px; flex-wrap: wrap; align-items: center; margin-top: 36px; }
   .hero__publico { font-size: .9rem; color: var(--tinta-suave); margin-bottom: 14px; }
   .hero__cta .link { align-self: center; }
   .hero__nota { font-size: .85rem; color: var(--tinta-suave); margin-top: 14px; }

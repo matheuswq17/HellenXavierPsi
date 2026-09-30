@@ -81,7 +81,7 @@ export const site = {
     eyebrow: "Psicóloga · Neuropsicóloga · CRP 06/48328",
     h1: "Psicoterapia e avaliação neuropsicológica",
     h1Local: "no Tucuruvi e online",
-    apoio: "Terapia Cognitivo-Comportamental para lidar com emoções, pensamentos e dificuldades do dia a dia.",
+    apoio: "Psicóloga clínica e neuropsicóloga, com especializações em TCC, Neuropsicologia e Dependência Química (Unifesp). Cuidado emocional e investigação cognitiva com a mesma profissional.",
     cta: "Conversar pelo WhatsApp",
     ctaSecundario: "Conhecer a avaliação",
     /** Vídeo gerado a partir da foto real (Higgsfield). Deixe vazio para usar só a foto. */

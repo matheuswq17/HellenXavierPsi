@@ -110,20 +110,23 @@ function parar() {
 }
 
 /* ---------- modo calmo ---------- */
-const btn = document.querySelector<HTMLButtonElement>("[data-calmo-toggle]");
+// Pode haver mais de um botão (header no desktop e menu no celular).
+const btns = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-calmo-toggle]"));
 const setBtn = () => {
   const calmo = root.hasAttribute("data-calmo");
-  btn?.setAttribute("aria-pressed", String(calmo));
-  btn?.setAttribute("aria-label", calmo ? "Modo calmo: ativar animações" : "Modo calmo: desligar animações");
+  btns.forEach((btn) => {
+    btn.setAttribute("aria-pressed", String(calmo));
+    btn.setAttribute("aria-label", calmo ? "Modo calmo: ativar animações" : "Modo calmo: desligar animações");
+  });
 };
-btn?.addEventListener("click", () => {
+btns.forEach((btn) => btn.addEventListener("click", () => {
   const ligar = !root.hasAttribute("data-calmo");
   if (ligar) { root.setAttribute("data-calmo", ""); parar(); }
   else { root.removeAttribute("data-calmo"); iniciar(); ScrollTrigger.refresh(); }
   try { localStorage.setItem("calmo", ligar ? "1" : "0"); } catch {}
   document.dispatchEvent(new CustomEvent("calmo", { detail: ligar }));
   setBtn();
-});
+}));
 
 secBgs();
 setBtn();

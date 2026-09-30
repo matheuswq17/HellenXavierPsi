@@ -59,12 +59,30 @@ const { mensagem } = Astro.props as { mensagem: string };
   .flutua__wa:hover ~ .flutua__previa,
   .flutua__wa:focus-visible ~ .flutua__previa { opacity: 1; transform: none; }
 
-  @media (max-width: 560px) { .flutua__respire { width: 44px; padding: 0; justify-content: center; } .flutua__respire span { display: none; } .flutua__wa { width: 48px; height: 48px; } .flutua { right: 12px; bottom: 12px; } }
+  /* Celular: só o WhatsApp flutua ("Respire comigo" fica no menu) e ele se recolhe
+     enquanto a pessoa rola para baixo, para não cobrir o texto que está sendo lido. */
+  @media (max-width: 860px) {
+    .flutua__respire { display: none; }
+    .flutua__wa { width: 52px; height: 52px; }
+    .flutua { right: 14px; bottom: max(14px, env(safe-area-inset-bottom)); }
+    .flutua.is-rolando { opacity: 0; transform: translateY(24px); pointer-events: none; }
+  }
   @media (hover: none) { .flutua__previa { display: none; } }
 </style>
 
 <script>
   const el = document.querySelector<HTMLElement>("[data-flutua]")!;
+  const celular = matchMedia("(max-width: 860px)");
+  let ultimo = scrollY, parado = 0;
+  addEventListener("scroll", () => {
+    if (!celular.matches) return;
+    const y = scrollY;
+    if (y > ultimo + 6 && y > 200) el.classList.add("is-rolando");
+    else if (y < ultimo - 6) el.classList.remove("is-rolando");
+    ultimo = y;
+    clearTimeout(parado);
+    parado = window.setTimeout(() => el.classList.remove("is-rolando"), 900);
+  }, { passive: true });
   const contato = document.querySelector("#contato");
   if (contato) {
     new IntersectionObserver(([entry]) => {

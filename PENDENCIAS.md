@@ -2,6 +2,7 @@
 
 ## Confirmado pela profissional (via Adolfo)
 - Endereço: Av. Nova Cantareira, 2014 — Edifício Cantareira Tower. Estacionamento no local.
+- CEP 02330-003 confirmado.
 - Referências: ~950 m do Metrô Tucuruvi e do Shopping Tucuruvi; 200 m do Shopping TriMais.
 - Atende adolescentes (a partir de 12 anos) e adultos, incluindo dependência química. **Não atende casais** (resposta de 30/09).
 - Formação: Psicologia UnG 1998; Dependência Química Unifesp 2011; Neuropsicologia IPAF 2015; Psicopatologia e Saúde Mental CEPS 2019; TCC CETCC 2020. Atua na área desde 2010.
@@ -16,7 +17,7 @@
 - Particular, sem convênio. WhatsApp (11) 98015-7199, Instagram @hellen.xavierpsi, e-mail xavier.hellen@gmail.com.
 
 ## Ainda confirmar com a Hellen
-- [ ] **Conjunto 15 e CEP 02330-003** continuam valendo no número 2014? (vieram da informação anterior, do número 2026).
+- [ ] **Conjunto 15** continua valendo no número 2014? (o CEP 02330-003 já foi confirmado).
 - [ ] Validar a redação de "O que você pode esperar de mim" (`sobre.compromissos`), da seção de dependência química (card, FAQ e página de psicoterapia) e das seções novas da página de avaliação (TDAH, TEA, laudo).
 
 ## Para você (Adolfo) fazer fora do código

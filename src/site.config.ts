@@ -43,6 +43,8 @@ export const site = {
     uf: "SP",
     cep: "02330-003",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Cantareira+Tower,+Av.+Nova+Cantareira,+2014+-+Tucuruvi,+S%C3%A3o+Paulo+-+SP",
+    rotaUrl: "https://www.google.com/maps/dir/?api=1&destination=Cantareira+Tower,+Av.+Nova+Cantareira,+2014+-+Tucuruvi,+S%C3%A3o+Paulo+-+SP",
+    wazeUrl: "https://waze.com/ul?ll=-23.47922,-46.61117&navigate=yes",
     /** Referências de acesso (informadas pela profissional). */
     acesso: [
       "Estacionamento no local",

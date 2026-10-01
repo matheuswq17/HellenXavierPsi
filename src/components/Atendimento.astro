@@ -3,6 +3,7 @@ import { Picture } from "astro:assets";
 import { site } from "../site.config";
 import { rich, waLink } from "../lib/text";
 import foto from "../assets/fotos/consultorio-psicologia-tucuruvi-hellen-xavier.jpg";
+import MapaConsultorio from "./MapaConsultorio.astro";
 const a = site.atendimento;
 ---
 <section class="secao at" id="atendimento" data-bg="#f4ece2">
@@ -38,6 +39,9 @@ const a = site.atendimento;
       </dl>
     </div>
   </div>
+  <div class="wrap at__mapa" data-reveal>
+    <MapaConsultorio />
+  </div>
   <p class="wrap at__bairros">Atendimento presencial para quem vive ou trabalha no {site.contato.bairros[0]} e em bairros próximos da Zona Norte, como {site.contato.bairros.slice(1, 7).join(", ")}. Online para todo o Brasil.</p>
   <div class="wrap at__proximo">
     <h3>Do contato ao primeiro encontro</h3>
@@ -51,6 +55,7 @@ const a = site.atendimento;
 </section>
 
 <style>
+  .at__mapa { margin-top: clamp(48px, 6vw, 80px); }
   .at__bairros { margin-top: 32px; font-size: .95rem; color: var(--tinta-suave); }
   .at__proximo { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--linha); }
   .at__proximo ol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; padding-left: 22px; margin-block: 24px; font-size: .95rem; color: var(--tinta-suave); }

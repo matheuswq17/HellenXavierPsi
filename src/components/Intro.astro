@@ -22,7 +22,8 @@ import Logo from "./Logo.astro";
 
 <style is:global>
   .intro { display: none; }
-  html.com-intro { overflow: hidden; }
+  /* A rolagem é travada por JS (sem overflow:hidden): a barra não some e o header não "anda" no pouso. */
+  html.com-intro { overscroll-behavior: none; }
   html.com-intro .intro {
     display: block; position: fixed; inset: 0; z-index: 200;
     cursor: pointer; -webkit-tap-highlight-color: transparent;
@@ -43,7 +44,7 @@ import Logo from "./Logo.astro";
     background: radial-gradient(closest-side, rgba(143, 204, 164, 0.38), rgba(143, 204, 164, 0.12) 55%, transparent);
     filter: blur(8px);
   }
-  .intro__logo { position: absolute; left: 0; top: 0; color: var(--floresta); will-change: transform; }
+  .intro__logo { position: absolute; left: 0; top: 0; color: var(--floresta); transform-origin: 0 0; will-change: transform; }
   .intro__canvas, .intro__svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .intro__svg { opacity: 0; }
   .intro__semente {

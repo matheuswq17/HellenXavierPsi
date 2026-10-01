@@ -128,7 +128,8 @@ async function iniciar(el: HTMLElement) {
     .to(letras, { yPercent: 0, duration: 0.95, ease: "expo.out", stagger: 0.028 }, 1.3)
     .to(crp ?? [], { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 1.65)
     .to(st, { q: 1.3, duration: 1.0, ease: "power1.inOut" }, 1.55)
-    .to(caixa, { scale: 1.035, duration: 0.42, yoyo: true, repeat: 1, ease: "sine.inOut", transformOrigin: "50% 58%" }, 1.85)
+    // Respiro: só no desenho (canvas/svg), nunca na caixa que voa — e termina antes do voo.
+    .to([canvas, svg], { scale: 1.035, duration: 0.4, yoyo: true, repeat: 1, ease: "sine.inOut", transformOrigin: "50% 58%" }, 1.75)
     .addLabel("voo", 2.6);
 
   // ---------- voo até o header ----------
@@ -146,7 +147,7 @@ async function iniciar(el: HTMLElement) {
     svg.style.clipPath = "";
     if (pulou) tl.timeScale(1.35);
   }, "voo")
-    .set(caixa, { transformOrigin: "0 0", scale: 1 }, "voo")
+    .set([canvas, svg], { scale: 1 }, "voo")
     .to(caixa, {
       x: () => (D.rl ? D.rl.left - L.x : 0),
       y: () => (D.rl ? D.rl.top - L.y : -L.h * 0.2),
@@ -182,7 +183,21 @@ async function iniciar(el: HTMLElement) {
   };
   const evs = ["pointerdown", "keydown", "wheel", "touchstart"] as const;
   evs.forEach((t) => addEventListener(t, acelerar, { passive: true }));
-  const tirarOuvintes = () => evs.forEach((t) => removeEventListener(t, acelerar));
+  // Trava a rolagem durante a abertura sem esconder a barra (evita o layout "andar").
+  const TECLAS = [" ", "PageDown", "PageUp", "ArrowDown", "ArrowUp", "Home", "End"];
+  const travar = (e: Event) => {
+    if (e.type === "keydown" && !TECLAS.includes((e as KeyboardEvent).key)) return;
+    e.preventDefault();
+  };
+  const travas = ["wheel", "touchmove", "keydown"] as const;
+  travas.forEach((t) => addEventListener(t, travar, { passive: false }));
+  const segurarTopo = () => { if (scrollY !== 0) scrollTo(0, 0); };
+  addEventListener("scroll", segurarTopo);
+  const tirarOuvintes = () => {
+    evs.forEach((t) => removeEventListener(t, acelerar));
+    travas.forEach((t) => removeEventListener(t, travar));
+    removeEventListener("scroll", segurarTopo);
+  };
   addEventListener("resize", () => { if (tl.time() < tl.labels.voo) { layout(); gl?.mascara(); desenhar(); } });
 }
 

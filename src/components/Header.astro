@@ -159,17 +159,32 @@ const links = [
 
 <script>
   const topo = document.querySelector<HTMLElement>("[data-topo]")!;
-  let last = 0;
-  const onScroll = () => {
-    const y = window.scrollY;
+  // Esconde ao rolar para baixo e mostra ao rolar para cima.
+  // O estado só muda depois de um deslocamento acumulado na mesma direção:
+  // eventos pequenos do scroll suave não fazem o header "tentar subir e voltar".
+  let last = window.scrollY;
+  let acumulado = 0;
+  let agendado = false;
+  const LIMIAR = 12;
+  const atualizar = () => {
+    agendado = false;
+    const y = Math.max(0, window.scrollY);
+    const delta = y - last;
+    last = y;
     topo.classList.toggle("is-scrolled", y > 24);
     const menuAberto = topo.querySelector("[data-menu-btn]")?.getAttribute("aria-expanded") === "true";
-    topo.classList.toggle("is-hidden", !menuAberto && y > 600 && y > last + 4);
-    if (y < last - 4) topo.classList.remove("is-hidden");
-    last = y;
+    if (menuAberto || y < 120) { topo.classList.remove("is-hidden"); acumulado = 0; return; }
+    if (delta === 0) return;
+    acumulado = Math.sign(delta) === Math.sign(acumulado) ? acumulado + delta : delta;
+    if (acumulado > LIMIAR && y > 600) topo.classList.add("is-hidden");
+    else if (acumulado < -LIMIAR) topo.classList.remove("is-hidden");
+  };
+  const onScroll = () => {
+    if (!agendado) { agendado = true; requestAnimationFrame(atualizar); }
   };
   addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  topo.addEventListener("focusin", () => topo.classList.remove("is-hidden"));
+  atualizar();
 
   const btn = topo.querySelector<HTMLButtonElement>("[data-menu-btn]")!;
   const menu = topo.querySelector<HTMLElement>("[data-menu]")!;

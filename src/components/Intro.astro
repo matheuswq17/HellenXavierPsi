@@ -1,0 +1,76 @@
+---
+/**
+ * Abertura do site: a árvore-cérebro cresce como seiva a partir do tronco,
+ * um pulso percorre os galhos até o cérebro e o logo voa para o header.
+ * Só aparece uma vez por sessão, nunca no Modo calmo / movimento reduzido.
+ * O "liga/desliga" é decidido no <head> (Base.astro) antes da pintura.
+ */
+import Logo from "./Logo.astro";
+---
+<div class="intro" data-intro aria-hidden="true">
+  <div class="intro__fundo" data-intro-fundo></div>
+  <div class="intro__aura" data-intro-aura></div>
+  <div class="intro__logo" data-intro-logo>
+    <canvas class="intro__canvas" data-intro-canvas></canvas>
+    <Logo class="intro__svg" data-intro-svg />
+    <span class="intro__chao" data-intro-chao></span>
+    <span class="intro__semente" data-intro-semente></span>
+  </div>
+  <div class="intro__marca" data-intro-marca></div>
+  <button class="intro__pular" type="button" tabindex="-1" data-intro-pular>Pular</button>
+</div>
+
+<style is:global>
+  .intro { display: none; }
+  html.com-intro { overflow: hidden; }
+  html.com-intro .intro {
+    display: block; position: fixed; inset: 0; z-index: 200;
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
+  }
+  html.com-intro .topo .marca__logo,
+  html.com-intro .topo .marca__txt { visibility: hidden; }
+
+  .intro__fundo {
+    position: absolute; inset: 0 -12%;
+    background:
+      radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(31, 74, 46, 0.05) 100%),
+      var(--linho);
+    will-change: transform;
+  }
+  .intro__aura {
+    position: absolute; left: 0; top: 0; width: 1px; height: 1px; opacity: 0;
+    border-radius: 50%; pointer-events: none;
+    background: radial-gradient(closest-side, rgba(143, 204, 164, 0.38), rgba(143, 204, 164, 0.12) 55%, transparent);
+    filter: blur(8px);
+  }
+  .intro__logo { position: absolute; left: 0; top: 0; color: var(--floresta); will-change: transform; }
+  .intro__canvas, .intro__svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .intro__svg { opacity: 0; }
+  .intro__semente {
+    position: absolute; left: calc(318 / 672 * 100%); top: calc(572 / 760 * 100%);
+    width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%;
+    background: #d8f3df;
+    box-shadow: 0 0 0 4px rgba(143, 204, 164, 0.35), 0 0 28px 8px rgba(143, 204, 164, 0.55);
+    transform: scale(0);
+  }
+  .intro__chao {
+    position: absolute; left: -12%; right: -12%; top: calc(574 / 760 * 100%); height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(31, 74, 46, 0.32) 30%, rgba(31, 74, 46, 0.32) 70%, transparent);
+    transform: scaleX(0); transform-origin: calc(50% - 4px) 50%;
+  }
+  .intro__marca { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
+  .intro__marca .marca__txt { visibility: visible !important; }
+  .intro__marca .marca__nome { overflow: hidden; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+  .intro__l { display: inline-block; white-space: pre; }
+  .intro__pular {
+    position: absolute; right: 24px; bottom: 22px;
+    background: none; border: 0; padding: 10px 6px; cursor: pointer;
+    font: 600 0.72rem/1 var(--sans); letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--tinta-suave); opacity: 0;
+  }
+  .intro__pular:hover { color: var(--floresta); }
+</style>
+
+<script>
+  import "../scripts/intro.ts";
+</script>

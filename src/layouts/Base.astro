@@ -9,6 +9,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import WhatsFloat from "../components/WhatsFloat.astro";
 import Respire from "../components/Respire.astro";
+import Intro from "../components/Intro.astro";
 import ogImg from "../assets/fotos/consultorio-psicologia-tucuruvi-hellen-xavier.jpg";
 import retratoImg from "../assets/fotos/hellen-xavier-retrato.jpg";
 import { getImage } from "astro:assets";
@@ -20,6 +21,8 @@ interface Props {
   noindex?: boolean;
   /** Nós extras de dados estruturados (Service, BreadcrumbList…) para a página. */
   ld?: Record<string, unknown>[];
+  /** Abertura animada com o logo (só a home usa). */
+  intro?: boolean;
 }
 const { title = site.seo.title, description = site.seo.description, mensagem = site.mensagens.geral } = Astro.props;
 const indexavel = Boolean(import.meta.env.PUBLIC_SITE_URL) && !Astro.props.noindex && Astro.url.pathname !== "/404.html";
@@ -130,8 +133,28 @@ const jsonLd = {
         if (h >= 18 || h < 6) d.classList.add("noite");
       })();
     </script>
+    {Astro.props.intro && (
+      <script is:inline>
+        // Abertura: uma vez por sessão, nunca no Modo calmo/movimento reduzido nem em link com âncora.
+        (function () {
+          var d = document.documentElement;
+          if (d.hasAttribute("data-calmo") || location.hash || navigator.webdriver) return;
+          try { if (sessionStorage.getItem("intro")) return; } catch (e) { return; }
+          d.classList.add("com-intro");
+          var l = document.createElement("link");
+          l.rel = "preload"; l.as = "image"; l.href = "/intro/crescimento.webp";
+          document.head.appendChild(l);
+          // Rede de segurança: se o script da abertura falhar, o site aparece sozinho.
+          window.__introFalha = setTimeout(function () {
+            d.classList.remove("com-intro");
+            document.dispatchEvent(new Event("intro:fim"));
+          }, 8000);
+        })();
+      </script>
+    )}
   </head>
   <body>
+    {Astro.props.intro && <Intro />}
     <a class="pular" href="#conteudo">Pular para o conteúdo</a>
     <Header mensagem={mensagem} />
     <main id="conteudo">

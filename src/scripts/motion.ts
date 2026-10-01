@@ -30,8 +30,8 @@ function iniciar() {
 
 
   ctx = gsap.context(() => {
-    // 1) Logo: cresce das raízes para a copa
-    gsap.fromTo(
+    // 1) Logo: cresce das raízes para a copa (pulado se a abertura já mostrou o logo)
+    if (!root.dataset.introRodou) gsap.fromTo(
       "[data-logo-intro]",
       { clipPath: "inset(100% 0% 0% 0%)" },
       { clipPath: "inset(0% 0% 0% 0%)", duration: 1.6, ease: "power2.inOut", delay: 0.15 },
@@ -130,8 +130,12 @@ btns.forEach((btn) => btn.addEventListener("click", () => {
 
 secBgs();
 setBtn();
+const comecar = () => { try { iniciar(); } catch { parar(); } };
 if (!root.hasAttribute("data-calmo")) {
-  try { iniciar(); } catch { parar(); }
+  // Com a abertura na tela, as entradas do hero esperam o logo começar a voar.
+  if (root.classList.contains("com-intro")) {
+    document.addEventListener("intro:fim", () => { comecar(); ScrollTrigger.refresh(); }, { once: true });
+  } else comecar();
 }
 matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", (event) => {
   if (!event.matches) return;

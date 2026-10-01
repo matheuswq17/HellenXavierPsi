@@ -54,8 +54,9 @@ export const site = {
   },
 
   horarios: {
-    texto: "De segunda a quinta-feira, até às 21h",
+    texto: "De segunda a quinta-feira, das 14h às 21h",
     dias: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+    abre: "14:00",
     fecha: "21:00",
     resposta: "Respondo mensagens em até 1 dia útil.",
   },

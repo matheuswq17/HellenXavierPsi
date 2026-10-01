@@ -54,6 +54,12 @@ const jsonLd = {
         { "@type": "Country", name: "Brasil (atendimento online)" },
       ],
       hasMap: c.mapsUrl,
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: site.horarios.dias,
+        opens: site.horarios.abre,
+        closes: site.horarios.fecha,
+      },
       taxID: site.cnpj,
       currenciesAccepted: "BRL",
       amenityFeature: [{ "@type": "LocationFeatureSpecification", name: "Estacionamento no local", value: true }],

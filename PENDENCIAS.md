@@ -10,16 +10,16 @@
 - Valor da sessão não é informado no site. Emite nota fiscal para reembolso.
 - Sessões de 60 minutos, em geral semanais.
 - Responde mensagens em até 1 dia útil.
+- Horário: segunda a quinta, das 14h às 21h (também no JSON-LD como openingHoursSpecification).
+- Deploy automático funcionando: cada push na main publica no Cloudflare Pages.
 - CNPJ da Insight Psicologia Ltda.: 60.101.913/0001-26 (exibido só no rodapé e na política de privacidade).
 - Particular, sem convênio. WhatsApp (11) 98015-7199, Instagram @hellen.xavierpsi, e-mail xavier.hellen@gmail.com.
 
 ## Ainda confirmar com a Hellen
 - [ ] **Conjunto 15 e CEP 02330-003** continuam valendo no número 2014? (vieram da informação anterior, do número 2026).
-- [ ] **Horário de início** do atendimento (o site diz "segunda a quinta, até 21h"). Com o início, dá para colocar `openingHoursSpecification` no JSON-LD.
 - [ ] Validar a redação de "O que você pode esperar de mim" (`sobre.compromissos`), da seção de dependência química (card, FAQ e página de psicoterapia) e das seções novas da página de avaliação (TDAH, TEA, laudo).
 
 ## Para você (Adolfo) fazer fora do código
-- [ ] **Deploy automático está falhando**: cadastrar os segredos `CLOUDFLARE_ACCOUNT_ID` e `CLOUDFLARE_API_TOKEN` (permissão Cloudflare Pages: Edit) em GitHub → Settings → Secrets and variables → Actions. Sem isso, nenhum push atualiza o site.
 - [ ] Criar o **Perfil da Empresa no Google** (categoria "Psicólogo") com nome, endereço e telefone **idênticos** ao site; adicionar fotos do consultório, horários e o link do site.
 - [ ] Cadastrar **Google Search Console** e **Bing Webmaster Tools**, enviar `https://hellenxavier.com.br/sitemap-index.xml` e pedir indexação da home e das duas páginas de serviço.
 - [ ] Atualizar endereço e horário no Instagram e colocar o link do site na bio.

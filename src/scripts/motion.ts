@@ -84,17 +84,6 @@ function iniciar() {
         scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
       });
     });
-
-    // 7) Raízes do rodapé
-    const raizes = document.querySelector("[data-raizes]");
-    if (raizes) {
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: raizes, start: "top 92%", end: "bottom 60%", scrub: 1 },
-      });
-      tl.fromTo("[data-tronco]", { scaleY: 0 }, { scaleY: 1, ease: "none", duration: 0.25 })
-        .fromTo(raizes, { clipPath: "inset(0% 50% 100% 50%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "power1.inOut", duration: 1 })
-        .fromTo("[data-pin]", { y: -24, opacity: 0 }, { y: 0, opacity: 1, ease: "back.out(2)", duration: 0.3 }, "-=0.2");
-    }
   });
 }
 

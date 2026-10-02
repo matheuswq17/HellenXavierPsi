@@ -12,7 +12,7 @@
  * então a borda é nítida em qualquer tela. Sem WebGL, cai num reveal circular simples.
  */
 import { gsap } from "gsap";
-import { LOGO_PATH } from "../components/logoPath";
+import { carregarImagem, criarCrescimento } from "./crescer";
 
 const root = document.documentElement;
 const VW = 672, VH = 760; // viewBox do logo
@@ -22,16 +22,6 @@ if (el && root.classList.contains("com-intro")) iniciar(el);
 
 function q<T extends Element>(sel: string, base: ParentNode = document) {
   return base.querySelector<T>(sel)!;
-}
-
-function carregar(src: string, limite = 1500): Promise<HTMLImageElement | null> {
-  return new Promise((ok) => {
-    const img = new Image();
-    const t = setTimeout(() => ok(null), limite);
-    img.onload = () => { clearTimeout(t); ok(img); };
-    img.onerror = () => { clearTimeout(t); ok(null); };
-    img.src = src;
-  });
 }
 
 async function iniciar(el: HTMLElement) {
@@ -106,9 +96,9 @@ async function iniciar(el: HTMLElement) {
   gsap.to(pular, { opacity: 1, duration: 0.6, delay: 0.9 });
 
   // ---------- renderizador ----------
-  const mapa = await carregar("/intro/crescimento.webp");
+  const mapa = await carregarImagem("/intro/crescimento.webp");
   const st = { p: 0, q: -0.3 };
-  const gl = mapa ? criarGL(canvas, mapa) : null;
+  const gl = mapa ? criarCrescimento(canvas, mapa) : null;
   const desenhar = () => {
     if (gl) gl.desenhar(st.p, st.q);
     else svg.style.clipPath = `circle(${(st.p * 92).toFixed(2)}% at 47.3% 75.3%)`;
@@ -199,94 +189,4 @@ async function iniciar(el: HTMLElement) {
     removeEventListener("scroll", segurarTopo);
   };
   addEventListener("resize", () => { if (tl.time() < tl.labels.voo) { layout(); gl?.mascara(); desenhar(); } });
-}
-
-/* ================= WebGL ================= */
-function criarGL(canvas: HTMLCanvasElement, mapa: HTMLImageElement) {
-  const gl = canvas.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false });
-  if (!gl) return null;
-
-  const vs = `attribute vec2 p; varying vec2 uv;
-    void main(){ uv = vec2(p.x * .5 + .5, .5 - p.y * .5); gl_Position = vec4(p, 0., 1.); }`;
-  const fs = `precision highp float; varying vec2 uv;
-    uniform sampler2D uG; uniform sampler2D uM; uniform float uP; uniform float uQ;
-    const vec3 cF = vec3(.1216, .2902, .1804);   // floresta
-    const vec3 cS = vec3(.5608, .8000, .6431);   // seiva
-    const vec3 cL = vec3(.7843, .9412, .8235);   // pulso
-    void main(){
-      float m = texture2D(uM, uv).a;
-      if (m < .003) { gl_FragColor = vec4(0.); return; }
-      float t = texture2D(uG, uv).r;
-      float d = uP - t;
-      float rev = smoothstep(-.004, .01, d);
-      float seiva = exp(-max(d, 0.) * 26.) * rev;
-      float x = (uQ - t) * 34.;
-      float pulso = exp(-x * x) * step(-.2, uQ);
-      vec3 c = mix(cF, cS, seiva * .92);
-      c = mix(c, cL, pulso * .88);
-      float a = m * rev;
-      gl_FragColor = vec4(c * a, a);
-    }`;
-  const sh = (tipo: number, src: string) => {
-    const s = gl.createShader(tipo)!;
-    gl.shaderSource(s, src); gl.compileShader(s);
-    return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
-  };
-  const v = sh(gl.VERTEX_SHADER, vs), f = sh(gl.FRAGMENT_SHADER, fs);
-  if (!v || !f) return null;
-  const pr = gl.createProgram()!;
-  gl.attachShader(pr, v); gl.attachShader(pr, f); gl.linkProgram(pr);
-  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return null;
-  gl.useProgram(pr);
-
-  const buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-  const loc = gl.getAttribLocation(pr, "p");
-  gl.enableVertexAttribArray(loc);
-  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-
-  const tex = (unidade: number, fonte: TexImageSource) => {
-    const t = gl.createTexture();
-    gl.activeTexture(gl.TEXTURE0 + unidade);
-    gl.bindTexture(gl.TEXTURE_2D, t);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, fonte);
-    return t;
-  };
-  tex(0, mapa);
-  gl.uniform1i(gl.getUniformLocation(pr, "uG"), 0);
-  gl.uniform1i(gl.getUniformLocation(pr, "uM"), 1);
-  const uP = gl.getUniformLocation(pr, "uP"), uQ = gl.getUniformLocation(pr, "uQ");
-
-  // Contorno nítido: o próprio path vetorial do logo, no tamanho exato do canvas.
-  const caminho = new Path2D(LOGO_PATH);
-  let texM: WebGLTexture | null = null;
-  const mascara = () => {
-    const c = document.createElement("canvas");
-    c.width = canvas.width; c.height = canvas.height;
-    const x = c.getContext("2d")!;
-    x.setTransform(c.width / VW, 0, 0, c.height / VH, 0, 0);
-    x.fillStyle = "#fff";
-    x.fill(caminho);
-    if (texM) gl.deleteTexture(texM);
-    texM = tex(1, c);
-  };
-  mascara();
-
-  return {
-    mascara,
-    desenhar(p: number, qv: number) {
-      gl.viewport(0, 0, canvas.width, canvas.height);
-      gl.clearColor(0, 0, 0, 0);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.uniform1f(uP, p);
-      gl.uniform1f(uQ, qv);
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    },
-    liberar() { gl.getExtension("WEBGL_lose_context")?.loseContext(); },
-  };
 }

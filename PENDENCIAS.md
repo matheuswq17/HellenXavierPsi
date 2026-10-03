@@ -11,7 +11,7 @@
 - Valor da sessão não é informado no site. Emite nota fiscal para reembolso.
 - Sessões de 60 minutos, em geral semanais.
 - Responde mensagens em até 1 dia útil.
-- Horário: segunda a quinta, das 14h às 21h (também no JSON-LD como openingHoursSpecification).
+- Horário: segunda a sexta, das 14h às 21h (também no JSON-LD como openingHoursSpecification).
 - Deploy automático funcionando: cada push na main publica no Cloudflare Pages.
 - CNPJ da Insight Psicologia Ltda.: 60.101.913/0001-26 (exibido só no rodapé e na política de privacidade).
 - Particular, sem convênio. WhatsApp (11) 98015-7199, Instagram @hellen.xavierpsi, e-mail xavier.hellen@gmail.com.

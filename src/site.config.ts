@@ -56,8 +56,8 @@ export const site = {
   },
 
   horarios: {
-    texto: "De segunda a quinta-feira, das 14h às 21h",
-    dias: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+    texto: "De segunda a sexta-feira, das 14h às 21h",
+    dias: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
     abre: "14:00",
     fecha: "21:00",
     resposta: "Respondo mensagens em até 1 dia útil.",
@@ -231,7 +231,7 @@ export const site = {
   faq: [
     { p: "Você atende por convênio?", r: "O atendimento é particular. Não atendo por convênio, mas emito nota fiscal para você solicitar reembolso ao seu plano. As condições de cobertura dependem de cada operadora." },
     { p: "Como funciona a sessão online?", r: "Por chamada de vídeo, no horário e na plataforma combinados. Antes de iniciar, conversamos sobre a adequação da modalidade. Escolha um lugar reservado, com boa conexão, e use fones de ouvido." },
-    { p: "Quais são os horários?", r: "De segunda a quinta-feira, até às 21h, presencial ou online. Respondo mensagens em até 1 dia útil." },
+    { p: "Quais são os horários?", r: "De segunda a sexta-feira, das 14h às 21h, presencial ou online. Respondo mensagens em até 1 dia útil." },
     { p: "Quanto tempo dura cada sessão?", r: "As sessões têm 60 minutos e, em geral, acontecem uma vez por semana. A frequência pode mudar ao longo do processo, sempre combinada com você." },
     { p: "Quanto custa?", r: "Os valores são informados no primeiro contato, junto com as formas de pagamento." },
     { p: "Como é a primeira sessão?", r: "A primeira sessão clínica é dedicada a conhecer sua história, compreender a demanda e combinar objetivos. Antes disso, pelo WhatsApp, você tira dúvidas sobre funcionamento, valores e horários." },

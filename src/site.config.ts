@@ -25,9 +25,9 @@ export const site = {
   abordagem: "Terapia Cognitivo-Comportamental",
 
   seo: {
-    title: "Psicóloga no Tucuruvi · Hellen Xavier | TCC e Neuropsicologia",
+    title: "Psicóloga presencial e online · Hellen Xavier | Tucuruvi, SP",
     description:
-      "Psicóloga no Tucuruvi, São Paulo. Psicoterapia com TCC para adolescentes (a partir de 12 anos) e adultos, atendimento em dependência química e avaliação neuropsicológica. Atendimento particular, presencial e online.",
+      "Psicóloga com atendimento presencial e online. Psicoterapia com TCC para adolescentes (a partir de 12 anos) e adultos, dependência química e avaliação neuropsicológica. Consultório no Tucuruvi, Zona Norte de São Paulo.",
   },
 
   contato: {
@@ -83,7 +83,7 @@ export const site = {
   hero: {
     eyebrow: "Psicóloga · Neuropsicóloga · CRP 06/48328",
     h1: "Psicoterapia e avaliação neuropsicológica",
-    h1Local: "no Tucuruvi e online",
+    h1Local: "presencial e online",
     apoio: "Psicóloga clínica e neuropsicóloga desde 2010, com especializações em TCC, Neuropsicologia, Psicopatologia e Saúde Mental e Dependência Química (Unifesp). Cuidado emocional e investigação cognitiva com a mesma profissional.",
     cta: "Conversar pelo WhatsApp",
     ctaSecundario: "Conhecer a avaliação",

@@ -209,6 +209,23 @@ html[data-calmo] *::after {
 .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.1em; margin-bottom: -0.1em; }
 .wi { display: inline-block; }
 
+/* Seção que fica sobre o fundo escuro durante a transição para o rodapé:
+   os tons passam para claros (animados via @property) e o texto segue legível. */
+@property --tinta { syntax: "<color>"; inherits: true; initial-value: #1b2a20; }
+@property --tinta-suave { syntax: "<color>"; inherits: true; initial-value: #4b5a4f; }
+@property --floresta { syntax: "<color>"; inherits: true; initial-value: #1f4a2e; }
+@property --linha { syntax: "<color>"; inherits: true; initial-value: rgba(31, 74, 46, 0.14); }
+@property --linho { syntax: "<color>"; inherits: true; initial-value: #faf5f0; }
+.antes-do-escuro {
+  transition: --tinta 0.7s var(--ease), --tinta-suave 0.7s var(--ease), --floresta 0.7s var(--ease),
+    --linha 0.7s var(--ease), --linho 0.7s var(--ease);
+}
+.antes-do-escuro.sob-fundo-escuro {
+  --tinta: #f4ece2; --tinta-suave: #cfd6c9; --floresta: #b9cdb0;
+  --linha: rgba(244, 236, 226, 0.18); --linho: rgba(244, 236, 226, 0.07);
+  color: var(--tinta);
+}
+
 /* Fundo: com motion, o <body> interpola a cor; sem motion, cada seção tem a sua */
 html:not(.motion) [data-bg] { background: var(--sec-bg, transparent); }
 html.motion .rodape { background: transparent; }

@@ -74,6 +74,17 @@ function iniciar() {
           scrollTrigger: { trigger: s, start: "top 75%", end: "top 25%", scrub: true },
         },
       );
+      // Seção escura chegando (ex.: rodapé): no meio da transição, a seção anterior,
+      // que ainda aparece no topo da tela, troca para tons claros e continua legível.
+      if (s.dataset.fg) {
+        const anterior = secs[i - 1];
+        anterior.classList.add("antes-do-escuro");
+        ScrollTrigger.create({
+          trigger: s, start: "top 50%",
+          onEnter: () => anterior.classList.add("sob-fundo-escuro"),
+          onLeaveBack: () => anterior.classList.remove("sob-fundo-escuro"),
+        });
+      }
     });
 
     // 6) Parallax
@@ -88,6 +99,7 @@ function iniciar() {
 }
 
 function parar() {
+  document.querySelectorAll(".antes-do-escuro, .sob-fundo-escuro").forEach((el) => el.classList.remove("antes-do-escuro", "sob-fundo-escuro"));
   stopHero?.();
   stopHero = null;
   ctx?.revert();

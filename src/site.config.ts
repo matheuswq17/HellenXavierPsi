@@ -56,8 +56,8 @@ export const site = {
   },
 
   horarios: {
-    texto: "De segunda a sexta-feira, das 14h às 21h",
-    dias: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    texto: "De segunda a quinta-feira, das 14h às 21h",
+    dias: ["Monday", "Tuesday", "Wednesday", "Thursday"],
     abre: "14:00",
     fecha: "21:00",
     resposta: "Respondo mensagens em até 1 dia útil.",
@@ -84,7 +84,7 @@ export const site = {
     eyebrow: "Psicóloga · Neuropsicóloga · CRP 06/48328",
     h1: "Psicoterapia e avaliação neuropsicológica",
     h1Local: "no Tucuruvi e online",
-    apoio: "Psicóloga clínica e neuropsicóloga desde 2010, com especializações em TCC, Neuropsicologia e Dependência Química (Unifesp). Cuidado emocional e investigação cognitiva com a mesma profissional.",
+    apoio: "Psicóloga clínica e neuropsicóloga desde 2010, com especializações em TCC, Neuropsicologia, Psicopatologia e Saúde Mental e Dependência Química (Unifesp). Cuidado emocional e investigação cognitiva com a mesma profissional.",
     cta: "Conversar pelo WhatsApp",
     ctaSecundario: "Conhecer a avaliação",
     /** Vídeo gerado a partir da foto real (Higgsfield). Deixe vazio para usar só a foto. */
@@ -96,13 +96,13 @@ export const site = {
       titulo: "Adolescentes",
       idade: "A partir de 12 anos",
       voz: "“Ninguém entende o que eu sinto.”",
-      texto: "Ansiedade, autoestima, escola, relações e as mudanças dessa fase, com a família participando quando faz sentido.",
+      texto: "Ansiedade, autoestima, relações e as mudanças dessa fase, com a família participando do processo.",
     },
     {
       titulo: "Adultos",
       idade: "",
       voz: "“Sinto que não dou conta.”",
-      texto: "Ansiedade, humor, estresse, trabalho, decisões e padrões que se repetem, com metas claras e acompanhamento.",
+      texto: "Ansiedade, humor, estresse, trabalho, decisões e padrões que se repetem, com metas claras.",
     },
     {
       titulo: "Dependência química",
@@ -115,14 +115,14 @@ export const site = {
   sobre: {
     titulo: "Prazer, eu sou a Hellen.",
     paragrafos: [
-      "Sou psicóloga clínica com abordagem cognitivo-comportamental e neuropsicóloga. Atuo na área desde 2010 e ofereço atendimento particular para adolescentes e adultos, incluindo casos de dependência química, no meu consultório no Tucuruvi e online.",
+      "Sou psicóloga clínica com especialização e atendimento na abordagem cognitivo-comportamental, e neuropsicóloga. Atuo na área desde 2010, oferecendo atendimento particular para adolescentes e adultos, incluindo casos de dependência química, no meu consultório no Tucuruvi e online.",
       "Na psicoterapia, trabalho com a relação entre pensamentos, emoções e comportamentos. O processo começa pela compreensão da sua história e das dificuldades que levaram você a buscar ajuda; os objetivos são construídos em conjunto.",
       "Minha formação reúne especializações em Terapia Cognitivo-Comportamental, Neuropsicologia, Psicopatologia e Saúde Mental e Dependência Química, esta última pela Unifesp. Psicoterapia e avaliação neuropsicológica têm objetivos diferentes: conversamos sobre qual caminho faz sentido para a sua demanda.",
     ],
     /** Compromissos de processo (validar redação com a profissional). */
     compromissos: [
       { t: "Escuta sem julgamento", d: "Você pode chegar sem saber nomear o que sente. Entender isso faz parte do trabalho." },
-      { t: "Método e objetivos claros", d: "Combinamos juntos o que queremos alcançar e revisamos o caminho ao longo do processo." },
+      { t: "Métodos e objetivos claros", d: "Definidos de acordo com a sua demanda. Trabalhamos em conjunto e revisamos o caminho ao longo do processo." },
       { t: "Transparência", d: "Valores, frequência e próximos passos são conversados abertamente, desde o primeiro contato." },
     ],
     desde: 2010,
@@ -163,7 +163,7 @@ export const site = {
   avaliacao: {
     titulo: "Avaliação Neuropsicológica",
     resumo:
-      "Investigação da atenção, memória, linguagem, funções executivas e percepção, com entrevistas, testes padronizados e laudo. Ajuda a esclarecer suspeitas como TDAH, TEA ou dificuldades de aprendizagem e a orientar os próximos passos.",
+      "Investigação da atenção, memória, linguagem, funções executivas e percepção, com entrevistas, testes padronizados e laudo. Ajuda a esclarecer suspeitas como TDAH, TEA ou dificuldades de aprendizagem, orientar os próximos passos e elaborar um plano de tratamento.",
     paraQuem: [
       "Suspeita de TDAH em adolescentes ou adultos",
       "Investigação de Transtorno do Espectro Autista (TEA)",
@@ -173,9 +173,9 @@ export const site = {
     ],
     etapas: [
       { titulo: "Entrevista inicial", texto: "Conversa para entender a queixa, a história e os objetivos. Com adolescentes, os responsáveis participam." },
-      { titulo: "Sessões de testagem", texto: "Aplicação de testes e tarefas selecionados para a demanda. Em média, a avaliação completa tem 6 sessões, podendo ser mais conforme cada paciente." },
+      { titulo: "Sessões de testagem", texto: "Aplicação de testes e tarefas selecionados para a demanda. A avaliação completa tem em torno de 6 sessões, dependendo do ritmo do avaliado." },
       { titulo: "Análise e integração", texto: "Correção dos instrumentos e integração com entrevistas, observações e, quando útil, informações da escola." },
-      { titulo: "Devolutiva e laudo", texto: "Encontro para explicar os resultados com clareza, entrega do laudo e orientações de próximos passos." },
+      { titulo: "Devolutiva e laudo", texto: "Encontro para explicar os resultados com clareza, entrega do laudo, orientação dos próximos passos e elaboração do plano de tratamento." },
     ],
     funcoes: [
       { id: "atencao", nome: "Atenção", investiga: "Capacidade de focar, manter e alternar o foco.", sinais: "Distração frequente, perder coisas, deixar tarefas pela metade.", x: 56, y: 13 },
@@ -186,7 +186,7 @@ export const site = {
     ],
     faq: [
       { p: "Qual a idade mínima?", r: "A avaliação é feita em adolescentes a partir de 12 anos e em adultos." },
-      { p: "Quantas sessões tem a avaliação?", r: "Em média, 6 sessões, incluindo entrevista, testagem e devolutiva. Alguns casos pedem mais encontros; a estimativa é apresentada após a entrevista inicial." },
+      { p: "Quantas sessões tem a avaliação?", r: "Em torno de 6 sessões, incluindo entrevista, testagem e devolutiva, dependendo do ritmo do avaliado. A estimativa é apresentada após a entrevista inicial." },
       { p: "O laudo serve para a escola?", r: "Sim. O laudo traz os resultados e orientações que podem ser compartilhados com a escola e outros profissionais, com a sua autorização." },
       { p: "Preciso de encaminhamento médico?", r: "Não é obrigatório. Muitas avaliações começam por indicação da escola, do médico ou pela própria percepção da família." },
       { p: "Tem reembolso do plano?", r: "O atendimento é particular. Emito nota fiscal para você solicitar reembolso ao seu plano; a cobertura depende das regras de cada operadora." },
@@ -231,7 +231,7 @@ export const site = {
   faq: [
     { p: "Você atende por convênio?", r: "O atendimento é particular. Não atendo por convênio, mas emito nota fiscal para você solicitar reembolso ao seu plano. As condições de cobertura dependem de cada operadora." },
     { p: "Como funciona a sessão online?", r: "Por chamada de vídeo, no horário e na plataforma combinados. Antes de iniciar, conversamos sobre a adequação da modalidade. Escolha um lugar reservado, com boa conexão, e use fones de ouvido." },
-    { p: "Quais são os horários?", r: "De segunda a sexta-feira, das 14h às 21h, presencial ou online. Respondo mensagens em até 1 dia útil." },
+    { p: "Quais são os horários?", r: "De segunda a quinta-feira, das 14h às 21h, presencial ou online. Respondo mensagens em até 1 dia útil." },
     { p: "Quanto tempo dura cada sessão?", r: "As sessões têm 60 minutos e, em geral, acontecem uma vez por semana. A frequência pode mudar ao longo do processo, sempre combinada com você." },
     { p: "Quanto custa?", r: "Os valores são informados no primeiro contato, junto com as formas de pagamento." },
     { p: "Como é a primeira sessão?", r: "A primeira sessão clínica é dedicada a conhecer sua história, compreender a demanda e combinar objetivos. Antes disso, pelo WhatsApp, você tira dúvidas sobre funcionamento, valores e horários." },

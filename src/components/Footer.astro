@@ -61,9 +61,11 @@ const ano = new Date().getFullYear();
 
   <div class="wrap rodape__base">
     <p><span class="num">©&nbsp;{ano}</span> {site.nomeCompleto} · {site.titulo} · <strong>{site.crp}</strong><br /><span class="rodape__pj">{site.empresa} · CNPJ {site.cnpj}</span></p>
-    <p>
+    <p class="rodape__links-base">
       <a class="link link--claro" href="/privacidade/">Privacidade</a>
-      
+      {site.credito.texto && (
+        <a class="rodape__credito" href={site.credito.url}>{site.credito.texto}</a>
+      )}
     </p>
   </div>
 </footer>
@@ -121,6 +123,10 @@ const ano = new Date().getFullYear();
   }
   .rodape__base p { margin: 0; }
   .rodape__base strong { color: var(--creme); font-weight: 600; }
+  .rodape__links-base { display: flex; flex-wrap: wrap; gap: 6px 24px; align-items: baseline; }
+  /* crédito discreto: mesmo tamanho e cor do texto do rodapé */
+  .rodape__credito { color: inherit; font-size: inherit; text-decoration: underline; text-decoration-color: rgba(170, 182, 166, 0.35); text-underline-offset: 3px; }
+  .rodape__credito:hover, .rodape__credito:focus-visible { text-decoration-color: currentColor; }
   .rodape__base span[aria-hidden] { margin: 0 8px; }
 
   @media (max-width: 900px) { .rodape__grid { grid-template-columns: 1fr 1fr; } }

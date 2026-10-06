@@ -1,0 +1,99 @@
+---
+/**
+ * Página sobre o site (créditos de quem fez). Fica fora do menu principal; entra no sitemap.
+ * É claramente separada dos serviços da Hellen: sem botão flutuante do WhatsApp dela e com
+ * um contato próprio do desenvolvedor (evento GA4 "contato_desenvolvedor", não é conversão do Ads).
+ */
+import Base from "../layouts/Base.astro";
+import { site } from "../site.config";
+import { waLink } from "../lib/text";
+
+const dev = site.desenvolvedor;
+
+const recursos = [
+  { t: "Animações com propósito", d: "O logo da árvore-cérebro cresce na abertura e vira raízes no rodapé. Há um “modo calmo” que desliga tudo, e o site respeita a preferência de movimento reduzido do aparelho." },
+  { t: "Feito primeiro para o celular", d: "Layout, textos e botões pensados para a tela pequena, onde chega a maior parte das visitas." },
+  { t: "Mapa do consultório", d: "Mapa próprio, desenhado com as ruas reais do Tucuruvi, com atalhos para rota no Google Maps e no Waze." },
+  { t: "SEO local", d: "Dados estruturados, páginas por serviço e textos para quem procura atendimento na Zona Norte de São Paulo." },
+  { t: "WhatsApp com mensagem pronta", d: "Cada botão abre a conversa com uma mensagem neutra, sem nenhum dado de saúde." },
+  { t: "Política de privacidade", d: "Explica de forma clara quais dados técnicos existem, como funcionam as medições e como recusar." },
+  { t: "Carregamento rápido", d: "Páginas estáticas, imagens em formatos modernos e scripts carregados só quando precisam." },
+];
+
+/** Notas do PageSpeed Insights (pagespeed.web.dev). Preencher depois de medir; null = ainda não medido. */
+const pagespeed: { celular: number | null; computador: number | null; medidoEm: string | null } = {
+  celular: null,
+  computador: null,
+  medidoEm: null,
+};
+---
+<Base
+  title={`Sobre este site | ${site.nome}`}
+  description="Como o site de Hellen Xavier foi feito: animações, versão para celular, mapa do consultório, SEO local, privacidade e desempenho. Créditos de desenvolvimento."
+  semWhatsFlutuante
+>
+  <section class="secao ss" data-hero data-bg="#faf5f0">
+    <div class="wrap ss__in">
+      <p class="eyebrow">Bastidores</p>
+      <h1>Sobre este <em>site</em></h1>
+      <p class="ss__lead">
+        Esta página fala só de como o site foi construído. Para atendimento com a psicóloga Hellen Xavier,
+        use os contatos do rodapé.
+      </p>
+
+      <h2>Quem fez</h2>
+      <p class="ss__autor"><strong>{dev.nome}</strong><br />{dev.funcao}</p>
+
+      <h2>O que o site tem</h2>
+      <ul class="ss__lista">
+        {recursos.map((r) => (
+          <li><strong>{r.t}.</strong> {r.d}</li>
+        ))}
+      </ul>
+
+      <h2>Desempenho</h2>
+      <p class="ss__nota">Notas do <a href="https://pagespeed.web.dev/" target="_blank" rel="noopener">PageSpeed Insights</a>, do Google.</p>
+      <dl class="ss__notas">
+        <div><dt>Celular</dt><dd>{pagespeed.celular ?? "Medição em breve"}</dd></div>
+        <div><dt>Computador</dt><dd>{pagespeed.computador ?? "Medição em breve"}</dd></div>
+      </dl>
+      {pagespeed.medidoEm && <p class="ss__nota">Medido em {pagespeed.medidoEm}.</p>}
+    </div>
+  </section>
+
+  {dev.whatsapp && <section class="secao ss-cta" data-bg="#dfe5d8">
+    <div class="wrap ss__in">
+      <p class="eyebrow">Desenvolvimento de sites</p>
+      <h2>Quer um site assim para o <em>seu trabalho?</em></h2>
+      <p class="ss__nota">Contato direto com {dev.nome}. Não faz parte dos serviços da Hellen Xavier.</p>
+      <p>
+        <a class="btn" href={waLink(dev.whatsapp, dev.mensagem)} target="_blank" rel="noopener"
+           data-evento="contato_desenvolvedor" data-origem="sobre-este-site">
+          Quero um site assim
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </p>
+    </div>
+  </section>}
+</Base>
+
+<style>
+  .ss { padding-top: calc(84px + 80px); }
+  .ss__in { max-width: 720px; }
+  .ss h1 { font-size: clamp(2.4rem, 5vw, 4rem); margin-bottom: 24px; }
+  .ss h2, .ss-cta h2 { font-size: 1.6rem; margin: 40px 0 16px; }
+  .ss-cta h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); margin-top: 8px; }
+  .ss p, .ss li, .ss-cta p { color: var(--tinta-suave); }
+  .ss__lead { font-size: 1.12rem; }
+  .ss__autor strong { color: var(--tinta); }
+  .ss__lista { padding-left: 1.1em; display: grid; gap: 12px; margin: 0; }
+  .ss__lista strong { color: var(--tinta); font-weight: 600; }
+  .ss__notas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 16px 0 0; }
+  .ss__notas div { border: 1px solid var(--linha); border-radius: 16px; padding: 18px 20px; }
+  .ss__notas dt { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--floresta); }
+  .ss__notas dd { margin: 6px 0 0; font-family: var(--serif); font-size: 1.5rem; color: var(--tinta); }
+  .ss__nota { font-size: 0.95rem; }
+  .ss-cta { padding-bottom: clamp(64px, 10vw, 120px); }
+  .ss-cta .btn { margin-top: 12px; }
+  @media (max-width: 520px) { .ss__notas { grid-template-columns: 1fr; } }
+</style>

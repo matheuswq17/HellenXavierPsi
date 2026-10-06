@@ -23,6 +23,8 @@ interface Props {
   ld?: Record<string, unknown>[];
   /** Abertura animada com o logo (só a home usa). */
   intro?: boolean;
+  /** Esconde o botão flutuante do WhatsApp da Hellen (ex.: página sobre o site). */
+  semWhatsFlutuante?: boolean;
 }
 const { title = site.seo.title, description = site.seo.description, mensagem = site.mensagens.geral } = Astro.props;
 const indexavel = Boolean(import.meta.env.PUBLIC_SITE_URL) && !Astro.props.noindex && Astro.url.pathname !== "/404.html";
@@ -165,7 +167,7 @@ const jsonLd = {
       <slot />
     </main>
     <Footer mensagem={mensagem} />
-    <WhatsFloat mensagem={mensagem} />
+    {!Astro.props.semWhatsFlutuante && <WhatsFloat mensagem={mensagem} />}
     <Respire />
     <script>
       import "../scripts/motion.ts";

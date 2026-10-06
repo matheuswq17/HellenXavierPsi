@@ -251,7 +251,16 @@ export const site = {
     nota: "Esta lista não é um teste. Só uma avaliação profissional pode indicar o que está acontecendo.",
   },
 
-  credito: { texto: "", url: "" },
+  credito: { texto: "Site por Matheus Xavier Silva de Toledo", url: "/sobre-este-site/" },
+
+  /** Quem fez o site (página /sobre-este-site). Separado dos serviços da Hellen. */
+  desenvolvedor: {
+    nome: "Matheus Xavier Silva de Toledo",
+    funcao: "Desenvolvedor · Estudante de Engenharia de Software (FIAP)",
+    /** Só dígitos (55 + DDD). Vazio = a página não mostra o botão "Quero um site assim". */
+    whatsapp: "",
+    mensagem: "Oi, Matheus! Vi o site da Hellen Xavier e quero um site assim.",
+  },
 } as const;
 
 export type Site = typeof site;

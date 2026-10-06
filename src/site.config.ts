@@ -258,7 +258,7 @@ export const site = {
     nome: "Matheus Xavier Silva de Toledo",
     funcao: "Desenvolvedor · Estudante de Engenharia de Software (FIAP)",
     /** Só dígitos (55 + DDD). Vazio = a página não mostra o botão "Quero um site assim". */
-    whatsapp: "",
+    whatsapp: "5511939011304",
     mensagem: "Oi, Matheus! Vi o site da Hellen Xavier e quero um site assim.",
   },
 } as const;

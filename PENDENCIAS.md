@@ -23,7 +23,7 @@
 
 ## Para você (Adolfo) fazer fora do código
 - [ ] **Medição:** preencher `PUBLIC_GOOGLE_TAG_ID` e `PUBLIC_GADS_CONVERSION_WHATSAPP` como **Variables** do repositório no GitHub (Settings → Secrets and variables → Actions → Variables); o build roda no GitHub Actions. Sem elas, a tag do Google não carrega (nem o banner de cookies, que só aparece com a tag ativa).
-- [ ] **Botão "Quero um site assim":** confirmar o número 5511939011304 (está no último commit, separado).
+- [x] **Botão "Quero um site assim":** número 5511939011304 confirmado.
 - [ ] **PageSpeed:** medir em pagespeed.web.dev (celular e computador) e preencher as notas em `src/pages/sobre-este-site.astro`.
 - [ ] Criar o **Perfil da Empresa no Google** (categoria "Psicólogo") com nome, endereço e telefone **idênticos** ao site; adicionar fotos do consultório, horários e o link do site.
 - [ ] Cadastrar **Google Search Console** e **Bing Webmaster Tools**, enviar `https://hellenxavier.com.br/sitemap-index.xml` e pedir indexação da home e das duas páginas de serviço.

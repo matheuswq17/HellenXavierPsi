@@ -13,6 +13,8 @@ import Intro from "../components/Intro.astro";
 import ogImg from "../assets/fotos/consultorio-psicologia-tucuruvi-hellen-xavier.jpg";
 import retratoImg from "../assets/fotos/hellen-xavier-retrato.jpg";
 import { getImage } from "astro:assets";
+import Consentimento from "../components/Consentimento.astro";
+import { tagAtiva, tagId, adsId } from "../lib/medicao";
 
 interface Props {
   title?: string;
@@ -32,6 +34,8 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
 const og = await getImage({ src: ogImg, width: 1200, height: 630, format: "jpg", fit: "cover" });
 const retrato = await getImage({ src: retratoImg, width: 800, format: "jpg" });
 const c = site.contato;
+// Google tag só em produção e só com ID configurado (variáveis de ambiente PUBLIC_*).
+const comTag = tagAtiva;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -125,6 +129,23 @@ const jsonLd = {
     <meta property="og:image:alt" content="Consultório de psicologia de Hellen Xavier no Tucuruvi, com a psicóloga sentada em uma poltrona clara" />
     <meta name="twitter:card" content="summary_large_image" />
     {indexavel && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    {comTag && <script async src={`https://www.googletagmanager.com/gtag/js?id=${tagId}`}></script>}
+    {comTag && (
+      <script is:inline define:vars={{ tagId, adsId }}>
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        // Consent Mode v2: tudo começa negado; o banner (Consentimento.astro) atualiza a escolha.
+        gtag("consent", "default", { ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", analytics_storage: "denied", wait_for_update: 500 });
+        gtag("set", "ads_data_redaction", true);
+        try {
+          if (localStorage.getItem("consentimento_cookies") === "aceito")
+            gtag("consent", "update", { ad_storage: "granted", ad_user_data: "granted", ad_personalization: "granted", analytics_storage: "granted" });
+        } catch (e) {}
+        gtag("js", new Date());
+        gtag("config", tagId);
+        if (adsId && adsId !== tagId) gtag("config", adsId);
+      </script>
+    )}
     <script is:inline>
       // Antes da pintura: modo calmo, horário e motion (evita "piscar")
       (function () {
@@ -159,7 +180,7 @@ const jsonLd = {
       </script>
     )}
   </head>
-  <body>
+  <body data-wa={c.whatsapp}>
     {Astro.props.intro && <Intro />}
     <a class="pular" href="#conteudo">Pular para o conteúdo</a>
     <Header mensagem={mensagem} />
@@ -169,8 +190,10 @@ const jsonLd = {
     <Footer mensagem={mensagem} />
     {!Astro.props.semWhatsFlutuante && <WhatsFloat mensagem={mensagem} />}
     <Respire />
+    {comTag && <Consentimento />}
     <script>
       import "../scripts/motion.ts";
+      import "../scripts/medicao.ts";
     </script>
     <style>
       .pular {

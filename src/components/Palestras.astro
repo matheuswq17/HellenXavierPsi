@@ -19,7 +19,7 @@ const p = site.palestras;
           <li data-reveal><span class="num">{String(i + 1).padStart(2, "0")}</span><span set:html={rich(t)} /></li>
         ))}
       </ol>
-      <a class="btn btn--ghost" data-reveal href={waLink(site.contato.whatsapp, site.mensagens.palestras)} target="_blank" rel="noopener">Convidar para uma palestra</a>
+      <a class="btn btn--ghost" data-reveal href={waLink(site.contato.whatsapp, site.mensagens.palestras)} data-origem="palestras" target="_blank" rel="noopener">Convidar para uma palestra</a>
     </div>
     <div class="pa__foto" data-parallax="-8">
       <Picture src={foto} formats={["avif", "webp"]} widths={[480, 720, 960]} sizes="(max-width: 860px) 90vw, 36vw"

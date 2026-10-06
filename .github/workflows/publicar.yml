@@ -16,6 +16,9 @@ jobs:
     timeout-minutes: 20
     env:
       PUBLIC_SITE_URL: https://hellenxavier.com.br
+      # IDs públicos da tag do Google (GitHub → Settings → Secrets and variables → Actions → Variables). Vazios = sem tag.
+      PUBLIC_GOOGLE_TAG_ID: ${{ vars.PUBLIC_GOOGLE_TAG_ID }}
+      PUBLIC_GADS_CONVERSION_WHATSAPP: ${{ vars.PUBLIC_GADS_CONVERSION_WHATSAPP }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

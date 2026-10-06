@@ -2,6 +2,7 @@
 import { site } from "../site.config";
 import { rich, waLink } from "../lib/text";
 import Logo from "./Logo.astro";
+import { tagAtiva } from "../lib/medicao";
 const c = site.contato;
 const { mensagem = site.mensagens.geral } = Astro.props;
 const ano = new Date().getFullYear();
@@ -14,7 +15,7 @@ const ano = new Date().getFullYear();
       Pelo WhatsApp, você consulta valores e horários e tira dúvidas sobre o atendimento. Respondo em até 1 dia útil.
     </p>
     <div class="rodape__botoes" data-reveal>
-      <a class="btn btn--claro" href={waLink(c.whatsapp, mensagem)} target="_blank" rel="noopener">
+      <a class="btn btn--claro" href={waLink(c.whatsapp, mensagem)} data-origem="contato" target="_blank" rel="noopener">
         Conversar pelo WhatsApp
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
@@ -48,7 +49,7 @@ const ano = new Date().getFullYear();
     <div>
       <h3 class="rodape__h">Fale comigo</h3>
       <ul class="rodape__links">
-        <li><a class="link link--claro" href={waLink(c.whatsapp, mensagem)} target="_blank" rel="noopener">WhatsApp <span set:html={rich(c.whatsappExibicao)} /></a></li>
+        <li><a class="link link--claro" href={waLink(c.whatsapp, mensagem)} data-origem="rodape" target="_blank" rel="noopener">WhatsApp <span set:html={rich(c.whatsappExibicao)} /></a></li>
         <li><a class="link link--claro" href={c.instagram.replace(/\[\[|\]\]/g, "")} target="_blank" rel="noopener">Instagram <span set:html={rich(c.instagramExibicao)} /></a></li>
         <li><a class="link link--claro" href={`mailto:${c.email.replace(/\[\[|\]\]/g, "")}`}><span set:html={rich(c.email)} /></a></li>
       </ul>
@@ -63,6 +64,7 @@ const ano = new Date().getFullYear();
     <p><span class="num">©&nbsp;{ano}</span> {site.nomeCompleto} · {site.titulo} · <strong>{site.crp}</strong><br /><span class="rodape__pj">{site.empresa} · CNPJ {site.cnpj}</span></p>
     <p class="rodape__links-base">
       <a class="link link--claro" href="/privacidade/">Privacidade</a>
+      {tagAtiva && <button type="button" class="rodape__credito rodape__cookies" data-cookies-abrir>Preferências de cookies</button>}
       {site.credito.texto && (
         <a class="rodape__credito" href={site.credito.url}>{site.credito.texto}</a>
       )}
@@ -127,6 +129,7 @@ const ano = new Date().getFullYear();
   /* crédito discreto: mesmo tamanho e cor do texto do rodapé */
   .rodape__credito { color: inherit; font-size: inherit; text-decoration: underline; text-decoration-color: rgba(170, 182, 166, 0.35); text-underline-offset: 3px; }
   .rodape__credito:hover, .rodape__credito:focus-visible { text-decoration-color: currentColor; }
+  .rodape__cookies { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
   .rodape__base span[aria-hidden] { margin: 0 8px; }
 
   @media (max-width: 900px) { .rodape__grid { grid-template-columns: 1fr 1fr; } }

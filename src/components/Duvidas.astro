@@ -15,7 +15,7 @@ const g = site.guia;
           <h3>{g.titulo}</h3>
           <ul>{g.sinais.map((s) => <li>{s}</li>)}</ul>
           <p class="du__nota">{g.nota}</p>
-          <a class="link" href={waLink(site.contato.whatsapp, site.mensagens.guia)} target="_blank" rel="noopener">Conversar sobre isso</a>
+          <a class="link" href={waLink(site.contato.whatsapp, site.mensagens.guia)} data-origem="duvidas" target="_blank" rel="noopener">Conversar sobre isso</a>
         </div>
       )}
     </div>

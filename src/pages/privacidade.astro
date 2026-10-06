@@ -2,12 +2,12 @@
 import Base from "../layouts/Base.astro";
 import { site } from "../site.config";
 ---
-<Base title={`Privacidade | ${site.nome}`} description="Política de privacidade do site de Hellen Xavier, psicóloga no Tucuruvi: sem formulários, sem cookies de publicidade, métricas anônimas e sigilo profissional.">
+<Base title={`Privacidade | ${site.nome}`} description="Política de privacidade do site de Hellen Xavier, psicóloga no Tucuruvi: sem formulários, medição de visitas e anúncios pela tag do Google sem dados de saúde, e sigilo profissional.">
   <section class="secao pv" data-hero data-bg="#faf5f0">
     <div class="wrap pv__in">
       <p class="eyebrow">Privacidade</p>
       <h1>Seus dados, <em>com cuidado.</em></h1>
-      <p>Este site não tem formulários e não usa cookies de rastreamento ou de publicidade.</p>
+      <p>Este site não tem formulários. Para medir visitas e o resultado dos anúncios, ele usa a tag do Google, explicada abaixo. Nenhum dado de saúde é coletado.</p>
       <p>Ao clicar em “WhatsApp”, você é levado a uma conversa com uma mensagem pronta e neutra. Nada é enviado sem a sua confirmação. Recomendamos não compartilhar informações de saúde detalhadas por mensagem: elas podem ser tratadas com calma e sigilo na sessão.</p>
       <p>O “modo calmo” fica salvo apenas no seu navegador.</p>
       <p>As informações compartilhadas em atendimento são protegidas pelo sigilo profissional previsto no Código de Ética do Psicólogo e pela Lei Geral de Proteção de Dados (LGPD).</p>
@@ -18,6 +18,11 @@ import { site } from "../site.config";
       <h2>Dados técnicos e atendimento</h2>
       <p>O site é hospedado na Cloudflare, que processa dados técnicos, como endereço IP, data, página acessada e navegador, para entregar as páginas e proteger o site contra abusos. Esses dados são tratados pela Cloudflare conforme a <a href="https://www.cloudflare.com/pt-br/privacypolicy/" target="_blank" rel="noopener">política de privacidade dela</a>.</p>
       <p>Para saber quantas pessoas visitam o site e quais páginas são mais acessadas, usamos o Cloudflare Web Analytics, que mede visitas de forma agregada, sem cookies e sem identificar você.</p>
+      <h2 id="cookies">Cookies da tag do Google (Google Ads e Google Analytics)</h2>
+      <p><strong>Finalidade.</strong> Usamos a tag do Google para medir quantas pessoas visitam o site e quantas clicam no botão do WhatsApp depois de ver um anúncio. Isso ajuda a saber se os anúncios funcionam. Para isso, o Google pode gravar cookies no seu navegador e registrar dados como páginas visitadas, tipo de aparelho, região aproximada e de qual anúncio ou site você veio.</p>
+      <p><strong>Sem dados de saúde.</strong> As medições registram apenas que houve um clique e em qual parte do site (por exemplo, “botão do topo”). Nunca registram o conteúdo de mensagens, motivos de busca por atendimento ou qualquer informação de saúde, e nada disso vai no endereço das páginas.</p>
+      <p><strong>Sua escolha.</strong> No primeiro acesso, um aviso na parte de baixo da tela pergunta se você aceita esses cookies. Até você aceitar, a tag funciona no modo de consentimento do Google, sem gravar cookies de medição ou de publicidade no seu navegador. Antes do aceite, ou depois de uma recusa, o Google ainda recebe sinais sem cookies e sem identificação (por exemplo, que houve uma visita ou um clique), usados para estimar os resultados dos anúncios. Se você recusar, nada muda no funcionamento do site. A escolha fica salva no seu navegador e pode ser mudada a qualquer momento em “Preferências de cookies”, no rodapé.</p>
+      <p><strong>Outras formas de recusar.</strong> Você também pode bloquear ou apagar cookies nas configurações do seu navegador, usar a navegação anônima, instalar o <a href="https://tools.google.com/dlpage/gaoptout?hl=pt-BR" target="_blank" rel="noopener">complemento de desativação do Google Analytics</a> e ajustar a personalização de anúncios em <a href="https://myadcenter.google.com/" target="_blank" rel="noopener">Minha Central de Anúncios do Google</a>. O site continua funcionando normalmente. Os dados são tratados pelo Google conforme a <a href="https://policies.google.com/privacy?hl=pt-BR" target="_blank" rel="noopener">política de privacidade dele</a>.</p>
       <p>Este aviso trata do site e dos canais de contato. As informações sobre tratamento e guarda de registros clínicos são esclarecidas no início do atendimento. Evite enviar laudos, documentos ou detalhes de saúde no primeiro contato.</p>
     </div>
   </section>

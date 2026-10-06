@@ -1,0 +1,64 @@
+---
+/**
+ * Banner de consentimento de cookies (LGPD + Google Consent Mode v2).
+ * A tag do Google começa com tudo negado (ver Base.astro). Aqui a pessoa aceita ou recusa;
+ * a escolha fica salva no navegador e pode ser mudada em "Preferências de cookies", no rodapé.
+ * Só é renderizado quando a tag está ativa (produção com ID configurado).
+ */
+---
+<div class="cookies" data-cookies role="dialog" aria-labelledby="cookies-titulo" aria-describedby="cookies-texto" hidden>
+  <p class="cookies__titulo" id="cookies-titulo">Cookies</p>
+  <p class="cookies__texto" id="cookies-texto">
+    Usamos cookies do Google para medir visitas e o resultado dos anúncios. Nenhum dado de saúde é coletado.{" "}<a href="/privacidade/#cookies">Saiba mais</a>
+  </p>
+  <div class="cookies__botoes">
+    <button type="button" class="btn cookies__btn" data-cookies-escolha="recusado">Recusar</button>
+    <button type="button" class="btn cookies__btn" data-cookies-escolha="aceito">Aceitar</button>
+  </div>
+</div>
+
+<style>
+  .cookies {
+    position: fixed; z-index: 60; left: 50%; bottom: max(16px, env(safe-area-inset-bottom));
+    translate: -50% 0; width: min(560px, calc(100vw - 32px));
+    background: var(--linho); color: var(--tinta); border: 1px solid var(--linha); border-radius: 20px;
+    box-shadow: 0 24px 60px -24px rgba(22, 48, 31, 0.35); padding: 20px 22px;
+    display: grid; gap: 10px;
+  }
+  .cookies[hidden] { display: none; }
+  .cookies__titulo { margin: 0; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--floresta); }
+  .cookies__texto { margin: 0; font-size: 0.95rem; line-height: 1.5; color: var(--tinta-suave); }
+  .cookies__texto a { color: var(--floresta); }
+  .cookies__botoes { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+  /* Aceitar e Recusar com o mesmo peso visual (LGPD: recusar tem de ser tão fácil quanto aceitar) */
+  .cookies__btn { min-width: 128px; justify-content: center; }
+  @media (max-width: 480px) { .cookies__botoes { justify-content: stretch; } .cookies__btn { flex: 1; } }
+</style>
+
+<script>
+  const CHAVE = "consentimento_cookies";
+  const banner = document.querySelector<HTMLElement>("[data-cookies]");
+  const g = (...a: unknown[]) => { if (typeof (window as any).gtag === "function") (window as any).gtag(...a); };
+  const valor = (sim: boolean) => (sim ? "granted" : "denied");
+
+  function aplicar(escolha: "aceito" | "recusado") {
+    const sim = escolha === "aceito";
+    g("consent", "update", { ad_storage: valor(sim), ad_user_data: valor(sim), ad_personalization: valor(sim), analytics_storage: valor(sim) });
+    try { localStorage.setItem(CHAVE, escolha); } catch { /* sem armazenamento: vale só nesta página */ }
+    if (banner) banner.hidden = true;
+  }
+
+  let salvo: string | null = null;
+  try { salvo = localStorage.getItem(CHAVE); } catch { /* ignora */ }
+  if (banner && salvo !== "aceito" && salvo !== "recusado") banner.hidden = false;
+
+  banner?.querySelectorAll<HTMLButtonElement>("[data-cookies-escolha]").forEach((b) =>
+    b.addEventListener("click", () => aplicar(b.dataset.cookiesEscolha as "aceito" | "recusado")),
+  );
+  document.addEventListener("click", (e) => {
+    if ((e.target as Element | null)?.closest?.("[data-cookies-abrir]") && banner) {
+      banner.hidden = false;
+      banner.querySelector<HTMLButtonElement>("[data-cookies-escolha]")?.focus();
+    }
+  });
+</script>
